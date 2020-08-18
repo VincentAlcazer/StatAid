@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1596014785472.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "40|88|362|2|\n45|30|153|2|\n61|22|94|4|\n64|7|67|8|\n79|7|87|8|\n99|22|144|4|\n222|7|241|6|\n377|37|512|0|\n522|46|552|0|\n572|63|629|0|\n",
+    "hash" : "1537338114",
+    "id" : "606F8F08",
+    "lastKnownWriteTime" : 1596783942,
+    "last_content_update" : 1596783942264,
+    "path" : "C:/Users/Vincent/Desktop/StatAid/R/Functions.R",
+    "project_path" : "R/Functions.R",
+    "properties" : {
+        "cursorPosition" : "38,0",
+        "scrollLine" : "28"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

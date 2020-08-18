@@ -1,0 +1,37 @@
+Package: StatAid
+Title: Your Statistics Helper
+Version: 0.0.0.9000
+Authors@R: person('Vincent', 'ALCAZER', email = 'vincent.alcazer@chu-lyon.fr', role = c('cre', 'aut'))
+Description: StatAid is a Shiny app built in a R package to guide researchers and clinicians through data analysis.
+License: MIT + file LICENSE
+Imports: 
+    golem,
+    shiny,
+    DT,
+	data.table,
+    shinydashboard,
+    ggrepel,
+    ggpubr,
+    dplyr,
+    ggplot2,
+    tidyr,
+    forcats,
+    pkgload,
+    RColorBrewer,
+    mgcv,
+    broom,
+    survival,
+    survminer,
+	htmltools,
+	config,
+	tibble
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+URL: https://github.com/VincentAlcazer/StatAid
+BugReports: https://github.com/VincentAlcazer/StatAid/issues
+Suggests: 
+    testthat,
+	processx,
+    attempt,
+    glue

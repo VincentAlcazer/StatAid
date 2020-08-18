@@ -1,0 +1,211 @@
+
+
+
+##### ===== Data
+
+data_aml <- data.table::fread("datasets/TCGA_AML_exemple.txt", dec=",", na.strings=c("","NA"),stringsAsFactors=T , data.table = F)
+
+data_iris <- read.delim("datasets/Iris_paired.txt", dec=".", na.strings=c("","NA"),stringsAsFactors=T )
+
+
+data = data_iris %>%
+  mutate("Whole_cohort" = as.factor("Whole cohort"))
+
+
+
+
+variables =c("Age", "WBC","PB_BLAST_PERCENTAGE")
+
+data_aml %>%
+  pivot_longer(variables,names_to = "Timepoint",values_to = "value") %>%
+  ggplot(aes(x=Timepoint, y=value, fill = Timepoint )) +
+  geom_boxplot(outlier.shape = NA,size=0.75) +
+  geom_point() +
+  geom_line(aes(group=factor(Patient_id)), alpha = 0.50) +
+  geom_text_repel(aes(label=label),size=5, colour="red") +
+  labs( y= paste0(input$Variable), x = "", fill = "Group") +
+  default_theme +
+  theme(axis.text.x = legend.x(),
+        legend.position = input$Legend_ext)
+
+
+
+data_aml %>%
+  pivot_longer(variables,names_to = "Timepoint",values_to = "value") %>%
+  ggbarplot(x="Timepoint", y="value", fill = "Timepoint", size=0.75, width=1,
+            add = c("mean_sd", "point"), error.plot = "upper_errorbar") +
+  geom_line(aes(group=factor(Patient_id)), alpha = 0.50) +
+  #geom_text_repel(aes(label=label),size=5, colour="red") +
+  labs( y= paste0(input$Variable), x = "", fill = "Group") +
+  default_theme +
+  theme(axis.text.x = legend.x(),
+        legend.position = input$Legend_ext)
+
+
+
+
+time_var = "OS_MONTHS"
+status_var = "OS_STATUS"
+x_var = "ELN2017"
+
+km_curves <- function(data, time_var, status_var, x_var){
+  
+  formula <- as.formula(sprintf(paste0("Surv(",time_var,",",status_var,")~",x_var)))
+  surv  <- surv_fit(formula, data=data_aml)
+  
+  ggsurvplot(surv,
+             title="OS according to Gene score (mean) in BEAT patients",
+             ylab="Disease Free Survival (%)",
+             xlab="Days",
+             #legend= c(0.8,0.3),
+             legend = "top",
+             font.title    = c(12, "bold", "black"),
+             # font.x = c(20,"bold","black"),
+             # font.y = c(20,"bold","black"),
+             # font.tickslab = c(14,"plain","black"),
+             # legend.title = paste0(nrow(gene_os_BEAT),"-Genes score"),
+             # legend.labs=c(levels(data_km_os_BEAT_pond$Mean_cut_3)),
+             linetype = 1, size = 1,
+             # censor.size = 10,
+             conf.int = FALSE,
+             pval = TRUE, pval.method = TRUE, 
+             # pval.size = 6,
+             # pval.coord = pvalue_position,
+             # pval.method.size = 6,
+             # pval.method.coord = pvaluemeth_position,
+             risk.table = TRUE,
+             # risk.table.font.title = 8,
+             # risk.table.fontsize = 8,
+             tables.theme = theme_cleantable(),
+             risk.table.y.text = FALSE,
+             surv.median.line = "v",
+             ggtheme = theme_classic(base_size = 11) +
+               theme( 
+                 legend.title=element_text(color = "black", face="bold"),
+                 axis.title = element_text(size = 12, color = "black", face="bold")))
+  
+}
+
+
+
+
+data <- data_aml %>%
+  select(time = one_of("OS_MONTHS"), status = one_of("OS_STATUS"), x_var = one_of("ELN2017"))
+
+
+surv <- surv_fit(Surv(time,status)~x_var, data = data)
+
+
+km_curves(data_aml, "OS_MONTHS", "OS_STATUS", "ELN2017")
+
+
+
+test <- regression_table(data_aml, "Sexe", family = "binomial")
+
+test[["df_mod"]]
+
+GGally::ggcoef(test[["df_unmod"]]) + theme_bw()
+
+
+
+
+
+
+
+
+setdiff(names(data_aml[sapply(data_aml, class) %in% c("numeric","integer")]),)
+
+
+data <- data_aml
+y_var = "WBC"
+x_var = "Age"
+model = "gam"
+cor_type = "pearson"
+
+
+
+res <- list()
+formula = as.formula(paste(y_var,"~",x_var))
+model <- glm(formula, data=data, family = "gaussian")
+res[["model"]] <- model
+res[["augment_df"]] <- broom::augment(model)
+res[["tidy_df"]] <- broom::tidy(model)
+res[["cor_df"]] <-broom::tidy(cor.test(data[,y_var],data[,x_var], method = cor_type))
+
+res[["augment_df"]]
+
+
+res <- regression_dataframes(y_var, x_var, data=data_aml, model="gam", cor_type)
+
+
+
+res[["augment_df"]]
+
+## Diagnosis 1: Residuals vs fitted values
+
+res[["augment_df"]] %>%
+  ggplot(aes(x = .fitted, y = Std_residuals)) +
+  geom_point() +
+  geom_smooth(method="gam", formula = y ~s(x), se = T, color = "navyblue",
+              fill="lightblue", alpha = 0.5) +
+  theme_bw() +
+  default_theme
+
+
+
+
+
+ shapiro <- format.pval(shapiro.test(res[["augment_df"]]$.std.resid)$p.value,4,eps=0.0001)
+ y_pos <- max(res[["augment_df"]]$.std.resid)*0.9
+ 
+  qplot(sample = .std.resid, data = res[["augment_df"]]) +
+  theme_bw() +
+    labs(title = "Quantile-Quantile plot", y = "Scaled residuals", x = "Theorical values") +
+    geom_abline(intercept =0, slope = 1, size=1, linetype=2) +
+    annotate(geom="text", x=-1.75, y=y_pos, label=paste0("Shapiro test p-value: ",shapiro),
+             size = 5) +
+  default_theme
+
+
+### GAM test
+
+
+gam <-   geom_smooth(method="gam", formula = y ~s(x), se = T, color = "navyblue",
+                     fill="lightblue", alpha = 0.5)
+lm <- geom_smooth(method="lm", se = T, color = "navyblue",
+                  fill="lightblue", alpha = 0.5)
+
+
+data %>%
+  ggplot(aes_string(x=x_var, y = y_var)) +
+  geom_point() +
+  geom_smooth(method="gam", formula = y ~s(x), se = T, color = "navyblue",
+              fill="lightblue", alpha = 0.5) +
+  theme_bw() +
+  default_theme
+
+formula <- as.formula(paste0(y_var," ~ s(",x_var,")"))
+model <- gam(formula, data=data, method = "REML")
+
+plot(model, select = 1, shift=coef(model)[1], 
+     cex=1, pch=1, residuals=TRUE, seWithMean=TRUE, shade=TRUE, shade.col="lightblue")
+
+ggplot(res[["augment_df"]], aes(x=.fitted, y=.resid) ) +
+  geom_point() +
+  geom_smooth(method="loess", se=T)
+
+input <- data.frame(model = as.character("lm"))
+
+
+if(input$model == "lm"){
+  title <- "Linear model"
+}else if (input$model == "gam"){
+  title <- "Generalized additive model"
+}else if (input$model = "loess"){
+  title <- "Locally Weighted Scatterplot Smoother"
+}
+
+
+
+mod_city2 <- gam(city.mpg ~ s(weight) + s(length) + s(price) +fuel+drive+style, 
+                 data = mpg, method = "REML")

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1597742852202.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "10|47|19|0|\n21|20|26|0|\n27|20|37|0|\n38|20|42|0|\n58|88|380|2|\n400|37|535|0|\n560|37|725|0|\n",
+    "hash" : "3157729435",
+    "id" : "1EB235BE",
+    "lastKnownWriteTime" : 1597766384,
+    "last_content_update" : 1597766382124,
+    "path" : "E:/Biostat_bioinfo/Analyses/StatAid/R/Functions.R",
+    "project_path" : "R/Functions.R",
+    "properties" : {
+        "cursorPosition" : "544,2",
+        "scrollLine" : "382"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1596786272947.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "728381732",
+    "id" : "234A1B53",
+    "lastKnownWriteTime" : 1596786173,
+    "last_content_update" : 1596786173,
+    "path" : "C:/Users/Vincent/Desktop/StatAid/R/mod_Explo_distri.R",
+    "project_path" : "R/mod_Explo_distri.R",
+    "properties" : {
+        "cursorPosition" : "124,20",
+        "scrollLine" : "124"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

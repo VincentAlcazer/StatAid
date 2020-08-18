@@ -1,0 +1,24 @@
+Package: here
+Title: A Simpler Way to Find Your Files
+Version: 0.1
+Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
+Description: Constructs paths to your project's files.
+    The 'here()' function uses a reasonable heuristics to find your project's
+    files, based on the current working directory at the time when the package
+    is loaded. Use it as a drop-in replacement for 'file.path()', it will always
+    locate the files relative to your project root.
+Imports: rprojroot (>= 1.2)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Date: 2017-05-27
+URL: https://github.com/krlmlr/here, http://krlmlr.github.io/here
+BugReports: https://github.com/krlmlr/here/issues
+RoxygenNote: 6.0.1
+NeedsCompilation: no
+Packaged: 2017-05-27 20:53:11 UTC; muelleki
+Author: Kirill Müller [aut, cre]
+Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
+Repository: CRAN
+Date/Publication: 2017-05-28 06:13:04 UTC
+Built: R 4.0.0; ; 2020-05-02 19:20:08 UTC; windows

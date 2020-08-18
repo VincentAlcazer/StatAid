@@ -1,0 +1,69 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# Welcome to StatAid
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+StatAid is a free open-source statistical software designed for life-science applied data analysis. It has been developed with the R software, using the [Shiny package](https://shiny.rstudio.com/). [Golem](https://github.com/ThinkR-open/golem) has been used for package compilation and deployment.  
+
+# Getting started
+
+## Online version 
+
+StatAid has a ready-to-use online version available at [https://vincentalcazer.shinyapps.io/StatAid/](https://vincentalcazer.shinyapps.io/StatAid/).
+
+## Local version
+
+You can install the development version from [GitHub](https://github.com/VincentAlcazer/StatAid) else by cloning the repository or directly by downloading the package in R:
+
+```{r Github install }
+
+# install.packages("remotes")
+remotes::install_github("VincentAlcazer/StatAid")
+
+run_app()
+```
+
+
+You can also use StatAid locally 
+
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+#library(StatAid)
+## basic example code
+```
+
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
+```{r cars}
+summary(cars)
+```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+
+You can also embed plots, for example:
+
+```{r pressure, echo = FALSE}
+plot(pressure)
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!

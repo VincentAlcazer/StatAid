@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1596006473867.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3868796377",
+    "id" : "77A757A8",
+    "lastKnownWriteTime" : 1596784088,
+    "last_content_update" : 1596784088652,
+    "path" : "C:/Users/Vincent/Desktop/StatAid/dev/02_dev.R",
+    "project_path" : "dev/02_dev.R",
+    "properties" : {
+        "cursorPosition" : "40,0",
+        "scrollLine" : "20"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

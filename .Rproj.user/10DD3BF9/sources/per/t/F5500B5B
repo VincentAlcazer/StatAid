@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1596782083459.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "80|28|106|2|\n",
+    "hash" : "2523657143",
+    "id" : "F5500B5B",
+    "lastKnownWriteTime" : 1596783968,
+    "last_content_update" : 1596787838025,
+    "path" : "C:/Users/Vincent/Desktop/StatAid/R/mod_Explo_table_des.R",
+    "project_path" : "R/mod_Explo_table_des.R",
+    "properties" : {
+        "cursorPosition" : "130,3",
+        "scrollLine" : "78"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

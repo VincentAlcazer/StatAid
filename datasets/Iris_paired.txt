@@ -1,0 +1,61 @@
+patient_id	pairing	Sepal.Length	Sepal.Width	Petal.Length	Petal.Width	Species	Test_cat
+patient_1	1	4.6	3.6	1	0.2	setosa	Petit
+patient_2	1	5.1	2.5	3	1.1	versicolor	Petit
+patient_3	1	5.5	2.3	4	1.3	virginica	Petit
+patient_4	2	6	2.2	4	1	setosa	Petit
+patient_5	2	6.1	2.8	4	1.3	versicolor	Petit
+patient_6	2	5.5	2.5	4	1.3	virginica	Petit
+patient_7	3	5.8	2.6	4	1.2	setosa	Petit
+patient_8	3	6.7	3	5	1.7	versicolor	Petit
+patient_9	3	5.7	2.5	5		virginica	Petit
+patient_10	4	6	2.2	5	1.5	setosa	Petit
+patient_11	4	6.3	2.5	5	1.9	versicolor	Petit
+patient_12	4	6.3	3.3	6	2.5	virginica	Petit
+patient_13	5	7.2	3.2	6	1.8	setosa	Petit
+patient_14	5	4.3	3	1.1	0.1	versicolor	Petit
+patient_15	5		4	1.2	0.2	virginica	Petit
+patient_16	6	5	3.2	1.2	0.2	setosa	Petit
+patient_17	6	4.7	3.2	1.3	0.2	versicolor	Petit
+patient_18	6	5.4	3.9	1.3	0.4	virginica	Petit
+patient_19	7	32	3.5	1.3	0.2	setosa	Petit
+patient_20	7		3	1.3	0.2	versicolor	Petit
+patient_21	7	5	3.5	1.3	0.3	virginica	Petit
+patient_22	8	4.5	2.3	1.3	0.3	setosa	Petit
+patient_23	8	4.4	3.2	1.3	0.2	versicolor	Petit
+patient_24	8	5.1	3.5	1.4	0.2	virginica	Petit
+patient_25	9	4.9	3	1.4	0.2	setosa	Petit
+patient_26	9	5	3.6	1.4	0.2	versicolor	Petit
+patient_27	9	4.6	3.4	1.4	0.3	virginica	Petit
+patient_28	10	4.4	2.9	1.4	0.2	setosa	Petit
+patient_29	10	4.8	3	1.4	0.1	versicolor	Petit
+patient_30	10	5.1	3.5	1.4	0.3	virginica	Petit
+patient_31	11	5.2	3.4	1.4	0.2	setosa	Petit
+patient_32	11	5.5	4.2	1.4		versicolor	Petit
+patient_33	11	4.9	3.6	1.4	0.1	virginica	Petit
+patient_34	12	4.8	3	1.4		setosa	Petit
+patient_35	12	4.6		1.4	0.2	versicolor	Petit
+patient_36	12	5	3.3	1.4	0.2	virginica	Grand
+patient_37	13	4.6		1.5	0.2	setosa	Grand
+patient_38	13	5	3.4	1.5	0.2	versicolor	Grand
+patient_39	13	4.9	3.1	1.5	0.1	virginica	Grand
+patient_40	14	5.4	3.7	1.5	0.2	setosa	Grand
+patient_41	14	5	3.5	1.3	0.3	versicolor	Grand
+patient_42	14	4.5	2.3	1.3	0.3	virginica	Grand
+patient_43	15	4.4	3.2	1.3	0.2	setosa	Grand
+patient_44	15	5.1	3.5	1.4	0.2	versicolor	Grand
+patient_45	15	4.9	3	1.4	0.2	virginica	Grand
+patient_46	16	5	3.6	1.4	0.2	setosa	Grand
+patient_47	16	4.6	3.4	1.4	0.3	versicolor	Grand
+patient_48	16	4.4	2.9	1.4	0.2	virginica	Grand
+patient_49	17	4.8	3	1.4	0.1	setosa	Grand
+patient_50	17	5.1	3.5	1.4	0.3	versicolor	Grand
+patient_51	17	5.2	3.4	1.4	0.2	virginica	Grand
+patient_52	18	5.5	4.2	1.4		setosa	Grand
+patient_53	18	4.9	3.6	1.4	0.1	versicolor	Grand
+patient_54	18	4.8	3	1.4		virginica	Grand
+patient_55	19	4.6		1.4	0.2	setosa	Grand
+patient_56	19	5	3.3	1.4	0.2	versicolor	Grand
+patient_57	19	4.6		1.5	0.2	virginica	Grand
+patient_58	20	6.3	2.5	5	1.9	setosa	Grand
+patient_59	20	6.3	3.3	6	2.5	versicolor	Grand
+patient_60	20	7.2	3.2	6	1.8	virginica	Grand

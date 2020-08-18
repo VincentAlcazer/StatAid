@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1596784066322.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2330149189",
+    "id" : "93C95307",
+    "lastKnownWriteTime" : 1596787914,
+    "last_content_update" : 1596787914104,
+    "path" : "C:/Users/Vincent/Desktop/StatAid/R/mod_Explo_paired.R",
+    "project_path" : "R/mod_Explo_paired.R",
+    "properties" : {
+        "cursorPosition" : "100,0",
+        "scrollLine" : "93"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
