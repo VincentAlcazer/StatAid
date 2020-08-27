@@ -2,7 +2,7 @@
 title: 'StatAid: a R package with a graphical user interface for data analysis'
 authors:
 - affiliation: 1, 2
-  name: Vincent Alcazer*
+  name: Vincent Alcazer
   orcid: 0000-0003-1843-6286
 date: "27 August 2020"
 bibliography: paper.bib
@@ -17,6 +17,7 @@ affiliations:
   name: Cancer Research Center of Lyon, INSERM U1052, Lyon, FRANCE
 - index: 2
   name: Hospices Civils de Lyon, Lyon, FRANCE
+
 ---
 
 # Summary
