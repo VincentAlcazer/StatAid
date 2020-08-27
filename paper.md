@@ -23,18 +23,18 @@ affiliations:
 # Summary
 
 Data analysis is a crucial step in every research project in life science. Every clinician or researcher is one day faced to the need of performing statistical analysis. However, few free accessible solutions exists to date and most of the reference software need a paid license. R is a free langage allowing to perform statistical analysis [@RCoreTeam:2017].
-While R environment is very powerful, its learning curve can be very steep at the beginning, especially for people with no previous coding skill or few time to learn. A graphical user interface has already been provided as and independant package, but its features are limited for medical and applied life science studies, with no support for time-dependant variable analysis for example [@Fox:2005] . 
+While R environment is very powerful, its learning curve can be very steep at the beginning, especially for people with no previous coding skill or few time to learn. A graphical user interface has already been provided as an independant package, but its features are limited for medical and applied life science studies, with no support for time-dependant variable analysis for example [@Fox:2005]. 
 
-`StatAid` is a free open-source software provided as a R package allowing clinicians and researchers to perform statistic analysis through an intuitive graphical interface. It has been developed  using the Shiny package [@Chang:2020]. Golem has been used for package compilation and deployment[@Guyader:2020].
+`StatAid` is a free open-source software provided as a R package allowing clinicians and researchers to perform statistical analysis through an intuitive graphical interface. It has been developed  using the Shiny package [@Chang:2020]. Golem has been used for package compilation and deployment [@Guyader:2020].
 
-The software guide the users through the steps of a good data analysis, including multiple features:
-<ul><li> Exploratory data analysis: distribution, count, missing-values and outliers check  </li>
-<li> Descriptive analysis, simple comparative analysis and publication ready 'table 1' output </li>
-<li> Publication-ready graph customization  </li>
-<li> Paired data analysis (case-control studies, repetead measures) </li>
-<li> Univariate analysis and models for continuous and categorical outcome: Correlation, linear and logistic regression  </li>
-<li> Univariate analysis and models for time-dependant outcome: Kaplan-Meier curves and cox regression </li>
-<li> Multivariate analysis and models for continuous and categorical outcome </li></ul>
+The software guide the users through all the steps of a data analysis, including multiple features:
+ +Exploratory data analysis: distribution, count, missing-values and outliers check
+ +Descriptive analysis, simple comparative analysis and publication ready 'table 1' output 
+ +Publication-ready graph customization 
+ +Paired data analysis (case-control studies, repetead measures)
+ +Univariate analysis and models for continuous and categorical outcome: Correlation, linear and logistic regression 
+ *Univariate analysis and models for time-dependant outcome: Kaplan-Meier curves and cox regression 
+ *Multivariate analysis and models for continuous and categorical outcome 
 
 Its user-friendly interface can guide any clinician or researcher even with no previous software experience for its statistical analysis. In addition to a local version, a ready-to-use online version [(https://vincentalcazer.shinyapps.io/StatAid/)](https://vincentalcazer.shinyapps.io/StatAid/) is also alvailable, providing access to `StatAid` everywhere even on hospital / research center computers where no external software can be installed.
  
@@ -45,7 +45,7 @@ Its user-friendly interface can guide any clinician or researcher even with no p
 
 As an evolving open-source software, another goal of `StatAid` is also to fit specific needs by allowing users to request particular feature implementation for their study.
 
-`StatAid` was designed to be used by clinicians, researchers, students and any person wanting to perform statistical analysis with no coding ability. It was primarly designed for medical/life science data analysis but can easily be extended to other fields.
+`StatAid` was designed to be used by clinicians, researchers, students and any person wanting to perform statistical analysis with no coding ability. It has already been used by multiple researchers and students for their PhD or medical doctors for their thesis. It was primarly designed for medical/life science data analysis but can easily be extended to other fields.
 
 
 # References
