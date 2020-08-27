@@ -52,7 +52,7 @@ Its user-friendly interface can guide any clinician or researcher even with no p
 
 As an evolving open-source software, another goal of `StatAid` is also to fit specific needs by allowing users to request particular feature implementation for their study.
 
-`StatAid` was designed to be used by clinicians, researchers, students and any person wanting to perform statistical analysis with no coding ability. It has already been used by multiple researchers and students for their PhD or medical doctors for their thesis. It was primarly designed for medical/life science data analysis but can easily be extended to other fields.
+`StatAid` was designed to be used by clinicians, researchers, students and any person wanting to perform statistical analysis with no coding skills. It has already been used by multiple researchers and students for their PhD or medical doctors for their thesis. It was primarly designed for medical/life science data analysis but can easily be extended to other fields.
 
 
 # References
