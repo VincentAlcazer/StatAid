@@ -24,7 +24,9 @@ affiliations:
 Data analysis is a crucial step in every research project in life science. Every clinician or researcher is one day faced to the need of performing statistical analysis. However, few free accessible solutions exists to date and most of the reference software need a paid license. R is a free langage allowing to perform statistical analysis [@RCoreTeam:2017].
 While R environment is very powerful, its learning curve can be very steep at the beginning, especially for people with no previous coding skill or few time to learn. A graphical user interface has already been provided as and independant package, but its features are limited for medical and applied life science studies, with no support for time-dependant variable analysis for example [@Fox:2005] . 
 
-`StatAid` is a free open-source software provided as a R package allowing clinicians and researchers to perform statistic analysis through an intuitive graphical interface. The software guide the users through the steps of a good data analysis, including multiple features:
+`StatAid` is a free open-source software provided as a R package allowing clinicians and researchers to perform statistic analysis through an intuitive graphical interface. It has been developed  using the Shiny package [@Chang:2020]. Golem has been used for package compilation and deployment[@Guyader:2020].
+
+The software guide the users through the steps of a good data analysis, including multiple features:
 <ul><li> Exploratory data analysis: distribution, count, missing-values and outliers check  </li>
 <li> Descriptive analysis, simple comparative analysis and publication ready 'table 1' output </li>
 <li> Publication-ready graph customization  </li>
