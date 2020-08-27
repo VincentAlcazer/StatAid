@@ -28,13 +28,20 @@ While R environment is very powerful, its learning curve can be very steep at th
 `StatAid` is a free open-source software provided as a R package allowing clinicians and researchers to perform statistical analysis through an intuitive graphical interface. It has been developed  using the Shiny package [@Chang:2020]. Golem has been used for package compilation and deployment [@Guyader:2020].
 
 The software guide the users through all the steps of a data analysis, including multiple features:
- +Exploratory data analysis: distribution, count, missing-values and outliers check
- +Descriptive analysis, simple comparative analysis and publication ready 'table 1' output 
- +Publication-ready graph customization 
- +Paired data analysis (case-control studies, repetead measures)
- +Univariate analysis and models for continuous and categorical outcome: Correlation, linear and logistic regression 
- *Univariate analysis and models for time-dependant outcome: Kaplan-Meier curves and cox regression 
- *Multivariate analysis and models for continuous and categorical outcome 
+
+- Exploratory data analysis: distribution, count, missing-values and outliers check
+
+- Descriptive analysis, simple comparative analysis and publication ready 'table 1' output 
+
+- Publication-ready graph customization 
+
+- Paired data analysis (case-control studies, repetead measures)
+
+- Univariate analysis and models for continuous and categorical outcome: Correlation, linear and logistic regression 
+
+- Univariate analysis and models for time-dependant outcome: Kaplan-Meier curves and cox regression 
+
+- Multivariate analysis and models for continuous and categorical outcome 
 
 Its user-friendly interface can guide any clinician or researcher even with no previous software experience for its statistical analysis. In addition to a local version, a ready-to-use online version [(https://vincentalcazer.shinyapps.io/StatAid/)](https://vincentalcazer.shinyapps.io/StatAid/) is also alvailable, providing access to `StatAid` everywhere even on hospital / research center computers where no external software can be installed.
  
