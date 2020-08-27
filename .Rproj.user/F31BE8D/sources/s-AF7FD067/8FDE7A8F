@@ -5,7 +5,7 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3953711047",
+    "hash" : "0",
     "id" : "8FDE7A8F",
     "lastKnownWriteTime" : 1597766330,
     "last_content_update" : 1597766329373,
@@ -13,7 +13,7 @@
     "project_path" : "R/mod_Contact.R",
     "properties" : {
         "cursorPosition" : "26,12",
-        "scrollLine" : "12"
+        "scrollLine" : "8"
     },
     "read_only" : false,
     "read_only_alternatives" : [

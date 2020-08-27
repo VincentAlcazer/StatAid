@@ -34,22 +34,26 @@ mod_Intro_ui <- function(id){
                    p("StatAid features will be regurlarly updated:"),
                    HTML("<ul><li> Exploratory data analysis: distribution, count, missing-values and outliers check  </li>
                             <li> Descriptive analysis, simple comparative analysis and publication ready 'table 1' output </li>
+                             <li> Publication-ready graph customization  </li>
+                            <li> Paired data analysis (case-control studies, repetead measures) </li>
                             <li> Univariate analysis and models for continuous and categorical outcome: Correlation, linear and logistic regression  </li>
 						              	<li> Univariate analysis and models for time-dependant outcome: Kaplan-Meier curves and cox regression </li>
-                            <li> Multivariate models for continuous and categorical outcome </li>
-                            <li> Multivariate models for time-dependant outcome (to be implemented...) </li>
-                            <li> Matched data support (case-control studies, repetead measures) </li>
-                            
+                            <li> Multivariate analysis and models for continuous and categorical outcome </li>
+
                             </ul>"),
                    
                    h2("Change log"),
+                   
+                   p("26/08/2020: v1.0 - Github Public Release"),
+                   p("26/08/2020: v0.7.1 - Minor tweaks and bug fixes"),
                    p("18/08/2020: v0.7 - Paired-data exploration module"),
                    p("29/07/2020: v0.6 - Multivariate analysis and models modules (numeric & categorical outcomes)"),
                    p("09/05/2020: v0.5 - Univariate analysis and models modules (time-dependant outcome)"),
                    p("02/05/2020: v0.4 - Univariate analysis and models modules (categorical outcome)"),
                    p("21/04/2020: v0.3 - Univariate analysis and models modules (numeric outcome)"),
-                   p("19/04/2020: v0.2 - Descriptive analysis module"),
-                   p("11/04/2020: v0.1 - Data loading & Exploratory data modules")
+                   p("19/03/2020: v0.2 - Descriptive analysis module"),
+                   p("17/02/2020: v0.1.1 - Global stability enhancement"),
+                   p("11/01/2020: v0.1 - Data loading & Exploratory data modules")
                    
             )#Column
     ), #tabitem

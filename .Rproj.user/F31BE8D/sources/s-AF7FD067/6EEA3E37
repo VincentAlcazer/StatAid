@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1598535168403.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6EEA3E37",
+    "lastKnownWriteTime" : 1598535782,
+    "last_content_update" : 1598535780139,
+    "path" : "E:/Biostat_bioinfo/Analyses/StatAid/paper.md",
+    "project_path" : "paper.md",
+    "properties" : {
+        "cursorPosition" : "46,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}

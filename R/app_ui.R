@@ -11,7 +11,7 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here 
     dashboardPage(
-      dashboardHeader(title = "StatAid v0.7"),
+      dashboardHeader(title = "StatAid v1.0"),
       dashboardSidebar(
         sidebarMenu(id="tabs",
                     menuItem("Introduction", tabName = "Intro_start", icon = icon("play-circle")
@@ -130,9 +130,9 @@ app_ui <- function(request) {
                   tabsetPanel(id = "Model", type = "tabs",
                               tabPanel("Correlation & Regression graph", 
                                        mod_Model_num_graph_coreg_ui("Model_num_graph_coreg_ui_1")),
-                              tabPanel("Univariate analysis", mod_Model_num_ui("Model_num_ui_1")),
+                              tabPanel("Univariate analysis", mod_Model_num_ui("Model_num_ui_1"))
                                     
-                              tabPanel("Custom graph", "A venir")
+                              #tabPanel("Custom graph", "A venir")
 
                   )
 
@@ -144,14 +144,7 @@ app_ui <- function(request) {
         ########## ========== Categorical
         
         tabItem(tabName = "Model_cat",
-                fluidRow(
-                  tabsetPanel(id = "Model", type = "tabs",
-                              tabPanel("Univariate analysis", 
-                                       mod_Model_cat_ui("Model_cat_ui_1")
-                                       )
-                         
-                              
-                  )
+                fluidRow(column(12, mod_Model_cat_ui("Model_cat_ui_1"))
                   
                   
                 )
@@ -196,7 +189,7 @@ app_ui <- function(request) {
         ), #tabItem
         
         ########## ========== Categorical
-        
+
         tabItem(tabName = "Model_cat_multi",
                 fluidRow(
                   tabsetPanel(id = "Model", type = "tabs",
@@ -211,6 +204,9 @@ app_ui <- function(request) {
                 )
                 
         ), #tabItem
+        
+
+        
         
         #################### ==================== BIOINFO ====================  ####################   
         

@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "4108143930",
+    "hash" : "2312932330",
     "id" : "8A59FF45",
-    "lastKnownWriteTime" : 1597765466,
-    "last_content_update" : 1597765464551,
+    "lastKnownWriteTime" : 1598535922,
+    "last_content_update" : 1598535921435,
     "path" : "E:/Biostat_bioinfo/Analyses/StatAid/R/mod_Intro.R",
     "project_path" : "R/mod_Intro.R",
     "properties" : {
-        "cursorPosition" : "45,38",
-        "scrollLine" : "24"
+        "cursorPosition" : "46,55",
+        "scrollLine" : "28"
     },
     "read_only" : false,
     "read_only_alternatives" : [
