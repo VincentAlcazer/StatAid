@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 <li> Paired data analysis (case-control studies, repetead measures) </li>
 <li> Univariate analysis and models for continuous and categorical outcome: Correlation, linear and logistic regression  </li>
 <li> Univariate analysis and models for time-dependant outcome: Kaplan-Meier curves and cox regression </li>
-<li> Multivariate analysis and models for continuous and categorical outcome </li></ul>
+<li> Multivariate analysis and models for continuous, categorical and time-dependant outcomes </li></ul>
 
 # Getting started
 

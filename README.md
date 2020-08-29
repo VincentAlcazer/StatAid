@@ -63,7 +63,8 @@ curves and cox regression
 
 <li>
 
-Multivariate analysis and models for continuous and categorical outcome
+Multivariate analysis and models for continuous, categorical and
+time-dependant outcomes
 
 </li>
 
