@@ -974,7 +974,7 @@ regression_table_multi <- function(data, y_var, family = "gaussian"){
 #' This function output a publication-ready regression table from a dataset. Each column of the dataset is included as a x variable in a multivariate model.
 #' @param data A dataframe with row corresponding to samples/patients and columns to variables.
 #' @param y_var A character string corresponding to the y variable.
-#' @param family Generalized linear model family (gaussian or binomial) 
+#' @param time_var A numeric variable corresponding to the time variable.
 #' @export
 
 regression_table_multi_cox <- function(data, y_var, time_var){

@@ -41,7 +41,7 @@ The software guide the users through all the steps of a data analysis, including
 
 - Univariate analysis and models for time-dependant outcome: Kaplan-Meier curves and cox regression 
 
-- Multivariate analysis and models for continuous and categorical outcome 
+- Multivariate analysis and models for continuous, categorical and time-dependant outcomes
 
 Its user-friendly interface can guide any clinician or researcher even with no previous software experience for its statistical analysis. In addition to a local version, a ready-to-use online version [(https://vincentalcazer.shinyapps.io/StatAid/)](https://vincentalcazer.shinyapps.io/StatAid/) is also alvailable, providing access to `StatAid` everywhere even on hospital / research center computers where no external software can be installed.
  
