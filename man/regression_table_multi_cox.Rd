@@ -12,7 +12,7 @@ regression_table_multi_cox(data, y_var, time_var)
 
 \item{y_var}{A character string corresponding to the y variable.}
 
-\item{family}{Generalized linear model family (gaussian or binomial)}
+\item{time_var}{A numeric variable corresponding to the time variable.}
 }
 \description{
 All-in-one publication ready regression table for cox models
