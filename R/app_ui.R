@@ -121,7 +121,7 @@ app_ui <- function(request) {
                 )#FluidRow
         ),#tabItem
         
-        #################### ==================== Predictive models ====================  #################### 
+        #################### ==================== Univariate Predictive models ====================  #################### 
         
         ########## ========== Numeric
         
@@ -172,7 +172,7 @@ app_ui <- function(request) {
         ), #tabItem
         
         
-        #################### ==================== Predictive models ====================  #################### 
+        #################### ==================== Multivariate Predictive models ====================  #################### 
         
         ########## ========== Numeric
         
@@ -205,7 +205,20 @@ app_ui <- function(request) {
                 
         ), #tabItem
         
-
+        tabItem(tabName = "Model_surv_multi",
+                fluidRow(
+                  tabsetPanel(id = "Model", type = "tabs",
+                              tabPanel("Manual variables selection", 
+                                       mod_Model_surv_multi_ui("Model_surv_multi_ui_1")
+                              )
+                              
+                              
+                  )
+                  
+                  
+                )
+                
+        ), #tabItem
         
         
         #################### ==================== BIOINFO ====================  ####################   

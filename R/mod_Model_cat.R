@@ -135,7 +135,7 @@ mod_Model_cat_server <- function(input, output, session, r){
       geom_hline(yintercept = 0, linetype="dashed", size = 1) +
       coord_flip() +
       default_theme +
-      labs(title = "Univariate analysis - Logistic model", y = "Odds Ratio", x = "") +
+      labs(title = "Univariate analysis - Logistic model", y = "Odds Ratio [95%CI]", x = "") +
       theme(legend.position = "right")
     
     

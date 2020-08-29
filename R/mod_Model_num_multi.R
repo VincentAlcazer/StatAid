@@ -85,9 +85,6 @@ mod_Model_num_multi_server <- function(input, output, session, r){
     req(input$Run_analysis >= 1)
     isolate({
       
-      y_var=as.character(input$y_var)
-      x_var=as.character(input$x_var)
-
      data_sort <- select(data(), all_of(input$y_var), one_of(input$x_var))
 
       

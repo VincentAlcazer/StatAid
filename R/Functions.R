@@ -360,7 +360,7 @@ descriptive_table <- function(data, group, na.include=F, percent_type=1,  padj_m
     pval_cols = c("param_pvalue","param_pvalue_adj","non_param_pvalue","non_param_pvalue_adj")
     na_to_remove_cols = c(pval_cols,"param_method","non_param_method")
 
-    final_df[,pval_cols] <- apply(final_df[,pval_cols],2, function(x){format.pval(x,2,eps=0.0001)})
+    final_df[,pval_cols] <- apply(final_df[,pval_cols],2, function(x){format.pval(x,2)})
     
     final_df[,na_to_remove_cols][final_df[,na_to_remove_cols] == "NA"] <- ""
     
@@ -773,7 +773,7 @@ regression_dataframes <- function(y_var, x_var, data,  model="lm",
 }
 
 
-#' All-in-one publication ready regression table
+#' All-in-one publication ready regression table for glm models
 #' This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.
 #' @param data A dataframe with row corresponding to samples/patients and columns to variables.
 #' @param y_var A character string corresponding to the y variable.
@@ -821,8 +821,8 @@ regression_table <- function(data, y_var, family = "gaussian"){
   res$CI95_low <- round(res$CI95_low,2)
   res$CI95_high <- round(res$CI95_high,2)
   
-  res$P.Value <- format.pval(res$P.Value, 3,eps=0.001)
-  res$Adj_P.Value <- format.pval(res$Adj_P.Value, 3,eps=0.001)
+  res$P.Value <- format.pval(res$P.Value, 2)
+  res$Adj_P.Value <- format.pval(res$Adj_P.Value, 2)
 
   if (family == "binomial"){
 
@@ -840,7 +840,64 @@ regression_table <- function(data, y_var, family = "gaussian"){
 }
 
 
-#' All-in-one publication ready regression table
+#' All-in-one publication ready regression table for cox models
+#' This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.
+#' @param data A dataframe with row corresponding to samples/patients and columns to variables.
+#' @param y_var A character string corresponding to the y variable = time-dependant outcome (0-1 or dead-alive for example).
+#' @param time_var A numeric variable corresponding to the time variable.
+#' @export
+
+regression_table_cox <- function(data, y_var, time_var){
+  
+  ## DF
+  exclude_vector = c("Patient_id","patient_id","Sample_ID","sample_id", "Whole_cohort")
+  
+  data_reg <- data %>% select(y_var = all_of(y_var),time_var = all_of(time_var), everything(), -one_of(exclude_vector))
+  
+  x_vars <- colnames(data_reg)[-c(1:2)]
+  
+  res_temp <- list()
+  
+  for(v in x_vars){
+    
+    formula = as.formula(paste0("Surv(time_var,y_var) ~ ",v))
+    
+    fit <- coxph(formula, data_reg)
+    res <- broom::tidy(fit,conf.int = TRUE) %>% filter(term != "(Intercept)")
+    if(class(data_reg[,v]) %in% c("factor","character") ){
+      res$term <- paste0(gsub(v,"",res$term),"_vs_",fit$xlevels[[1]][1])
+    }
+    if(class(data_reg[,v]) %in% c("numeric","double","integer") ){
+      res$term <- "Continuous"
+    }
+    
+    res_temp[[v]] <- res
+    
+  }
+  
+  
+  res <- bind_rows(res_temp, .id = "x_var") %>% filter(term != "(Intercept)") %>%
+    select("X Variables" = x_var, "Comparison" = term, 
+           "HR" = estimate, "CI95_low" = conf.low, "CI95_high" = conf.high,
+           "P.Value" = p.value) %>%
+    mutate(multiv_graph = paste0(`X Variables`,"_",Comparison),
+           HR = exp(HR), CI95_low = exp(CI95_low), CI95_high = exp(CI95_high))
+  
+  
+  res$Adj_P.Value = p.adjust(res$P.Value, method="fdr")
+  res$HR <- round(res$HR,2)
+  res$CI95_low <- round(res$CI95_low,2)
+  res$CI95_high <- round(res$CI95_high,2)
+  
+  res$P.Value <- format.pval(res$P.Value, 2)
+  res$Adj_P.Value <- format.pval(res$Adj_P.Value, 2)
+  
+
+  return(res)
+  
+}
+
+#' All-in-one publication ready regression table for glm models
 #' This function output a publication-ready regression table from a dataset. Each column of the dataset is included as a x variable in a multivariate model.
 #' @param data A dataframe with row corresponding to samples/patients and columns to variables.
 #' @param y_var A character string corresponding to the y variable.
@@ -907,6 +964,68 @@ regression_table_multi <- function(data, y_var, family = "gaussian"){
     colnames(res)[3] <- "Odds Ratio"
     
   }
+  
+  
+  return(res)
+  
+}
+
+#' All-in-one publication ready regression table for cox models
+#' This function output a publication-ready regression table from a dataset. Each column of the dataset is included as a x variable in a multivariate model.
+#' @param data A dataframe with row corresponding to samples/patients and columns to variables.
+#' @param y_var A character string corresponding to the y variable.
+#' @param family Generalized linear model family (gaussian or binomial) 
+#' @export
+
+regression_table_multi_cox <- function(data, y_var, time_var){
+  
+  ## DF
+  exclude_vector = c("Patient_id","patient_id","Sample_ID","sample_id", "Whole_cohort")
+  
+  data_reg <- data %>% select(y_var=all_of(y_var), time_var=all_of(time_var),everything(), -one_of(exclude_vector))
+  
+  
+  res_list <- list()
+
+    x_var = colnames(data_reg)[-c(1:2)]
+  
+  fit <- coxph(Surv(time_var,y_var) ~ ., data_reg)
+  res <- broom::tidy(fit,conf.int = TRUE) %>% filter(term != "(Intercept)") %>%
+    mutate(x_var = "", Comparison = "")
+  
+  
+  for(var in x_var){
+    res$x_var[grep(var, res$term)] <- var
+    
+  }
+  
+  
+  for(cat_var in names(fit$xlevels)){
+    
+    res$Comparison[grep(cat_var, res$term)] <- gsub(cat_var,"",paste0(res$term[grep(cat_var, res$term)],"_vs_",fit$xlevels[[cat_var]][1]))
+    
+  }
+  
+  for(num_var in x_var[which(!x_var %in% names(fit$xlevels))]){
+    
+    res$Comparison[grep(num_var, res$term)] <- "Continuous"
+  }
+  
+  
+  res <- res %>% filter(term != "(Intercept)") %>%
+    select("X Variables" = x_var, Comparison, 
+           "HR" = estimate, "CI95_low" = conf.low, "CI95_high" = conf.high,
+           "P.Value" = p.value) %>%
+    mutate(multiv_graph = paste0(`X Variables`,"_",Comparison),
+           HR = exp(HR), CI95_low = exp(CI95_low), CI95_high = exp(CI95_high))
+  
+  res$Adj_P.Value = p.adjust(res$P.Value, method="fdr")
+  res$HR <- round(res$HR,2)
+  res$CI95_low <- round(res$CI95_low,2)
+  res$CI95_high <- round(res$CI95_high,2)
+  
+  res$P.Value <- format.pval(res$P.Value, 2)
+  res$Adj_P.Value <- format.pval(res$Adj_P.Value, 2)
   
   
   return(res)

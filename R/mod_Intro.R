@@ -45,7 +45,8 @@ mod_Intro_ui <- function(id){
                    h2("Change log"),
                    
                    p("26/08/2020: v1.0 - Github Public Release"),
-                   p("26/08/2020: v0.7.1 - Minor tweaks and bug fixes"),
+                   p("24/08/2020: v0.8 - Univariate & multivariate models for time-dependant outcome"),
+                   p("20/08/2020: v0.7.1 - Minor tweaks and bug fixes"),
                    p("18/08/2020: v0.7 - Paired-data exploration module"),
                    p("29/07/2020: v0.6 - Multivariate analysis and models modules (numeric & categorical outcomes)"),
                    p("09/05/2020: v0.5 - Univariate analysis and models modules (time-dependant outcome)"),

@@ -5,8 +5,8 @@ account: vincentalcazer
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2592905
-bundleId: 3530382
+bundleId: 3569515
 url: https://vincentalcazer.shinyapps.io/StatAid_beta/
-when: 1597766672.93933
+when: 1598686619.04408
 asMultiple: FALSE
 asStatic: FALSE

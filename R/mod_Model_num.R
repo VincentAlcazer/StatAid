@@ -89,8 +89,7 @@ mod_Model_num_server <- function(input, output, session, r){
     req(input$Run_analysis >= 1)
     isolate({
       
-      y_var=as.character(input$y_var)
-      x_var=as.character(input$x_var)
+
       if(input$x_var == "All"){
         data_sort <- data()
       } else {
@@ -140,7 +139,7 @@ mod_Model_num_server <- function(input, output, session, r){
       geom_hline(yintercept = 0, linetype="dashed", size = 1) +
       coord_flip() +
       default_theme +
-      labs(title = "Univariate analysis - Linear model", y = "Beta coefficient", x = "") +
+      labs(title = "Univariate analysis - Linear model", y = "Beta coefficient [95%CI]", x = "") +
       theme(legend.position = "right")
     
       

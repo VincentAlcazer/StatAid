@@ -48,7 +48,7 @@ golem::add_module( name = "Model_surv")
 golem::add_module( name = "Model_surv_km")
 golem::add_module( name = "Model_num_multi")
 golem::add_module( name = "Model_cat_multi")
-
+golem::add_module( name = "Model_surv_multi")
 golem::add_module( name = "Contact" ) # Name of the module
 
 ## Add helper functions ----

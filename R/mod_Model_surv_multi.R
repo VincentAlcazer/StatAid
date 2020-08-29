@@ -1,4 +1,4 @@
-#' Model_surv UI Function
+#' Model_surv_multi UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -7,20 +7,16 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList 
-mod_Model_surv_ui <- function(id){
+mod_Model_surv_multi_ui <- function(id){
   ns <- NS(id)
   tagList(
-    tabsetPanel(id = "Cox_model",
+    tabsetPanel(id = "Multivariate_analysis",
                 tabPanel("Table",
-                         
-                         column(12,
+                         column(10,
                                 h4("Analysis informations"),
-               p("The status column must be coded else with 0-1 (no event-event) or dead-alive.
-             The corresponding time column must contain only numeric values. "),
-               htmlOutput(ns("analysis_info"))
+                                htmlOutput(ns("analysis_info"))
                                 
                          ),
-                         
                          column(10,
                                 DT::DTOutput(ns("Table_reg"))
                          ),
@@ -37,38 +33,37 @@ mod_Model_surv_ui <- function(id){
                                                 selectInput(ns("x_var"), label =("X Variable(s)"),
                                                             multiple = T, selected = "All",
                                                             choices=c("All")),
-                                                radioButtons(ns("model"), label = ("Model"),
+                                                radioButtons(ns("model"), label = ("Model"), 
                                                              choices = list("Cox" = "cox"),
                                                              selected = "cox"),
                                                 actionButton(ns("Run_analysis"),"Run Analysis")
-
+                                                
                                               )
                                 )#Absolutepanel
                          )),#Column & tabpanel
-
-                tabPanel("Graph",
+                
+                tabPanel("Graph", 
                          column(10,
                                 plotOutput(ns("Graph_reg"))
                          ),
                          column(2)
                 )#TabPanel
     )#Tabset panel
-  
-  )#Taglist
+  ) #Taglist
 }
     
-#' Model_surv Server Function
+#' Model_surv_multi Server Function
 #'
 #' @noRd 
-mod_Model_surv_server <- function(input, output, session, r){
+mod_Model_surv_multi_server <- function(input, output, session,r){
   ns <- session$ns
-  
-  ##### ===== Reactives elements
-  
+ 
   data <- reactive(r$test$data)
-
-    ## Parameters update
-
+  
+  
+  ## Parameters
+  
+  
   observe({
     updateSelectInput(
       session,
@@ -86,13 +81,13 @@ mod_Model_surv_server <- function(input, output, session, r){
     updateSelectInput(
       session,
       "x_var",
-      choices=c("All", names(data()[!names(data()) %in% c("Patient_id","Whole_cohort")])),
-      selected = "All")
+      choices=c(names(data()[!names(data()) %in% c("Patient_id","Whole_cohort")])))
+  
     
   })
   
   
-  
+  ## DF
   
   regression_table_df <- reactive({
     
@@ -100,14 +95,9 @@ mod_Model_surv_server <- function(input, output, session, r){
     req(input$Run_analysis >= 1)
     isolate({
       
-
-      if(input$x_var == "All"){
-        data_sort <- data()
-      } else {
-        data_sort <- select(data(), input$y_var, one_of(input$x_var), one_of(input$time_var))
-      }
+      data_sort <- select(data(), input$y_var, one_of(input$x_var), one_of(input$time_var))
       
-      df <- regression_table_cox(data=data_sort, y_var=input$y_var, time_var = input$time_var)
+      df <- regression_table_multi_cox(data=data_sort, y_var=input$y_var, time = input$time_var)
       
       return(df)
       
@@ -120,13 +110,22 @@ mod_Model_surv_server <- function(input, output, session, r){
   
   
   output$analysis_info <- renderText({
-    paste(paste0("<b>Methods :</b> Univariate analysis is performed using a cox regression model. 
-                 P-values are adjusted with the FDR (Benjamini-Hochberg) method. "))
+    paste(paste0("<b>Methods :</b> Multivariate analysis is performed using a cox regression model. 
+                 
+                Variables are manually selected by the user 
+                (e.g. Variables with a p-value < 0.10 in univariate analysis have been included in the multivariate model.)
+                 
+                 P-values are adjusted with the FDR (Benjamini-Hochberg) method. <br>
+                 
+                 <b>NB :</b> Your multivariate model is currently based on ",length(input$x_var)," variables. As a rule-of-thumb, you would
+                 need at least ",10*length(input$x_var)," patients/samples to have enough power to perform it.
+                 "))
+    
     
     
   })
   
-
+  
   output$Table_reg <- DT::renderDT(
     regression_table_df()[,-7],
     class = "display nowrap compact", # style
@@ -140,27 +139,26 @@ mod_Model_surv_server <- function(input, output, session, r){
     
   )
   
+  
   output$Graph_reg <- renderPlot(
-    
     regression_table_df() %>%
       ggplot(aes(x=multiv_graph , y=HR, color=`X Variables`)) + 
       geom_pointrange(aes(ymin= CI95_low, ymax=CI95_high), size = 1) +
       geom_hline(yintercept = 0, linetype="dashed", size = 1) +
       coord_flip() +
       default_theme +
-      labs(title = "Univariate analysis - Cox model", y = "Hazard ratio [95%CI]", x = "") +
+      labs(title = "Multivariate analysis - Cox model", y = "Hazard Ratio [95%CI]", x = "") +
       theme(legend.position = "right")
-    
     
   )
   
-
- 
+  
+  
 }
     
 ## To be copied in the UI
-# mod_Model_surv_ui("Model_surv_ui_1")
+# mod_Model_surv_multi_ui("Model_surv_multi_ui_1")
     
 ## To be copied in the server
-# callModule(mod_Model_surv_server, "Model_surv_ui_1")
+# callModule(mod_Model_surv_multi_server, "Model_surv_multi_ui_1")
  
