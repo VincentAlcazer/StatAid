@@ -1,5 +1,5 @@
 ---
-title: 'StatAid: a R package with a graphical user interface for data analysis'
+title: 'StatAid: An R package with a graphical user interface for data analysis'
 authors:
 - affiliation: 1, 2
   name: Vincent Alcazer
@@ -25,7 +25,7 @@ affiliations:
 Data analysis is a crucial step in every research project in life science. Every clinician or researcher is one day faced to the need of performing statistical analysis. However, few free accessible solutions exists to date and most of the reference software need a paid license. R is a free langage allowing to perform statistical analysis [@RCoreTeam:2017].
 While R environment is very powerful, its learning curve can be very steep at the beginning, especially for people with no previous coding skill or few time to learn. A graphical user interface has already been provided as an independant package, but its features are limited for medical and applied life science studies and its usage remains difficult and not intuitive for new users [@Fox:2005]. 
 
-`StatAid` is a free open-source software provided as a R package allowing clinicians and researchers to perform statistical analysis through an intuitive graphical interface. It has been developed  using the Shiny package [@Chang:2020]. Golem has been used for package compilation and deployment [@Guyader:2020].
+`StatAid` is a free open-source software provided as an R package allowing clinicians and researchers to perform statistical analysis through an intuitive graphical interface. It has been developed  using the Shiny package [@Chang:2020]. Golem has been used for package compilation and deployment [@Guyader:2020].
 
 The software guide the users through all the steps of a data analysis, including multiple features:
 
@@ -48,7 +48,7 @@ Its user-friendly interface can guide any clinician or researcher even with no p
 
 # Statement of need 
 
-`StatAid` is a R package designed to fit the needs for every-day statistical analysis in science. The package provides all the tools necessary to perform a complete data analysis in an intuitive ready-to-use graphical interface. Any user with no coding skill or no software with paid-license available can easily perform all the steps of a good statistical analysis, from dataexploration/quality check to multivariate modeling. The online version of `StatAid` render it accessible everywhere, even on computers with restricting software installation policies.
+`StatAid` is an R package designed to fit the needs for every-day statistical analysis in science. The package provides all the tools necessary to perform a complete data analysis in an intuitive ready-to-use graphical interface. Any user with no coding skill or no software with paid-license available can easily perform all the steps of a good statistical analysis, from dataexploration/quality check to multivariate modeling. The online version of `StatAid` render it accessible everywhere, even on computers with restricting software installation policies.
 
 As an evolving open-source software, another goal of `StatAid` is also to fit specific needs by allowing users to request particular feature implementation for their study.
 

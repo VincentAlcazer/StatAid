@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-`StatAid` is a free open-source software provided as a R package
+`StatAid` is a free open-source software provided as an R package
 allowing clinicians and researchers to perform statistic analysis
 through an intuitive graphical interface. It has been developed with the
 R software, using the [Shiny package](https://shiny.rstudio.com/).
