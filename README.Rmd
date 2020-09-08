@@ -53,12 +53,12 @@ You can install the development version from [GitHub](https://github.com/Vincent
 
 All troubleshooting and contributions can be found on the [Github page.](https://github.com/VincentAlcazer/StatAid/issues)
 
-## Reporting a bug
+## Bug report
 
-If you encounter any problem with the software or find a bug, please report it by:
+If you encounter any problem with the software or find a bug, please report it on GitHub:
 
-- Creating a [new issue](https://github.com/VincentAlcazer/StatAid/issues) on the Github page
-- Trying to describe the problem/bug with reproductible steps
+- Create a [new issue](https://github.com/VincentAlcazer/StatAid/issues) on the Github page
+- Try to describe the problem/bug with reproductible steps
 
 ## Feature request
 

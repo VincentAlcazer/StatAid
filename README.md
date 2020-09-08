@@ -88,11 +88,38 @@ repository or directly by downloading the package in R:
 # install.packages("remotes")
 #remotes::install_github("VincentAlcazer/StatAid")
 
-#run_app()
+#StatAid::run_app()
 ```
 
-# Troubleshooting / contact
+# Troubleshooting and contribution
 
-To report a bug or request/suggest a new feature, please open [Github
-issue.](https://github.com/VincentAlcazer/StatAid/issues) You can also
-contact me by [mail.](mailto:vincent.alcazer@chu-lyon.fr)
+All troubleshooting and contributions can be found on the [Github
+page.](https://github.com/VincentAlcazer/StatAid/issues)
+
+## Bug report
+
+If you encounter any problem with the software or find a bug, please
+report it on GitHub:
+
+  - Create a [new
+    issue](https://github.com/VincentAlcazer/StatAid/issues) on the
+    Github page
+  - Try to describe the problem/bug with reproductible steps
+
+## Feature request
+
+To ask for new feature implementation/current feature enhancemenet:
+
+  - Create a [new
+    issue](https://github.com/VincentAlcazer/StatAid/issues) on the
+    Github page
+  - Briefly describe the research question you want to answer and the
+    type of data you have
+  - If possible: provide pictures of the graph you would like to make or
+    references from the paper you saw the analysis in.
+
+## Contribution proposal
+
+Contributions to new features or code enhancement are welcomed by
+creating a new [pull
+request.](https://github.com/VincentAlcazer/StatAid/pulls)
