@@ -14,32 +14,22 @@ test_that("app server", {
 
 # Configure this test to fit your need
 test_that(
-  "app launches",{
+  "app launches",
+  {
     skip_on_cran()
     skip_on_travis()
     skip_on_appveyor()
-    if(interactive()){
+    if (interactive()) {
       x <- processx::process$new(
-        "R", 
+        "R",
         c(
-          "-e", 
+          "-e",
           "pkgload::load_all(here::here());run_app()"
         )
       )
       Sys.sleep(5)
       expect_true(x$is_alive())
       x$kill()
-      
     }
-
-
   }
 )
-
-
-
-
-
-
-
-
