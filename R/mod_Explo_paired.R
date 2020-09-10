@@ -13,7 +13,7 @@ mod_Explo_paired_ui <- function(id) {
     fluidRow(
       column(
         11,
-        p(strong("Data format:"), "each row correspond to an observation (sample/patient), each selected variable/column to a different timepoint of the same variable 
+        p(strong("Data format:"), "each row corresponds to an observation (sample/patient), each selected variable/column to a different timepoint of the same variable 
         (e.g. Concentration_day0, concentration_day15, concentration_day30...)"),
         htmlOutput(ns("analysis_info")),
       ),
