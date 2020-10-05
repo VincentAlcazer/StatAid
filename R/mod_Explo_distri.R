@@ -139,8 +139,7 @@ mod_Explo_distri_server <- function(input, output, session, r) {
 
     return(df)
   })
-
-
+  
 
   ## Plots & tables
 
@@ -159,6 +158,7 @@ mod_Explo_distri_server <- function(input, output, session, r) {
         legend.position = input$Legend_ext
       )
   })
+  
 
   output$Barchart <- renderPlot({
     data_explo() %>%
