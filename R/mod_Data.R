@@ -25,7 +25,7 @@ mod_Data_ui <- function(id) {
                             
                            
       
-      Once correctly encoded, your dataframe should be saved as a tab (.txt/.tsv), comma or semicolon (.csv) delimited file. 
+      Once correctly encoded, <b> your dataframe should be saved as a tab (.txt/.tsv), comma or semicolon (.csv) delimited file.</b> 
       
       Do not forget to select the appropriate parameters in control panel on the right. 
 	  
