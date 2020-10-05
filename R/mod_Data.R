@@ -66,6 +66,7 @@ mod_Data_server <- function(input, output, session, r) {
     server = T,
     rownames = FALSE,
     options = list(
+      scrollX = TRUE,
       lengthChange = TRUE,
       columnDefs = list(list(className = "dt-left", targets = "_all"))
     )
