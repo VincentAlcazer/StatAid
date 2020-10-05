@@ -35,7 +35,7 @@ The software guide the users through all the steps of a data analysis, including
 
 - Publication-ready graph customization 
 
-- Paired data analysis (Repeated measures...)
+- Paired data analysis (case-control studies, repeated measures)
 
 - Univariate analysis and models for continuous and categorical outcome: Correlation, linear and logistic regression 
 
@@ -43,16 +43,16 @@ The software guide the users through all the steps of a data analysis, including
 
 - Multivariate analysis and models for continuous, categorical and time-dependent outcomes
 
-Its user-friendly interface can guide any clinician or researcher even with no previous software experience for its statistical analysis. In addition to a local version, a ready-to-use online version [(https://vincentalcazer.shinyapps.io/StatAid/)](https://vincentalcazer.shinyapps.io/StatAid/) is also available, providing access to `StatAid` everywhere, even on hospital / research center computers where no external software can be installed.
+Its user-friendly interface can guide any clinician or researcher even with no previous software experience for its statistical analysis. In addition to a local version, a ready-to-use online version [(https://vincentalcazer.shinyapps.io/StatAid/)](https://vincentalcazer.shinyapps.io/StatAid/) is also available, providing access to `StatAid` everywhere, even on hospital/research center computers where no external software can be installed.
  
 
 # Statement of need 
 
-`StatAid` is an R package designed to fit the needs for every-day statistical analysis in science. The package provides an intuitive ready-to-use graphical interface to perform data analysis. Any user with no coding skill or no software with paid-license available can easily perform all the steps of a statistical analysis, from data-exploration/quality check to modelisation. The online version of `StatAid` renders it accessible everywhere, even on computers with restricting software installation policies.
+`StatAid` is an R package designed to fit the needs for every-day statistical analysis in science. The package provides all the tools necessary to perform a complete data analysis in an intuitive ready-to-use graphical interface. Any user with no coding skill or no software with paid-license available can easily perform all the steps of a good statistical analysis, from data-exploration/quality check to multivariate modeling. The online version of `StatAid` renders it accessible everywhere, even on computers with restrictive software installation policies.
 
 As an evolving open-source software, another goal of `StatAid` is also to fit specific needs by allowing users to request particular feature implementations for their study.
 
-`StatAid` was designed to be used by clinicians, researchers, students and any person wanting to perform statistical analysis with no coding skills. It was primarily designed for medical/life science data analysis but can easily be extended to other fields.
+`StatAid` was designed to be used by clinicians, researchers, students and any person wanting to perform statistical analysis with no coding skills. It has already been used by multiple researchers and students for their PhD or medical doctors for their thesis. It was primarily designed for medical/life science data analysis but can easily be extended to other fields.
 
 
 # References
