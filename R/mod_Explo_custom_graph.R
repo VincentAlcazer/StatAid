@@ -47,7 +47,7 @@ mod_Explo_custom_graph_ui <- function(id) {
           radioButtons(ns("Error"), "Error bars (Barchart)",
             choices = c(
               "Hide" = "hide",
-              "Standard derivation" = "sd",
+              "Standard deviation" = "sd",
               "Standard error" = "se",
               "95% CI" = "IC95"
             ),

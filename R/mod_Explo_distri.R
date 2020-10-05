@@ -12,14 +12,14 @@ mod_Explo_distri_ui <- function(id) {
   tagList(
     column(
       10,
-      p("Red-labelled data points are diverging from more than 3 standard-derivations from the mean.
+      p("Red-labelled data points are diverging from more than 3 standard-deviations from the mean.
             "),
       box(
         title = "Boxplot (Median, Interquartile Range)",
         plotOutput(ns("Boxplot")), collapsible = T
       ),
       box(
-        title = "Barplot (Mean, standard-derivation)",
+        title = "Barplot (Mean, standard-deviation)",
         plotOutput(ns("Barchart")), collapsible = T
       ),
       box(
