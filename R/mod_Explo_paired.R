@@ -13,8 +13,10 @@ mod_Explo_paired_ui <- function(id) {
     fluidRow(
       column(
         11,
-        p(strong("Data format:"), "each row correspond to an observation (sample/patient), each selected variable/column to a different timepoint of the same variable 
-        (e.g. Concentration_day0, concentration_day15, concentration_day30...)"),
+        p(strong("Data format:"), "each row corresponds to an observation (sample/patient), 
+        each selected variable/column to a different timepoint of the same variable 
+        (e.g. Concentration_day0, concentration_day15, concentration_day30...).
+          Timepoints should be selected in chronological order."),
         htmlOutput(ns("analysis_info")),
       ),
 
@@ -51,7 +53,7 @@ mod_Explo_paired_ui <- function(id) {
             radioButtons(ns("Error"), "Error bars (Barchart)",
               choices = c(
                 "Hide" = "hide",
-                "Standard derivation" = "sd",
+                "Standard deviation" = "sd",
                 "Standard error" = "se",
                 "95% CI" = "IC95"
               ),
@@ -203,7 +205,6 @@ mod_Explo_paired_server <- function(input, output, session, r) {
     req(input$Run_analysis >= 1)
 
     isolate({
-
 
       # autoplot_paired(data,timepoints,
       #                 group,

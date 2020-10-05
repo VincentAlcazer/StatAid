@@ -10,6 +10,7 @@
 #' @import broom
 #' @import survival
 #' @import survminer
+#' @import mgcv
 
 
 ########## ========== Datasets

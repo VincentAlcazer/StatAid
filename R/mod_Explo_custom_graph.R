@@ -140,7 +140,7 @@ mod_Explo_custom_graph_ui <- function(id) {
               max = 35, value = c(12, 14), step = 1
             ),
             sliderInput(ns("y_limits"),
-              label = "Limits", min = 0,
+              label = "Y Limits", min = 0,
               max = 100, value = c(0, 50)
             ),
           ) # Wellpanel
@@ -209,11 +209,19 @@ mod_Explo_custom_graph_server <- function(input, output, session, r) {
     updateSelectInput(
       session,
       "Group_level",
-      choices = c(NULL, (levels(data() %>% select(all_of(input$Group)) %>% unlist() %>% as.factor())))
+      choices = c(NULL, (levels(data() %>% select(input$Group) %>% unlist() %>% as.factor())))
     )
+
+    updateSliderInput(session,
+                      "y_limits",
+                      min = 0,
+                      max =  as.numeric((res()[["lim"]]$ylim[[2]]))*3, 
+                      value = c(as.numeric((res()[["lim"]]$ylim[[1]])), as.numeric((res()[["lim"]]$ylim[[2]])))
+                      )
+    
   })
 
-
+ 
 
   ##### Observe: legend parameters
   observe({
@@ -261,24 +269,12 @@ mod_Explo_custom_graph_server <- function(input, output, session, r) {
   })
 
 
-
-  # observe({
-  #   lim <- lim()
-  #   req(input$Run_analysis >= 1)
-  #   updateSliderInput("y_limits", value = c(lim$ylim))
-  #
-  # })
-  #
-  # reactiveValues({
-  #   lim <- res()[["lim"]]
-  # })
-
-
   ## Output
 
   output$Graph_comp <- renderPlot({
     p <- p() + theme_bw() +
       labs(title = input$Title, y = input$y_lab, x = input$x_lab, fill = input$legend_title) +
+      ylim(input$y_limits[1],input$y_limits[2]) +
       theme(
         plot.title = element_text(size = input$title_font_size, face = "bold"),
         axis.text.x = element_text(size = input$x_font_size[1], angle = input$x_angle, vjust = 0.5, hjust = 0.5, color = "black"),

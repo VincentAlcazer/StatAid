@@ -17,28 +17,38 @@ mod_Contact_ui <- function(id) {
       "and I am a medical doctor resident in clinical Hematology in Lyon, FRANCE.
     I am currently doing a PhD in immunology and bioinformatic, developping a new approach to 
     identify and select relevant CD8+ T cells epitopes among original targets (human endogenous retroviruses)
-    expressed in different kind of cancers."
+    expressed in different types of cancers."
     ),
 
-    h2("Development"),
+    h1("Development"),
     p(
       "This software has been developed with the R software using the ", a("Shiny package", href = "http://shiny.rstudio.com"),
       "under the", a("Rstudio", href = "https://rstudio.com/"), " environment. The R package has been created using",
       a("Golem.", href = "https://thinkr-open.github.io/golem/")
     ),
+    
+    h3("Packages and function used"),
+    p("StatAid is using multiple packages and function to provide you an easy-to-use interface for statistical analysis. 
+      All graphs are plotted with ",strong("ggplot2"), "combined with the ",strong("ggrepel"), " and ",strong("ggpubr"), " packages, unless stated otherwise. Colors are modified using the 
+      ",strong("Rcolorbrewer's"), " package palettes.
+      The ",strong("tidyr"), ", ",strong("dplyr"), ", ",strong("tibble"), " and ",strong("broom"), " packages are used for data tidying and formatting."
+    ),
+    
 
-    p("Full package list:"),
-    HTML("<ul><li> Ggplot2 </li> 
-         <li> dplyr </li> 
-          <li> tidyr </li> 
-         <li> ggrepel </li> 
-         <li> ggpubr </li> 
-         <li> tibble </li> 
-               <li> forcats </li> 
-          <li> RColorBrewer </li> 
-                <li> broom </li> 
-          <li> survival </li> 
-                <li> survminer </li> 
+    HTML("<ul><li> <b>Data Exploration : </b> 
+    Statistics in the descriptive tables are calculated with the base R functions (mean(), median(), sd() and IQR()). 
+    Statistical tests are also performed with base R functions (t.test(), wilcox.test(), anova() with lm(), kruskal.test(), chisq.test(), fisher.test()).
+    P-values are corrected with the base p.adjust() function. </li> 
+    
+    <li> <b>Uni and multivariate analysis : </b> Correlations are calculated with the base cor.test() function.
+    Linear and logistic model parameters are calculated with the base glm() function, with family = gaussian or binomial/logit, respectively.
+    Generalized additive model parameters are calculated with the gam() function from the <b>mgcv</b> package, with the REML method.
+    Linear, GAM and LOESS models are plotted using ggplot2's geom_smooth() function.  </li> 
+    
+    <li> <b>Time-dependant outcome : </b> Survival curves (Kaplan-Meier estimates) are plotted with the <b>survival</b>  and <b>survminer</b>  packages. 
+    Cox model parameters are calculated with the coxph() function. </li>  
+         
+
          </ul>"),
 
     a("Favicon by icon8", href = "https://icons8.com/icon/67592/statistics"),
@@ -50,6 +60,8 @@ mod_Contact_ui <- function(id) {
       a("Github issue.", href = "https://github.com/VincentAlcazer/StatAid/issues"),
       "You can also contact me by ", a("mail.", href = "mailto:vincent.alcazer@chu-lyon.fr")
     )
+    
+
   )
 }
 

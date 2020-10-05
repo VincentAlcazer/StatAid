@@ -11,14 +11,14 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here
     dashboardPage(
-      dashboardHeader(title = "StatAid v1.01"),
+      dashboardHeader(title = "StatAid v1.02"),
       dashboardSidebar(
         sidebarMenu(
           id = "tabs",
           menuItem("Introduction", tabName = "Intro_start", icon = icon("play-circle")),
           menuItem("Data loading", tabName = "Data", icon = icon("spinner")),
           menuItem("Data exploration", tabName = "Explo", icon = icon("poll")),
-          menuItem("Paired analysis", tabName = "Paired", icon = icon("link")),
+          menuItem("Paired-data analysis", tabName = "Paired", icon = icon("link")),
           menuItem("Univariate analysis & models",
             tabName = "Model", icon = icon("long-arrow-alt-right"),
             "Outcome (Y variable):",

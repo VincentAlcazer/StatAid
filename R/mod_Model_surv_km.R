@@ -15,7 +15,7 @@ mod_Model_surv_km_ui <- function(id) {
       h4("Analysis informations"),
       p("The status column must be coded else with 0-1 (no event-event) or dead-alive.
              The corresponding time column must contain only numeric values. "),
-      p("For categorical X variables, each different category is considered as an independant group.
+      p("For categorical X variables, each different category is considered as an independent group.
              For numeric X variables, you can select the number of groups to cut your variable in (e.g. 2 will cut at the median,
              3 at terciles...)")
     ),

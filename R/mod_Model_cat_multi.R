@@ -44,7 +44,9 @@ mod_Model_cat_multi_ui <- function(id) {
                 choices = list("Binomial" = "binomial"),
                 selected = "binomial"
               ),
-              actionButton(ns("Run_analysis"), "Run Analysis")
+              actionButton(ns("Run_analysis"), "Run Analysis"),
+              p(),
+              downloadButton(ns("download"), "Download table (.tsv)")
             )
           ) # Absolutepanel
         )
@@ -151,6 +153,16 @@ mod_Model_cat_multi_server <- function(input, output, session, r) {
       default_theme +
       labs(title = "Multivariate analysis - Linear model", y = "Beta coefficient", x = "") +
       theme(legend.position = "right")
+  )
+  
+  # Download table
+  output$download <- downloadHandler(
+    filename = function() {
+      paste("Multivariate_logit_table.tsv")
+    },
+    content = function(file) {
+      write.table(regression_table_df()[, -7], file, row.names = FALSE, sep = "\t", quote = F)
+    }
   )
 }
 

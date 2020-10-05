@@ -49,7 +49,9 @@ mod_Model_surv_multi_ui <- function(id) {
                 choices = list("Cox" = "cox"),
                 selected = "cox"
               ),
-              actionButton(ns("Run_analysis"), "Run Analysis")
+              actionButton(ns("Run_analysis"), "Run Analysis"),
+              p(),
+              downloadButton(ns("download"), "Download table (.tsv)")
             )
           ) # Absolutepanel
         )
@@ -155,6 +157,16 @@ mod_Model_surv_multi_server <- function(input, output, session, r) {
       default_theme +
       labs(title = "Multivariate analysis - Cox model", y = "Hazard Ratio [95%CI]", x = "") +
       theme(legend.position = "right")
+  )
+  
+  # Download table
+  output$download <- downloadHandler(
+    filename = function() {
+      paste("Multivariate_cox_table.tsv")
+    },
+    content = function(file) {
+      write.table(regression_table_df()[, -7], file, row.names = FALSE, sep = "\t", quote = F)
+    }
   )
 }
 

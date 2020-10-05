@@ -163,10 +163,12 @@ mod_Explo_cat_server <- function(input, output, session, r) {
   output$Summary_na_table <- DT::renderDT(
 
     data_explo() %>%
-      group_by_at(input$Group) %>%
+      select(Group = one_of(input$Group), Variable = one_of(input$Variable)) %>%
+      mutate(Group = forcats::fct_explicit_na(Group, "NA"),
+             Variable = forcats::fct_explicit_na(Variable, "NA")) %>%
+      group_by(Group, Variable) %>%
       summarise(
-        Count = n(),
-        "NA" = sum(is.na(input$Variable))
+        Count = n()
       ), # data
     class = "display nowrap compact", # style
     server = F, rownames = FALSE,

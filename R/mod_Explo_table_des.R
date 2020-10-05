@@ -10,6 +10,7 @@
 mod_Explo_table_des_ui <- function(id) {
   ns <- NS(id)
   tagList(
+fluidPage(
     column(
       10,
       h4("Analysis informations"),
@@ -46,11 +47,14 @@ mod_Explo_table_des_ui <- function(id) {
             choices = list("No" = "none", "Benjamini Hochberg (FDR)" = "fdr", "Holm" = "holm", "Bonferroni" = "bonferroni"),
             selected = "none"
           ),
-          actionButton(ns("Run_analysis"), "Run analysis")
+          actionButton(ns("Run_analysis"), "Run analysis"),
+          p(),
+          downloadButton(ns("download"), "Download table (.tsv)")
         )
       ) # Absolutepanel
     ) # Column
-  )
+  ) #fluidpage
+)
 }
 
 #' Explo_table_des Server Function
@@ -110,13 +114,19 @@ mod_Explo_table_des_server <- function(input, output, session, r) {
       return(df)
     })
   })
+  
+  data_out <- reactive({
+    
+    as.data.frame(table_des_df())
+    
+  })
 
   ## Output
 
   output$analysis_info <- renderText({
     paste(
       paste0("<b>Methods :</b> Categorical variables are expressed as n (%) and compared with the Chi-squared test or its non-parametric alternative Fisher's test with simulated p-values. 
-    Numerical variables are expressed as mean (standard-derivation) or median [IQR] and compared with else Welch's t-test (or its non-parametric alternative Wilcoxon's rank-sum test) or 
+    Numerical variables are expressed as mean (standard-deviation) or median [Interquartile Range] and compared with either Welch's t-test (or its non-parametric alternative Wilcoxon's rank-sum test) or 
     ANOVA (or its non-parametric alternative Kruskal-Wallis test) where appropriate.
                  Variables with >80% missing are removed from the analysis."),
       if_else(input$Adjust_pval == "none", "P-values are not adjusted.", paste0("P-values are adjusted with the ", as.character(input$Adjust_pval), " method."))
@@ -134,6 +144,18 @@ mod_Explo_table_des_server <- function(input, output, session, r) {
       pageLength = 30,
       columnDefs = list(list(className = "dt-left", targets = "_all"))
     )
+  )
+  
+  
+  # Download table
+  output$download <- downloadHandler(
+    filename = function() {
+      paste("Descriptive_table.tsv")
+    },
+    content = function(file) {
+      
+      write.table(table_des_df(), file, row.names = FALSE, sep = "\t", quote = F)
+    }
   )
 }
 

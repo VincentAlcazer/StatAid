@@ -541,6 +541,8 @@ autoplot_paired <- function(data, timepoints, group,
     droplevels() %>%
     pivot_longer(all_of(timepoints), names_to = "Timepoint", values_to = "value")
 
+  data_plot$Timepoint <- factor(data_plot$Timepoint, levels = timepoints)
+  
   data_stat <- data_plot %>%
     group_by(Group, Timepoint) %>%
     summarise(

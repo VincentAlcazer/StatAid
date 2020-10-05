@@ -3,21 +3,21 @@
 
 # Welcome to StatAid
 
-<!-- badges: start -->
+<!-- <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-<!-- badges: end -->
+–\>
+<!-- [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) -->
+<!-- <!-- badges: end --> –\>
 
 `StatAid` is a free open-source software provided as an R package
-allowing clinicians and researchers to perform statistic analysis
+allowing clinicians and researchers to perform statistical analysis
 through an intuitive graphical interface. It has been developed with the
 R software, using the [Shiny package](https://shiny.rstudio.com/).
 [Golem](https://github.com/ThinkR-open/golem) has been used for package
 compilation and deployment.
 
-The software guide the users through the steps of a good data analysis,
-including multiple features:
+The software guides the users through the steps of a good data analysis,
+including multiple features such as:
 
 <ul>
 
@@ -43,7 +43,7 @@ Publication-ready graph customization
 
 <li>
 
-Paired data analysis (case-control studies, repetead measures)
+Paired data analysis (repeated measures)
 
 </li>
 
@@ -56,7 +56,7 @@ Correlation, linear and logistic regression
 
 <li>
 
-Univariate analysis and models for time-dependant outcome: Kaplan-Meier
+Univariate analysis and models for time-dependent outcome: Kaplan-Meier
 curves and cox regression
 
 </li>
@@ -64,7 +64,7 @@ curves and cox regression
 <li>
 
 Multivariate analysis and models for continuous, categorical and
-time-dependant outcomes
+time-dependent outcomes
 
 </li>
 
@@ -86,9 +86,9 @@ repository or directly by downloading the package in R:
 ``` r
 
 # install.packages("remotes")
-#remotes::install_github("VincentAlcazer/StatAid")
+# remotes::install_github("VincentAlcazer/StatAid")
 
-#StatAid::run_app()
+# StatAid::run_app()
 ```
 
 # Troubleshooting and contribution

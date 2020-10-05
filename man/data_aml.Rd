@@ -5,7 +5,7 @@
 \alias{data_aml}
 \title{Global parameters}
 \format{
-An object of class \code{data.frame} with 151 rows and 18 columns.
+An object of class \code{data.frame} with 151 rows and 21 columns.
 }
 \usage{
 data_aml
