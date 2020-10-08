@@ -96,7 +96,7 @@ repository or directly by downloading the package in R:
 If you are not familiar with StatAid or just want to have an overview of
 the different possibilities, you can check the [StatAid’s quick-start
 user
-guide](https://github.com/VincentAlcazer/StatAid/STATAID_QUICK_START_USER_GUIDE.pdf)
+guide](https://github.com/VincentAlcazer/StatAid/blob/master/STATAID_QUICK_START_USER_GUIDE.pdf)
 
 # Troubleshooting and contribution
 

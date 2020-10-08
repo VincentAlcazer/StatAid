@@ -50,7 +50,7 @@ You can install the development version from [GitHub](https://github.com/Vincent
 
 ## Quick-start user guide
 
-If you are not familiar with StatAid or just want to have an overview of the different possibilities, you can check the [StatAid's quick-start user guide](https://github.com/VincentAlcazer/StatAid/STATAID_QUICK_START_USER_GUIDE.pdf)
+If you are not familiar with StatAid or just want to have an overview of the different possibilities, you can check the [StatAid's quick-start user guide](https://github.com/VincentAlcazer/StatAid/blob/master/STATAID_QUICK_START_USER_GUIDE.pdf)
 
 
 # Troubleshooting and contribution
