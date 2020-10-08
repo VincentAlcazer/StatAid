@@ -115,6 +115,8 @@ mod_Model_cat_server <- function(input, output, session, r) {
   output$y_var_print <- renderText({
     paste(paste0("<b>Y variable :</b> ", as.character(input$y_var), " (Levels = ", paste(levels(unlist(select(data(), input$y_var))), collapse = " / "), ")"),
       paste0("<br> <b> Odds Ratio :</b> comparing to reference level (= ", as.character(levels(unlist(select(data(), input$y_var)))[1]), ")"),
+      "<br> <i> Note that for categorical variables, each level of the variables is compared to the baseline level 
+      (which is the first level by alphabetical order).</i>",
       sep = "\n"
     )
   })
@@ -136,7 +138,7 @@ mod_Model_cat_server <- function(input, output, session, r) {
     regression_table_df() %>%
       ggplot(aes(x = multiv_graph, y = `Odds Ratio`, color = `X Variables`)) +
       geom_pointrange(aes(ymin = CI95_low, ymax = CI95_high), size = 1) +
-      geom_hline(yintercept = 0, linetype = "dashed", size = 1) +
+      geom_hline(yintercept = 1, linetype = "dashed", size = 1) +
       coord_flip() +
       default_theme +
       labs(title = "Univariate analysis - Logistic model", y = "Odds Ratio [95%CI]", x = "") +

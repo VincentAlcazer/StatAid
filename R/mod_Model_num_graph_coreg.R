@@ -204,6 +204,9 @@ mod_Model_num_graph_coreg_server <- function(input, output, session, r) {
 
 
   output$Actual_vs_predicted <- renderPlot({
+    input$Run_analysis
+    req(input$Run_analysis >= 1)
+    isolate({
     regression_df()[["augment_df"]] %>%
       ggplot(aes_string(x = ".fitted", y = input$y_var)) +
       geom_point() +
@@ -214,6 +217,7 @@ mod_Model_num_graph_coreg_server <- function(input, output, session, r) {
       ) +
       theme_bw() +
       default_theme
+    })
   })
 }
 

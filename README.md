@@ -3,11 +3,11 @@
 
 # Welcome to StatAid
 
-<!-- <!-- badges: start -->
+<!-- badges: start -->
 
-–\>
-<!-- [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) -->
-<!-- <!-- badges: end --> –\>
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
 
 `StatAid` is a free open-source software provided as an R package
 allowing clinicians and researchers to perform statistical analysis
@@ -43,7 +43,7 @@ Publication-ready graph customization
 
 <li>
 
-Paired data analysis (repeated measures)
+Paired data analysis (case-control studies, repeated measures)
 
 </li>
 
@@ -90,6 +90,13 @@ repository or directly by downloading the package in R:
 
 # StatAid::run_app()
 ```
+
+## Quick-start user guide
+
+If you are not familiar with StatAid or just want to have an overview of
+the different possibilities, you can check the [StatAid’s quick-start
+user
+guide](https://github.com/VincentAlcazer/StatAid/STATAID_QUICK_START_USER_GUIDE.pdf)
 
 # Troubleshooting and contribution
 

@@ -27,7 +27,7 @@ TCGA.AB.2882	Female	73	M2	Adverse	NA	No	No	No	37	1,7	16	11	0	11	1	2	HMA	32	12	4
 TCGA.AB.2884	Female	44	M1	Favorable	Normal	No	Yes	No	86	13,5	17	13,8	1	24,8	1	1	Intensive	7	15	5
 TCGA.AB.2889	Female	55	M4	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	52	30,9	59	28,4	1	34,3	0	1	Intensive	33	7	4
 TCGA.AB.2894	Female	50	M5	Intermediate	"t(9;11)(p21.3;q23.3)_MLLT3-KMT2A"	No	No	No	81	6,7	10	5	1	5	1	1	Intensive	79	1	4
-TCGA.AB.2895	Female	41	M1	FavorableOrIntermediate	NA	Yes	Yes	No	92	134,4	90	5,7	0	5,7	1	2	Intensive	87	5	1
+TCGA.AB.2895	Female	41	M1	Favorable	NA	Yes	Yes	No	92	134,4	90	5,7	0	5,7	1	2	Intensive	87	5	1
 TCGA.AB.2896	Female	21	M5	Favorable	Normal	No	Yes	No	90	93	72	7,5	0	7,5	1	2	Intensive	66	12	3
 TCGA.AB.2897	Female	50	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	90	3,4	0	30,5	0	30,5	0	0	Intensive	70	13	1
 TCGA.AB.2898	Female	69	M1	Intermediate	Intermediate Risk Abnormality	No	No	No	42	10,1	32	36,1	0	36,1	0	0	Intensive	59	9	3
@@ -35,7 +35,7 @@ TCGA.AB.2899	Female	76	M4	Intermediate	Intermediate Risk Abnormality	No	No	No	37
 TCGA.AB.2910	Female	61	M5	Adverse	Complex	Yes	No	No	71	34,6	55	0,1	0	0,1	1	2	Supportive care	15	10	1
 TCGA.AB.2911	Female	51	M4	Adverse	"t(v;11q23.3);_X_KMT2A(MLL_translocation)"	No	No	No	39	50,3	39	3,7	1	61,2	0	1	Intensive	86	8	5
 TCGA.AB.2914	Female	22	M2	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	55	51,8	70	48,3	0	48,3	0	0	Intensive	48	8	3
-TCGA.AB.2915	Female	73	M2	FavorableOrIntermediate	Complex	Yes	Yes	No	32	15,1	11	0,5	0	0,5	1	2	HMA	73	16	3
+TCGA.AB.2915	Female	73	M2	Favorable	Complex	Yes	Yes	No	32	15,1	11	0,5	0	0,5	1	2	HMA	73	16	3
 TCGA.AB.2916	Female	49	M4	Intermediate	Intermediate Risk Abnormality	No	No	No	51	12,4	5	45,3	0	45,3	0	0	Intensive	43	7	1
 TCGA.AB.2917	Female	41	M0	Adverse	Complex	No	No	No	42	47,6	74	39	1	57,3	0	1	Intensive	56	16	3
 TCGA.AB.2918	Female	47	M1	Adverse	Intermediate Risk Abnormality	Yes	No	No	77	80,5	79	6	1	7,4	1	1	Intensive	75	7	3
@@ -81,7 +81,7 @@ TCGA.AB.2822	Male	65	M0	Intermediate	Intermediate Risk Abnormality	No	No	No	99	2
 TCGA.AB.2828	Male	55	M4	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	35	22,2	8	99,9	0	99,9	0	0	Intensive	11	11	2
 TCGA.AB.2834	Male	33	M4	Adverse	"t(v;11q23.3);_X_KMT2A(MLL_translocation)"	Yes	No	No	71	25,9	14	7,7	0	7,7	1	2	Intensive	79	3	1
 TCGA.AB.2835	Male	48	M5	Favorable	Normal	No	Yes	No	83	116,2	3	77,3	0	77,3	0	0	Intensive	57	17	3
-TCGA.AB.2836	Male	35	M4	FavorableOrIntermediate	Normal	Yes	Yes	No	90	52,9	18	17	1	17	1	1	Intensive	56	10	5
+TCGA.AB.2836	Male	35	M4	Favorable	Normal	Yes	Yes	No	90	52,9	18	17	1	17	1	1	Intensive	56	10	5
 TCGA.AB.2840	Male	74	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	Yes	No	No	51	31,5	NA	0,7	0	0,7	1	2	Other	79	10	5
 TCGA.AB.2842	Male	64	M4	Adverse	Intermediate Risk Abnormality	No	No	No	95	2,3	0	0,3	0	0,3	1	2	Supportive care	61	2	5
 TCGA.AB.2843	Male	77	M6	Intermediate	Intermediate Risk Abnormality	No	No	No	75	2,6	8	3,7	1	6,3	1	1	Intensive	89	54	5

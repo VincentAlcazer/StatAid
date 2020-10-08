@@ -114,7 +114,10 @@ mod_Model_num_server <- function(input, output, session, r) {
 
   output$analysis_info <- renderText({
     paste(paste0("<b>Methods :</b> Univariate analysis is performed using a linear regression model. 
-                 P-values are adjusted with the FDR (Benjamini-Hochberg) method. "))
+                 P-values are adjusted with the FDR (Benjamini-Hochberg) method. 
+                  <br> <i> Note that for categorical variables, each level of the variables is compared to the baseline level 
+                 (which is the first level by alphabetical order).</i>
+                 "))
   })
 
 
