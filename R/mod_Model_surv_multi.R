@@ -152,7 +152,7 @@ mod_Model_surv_multi_server <- function(input, output, session, r) {
     regression_table_df() %>%
       ggplot(aes(x = multiv_graph, y = HR, color = `X Variables`)) +
       geom_pointrange(aes(ymin = CI95_low, ymax = CI95_high), size = 1) +
-      geom_hline(yintercept = 0, linetype = "dashed", size = 1) +
+      geom_hline(yintercept = 1, linetype = "dashed", size = 1) +
       coord_flip() +
       default_theme +
       labs(title = "Multivariate analysis - Cox model", y = "Hazard Ratio [95%CI]", x = "") +

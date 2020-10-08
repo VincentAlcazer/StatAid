@@ -57,11 +57,9 @@ cut4 <- function(x) {
 #' @export
 
 descriptive_table <- function(data, group, na.include = F, percent_type = 1, padj_method = "none", show_methods = F,
-                              exclude_vector = c("Patient_id", "patient_id", "Sample_ID")) {
+                              exclude_vector = c("Patient_id", "patient_id", "Sample_ID","Whole_cohort")) {
 
-
-  ## Change: Welch test!
-
+  
   if (group == "Whole_cohort") {
 
     ## Filter out var with >80% NA
@@ -85,6 +83,7 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
       ##### ===== DF
       {
         df <- data.frame(variable = data[, v])
+        colnames(df)[1] <- "variable"
       }
 
 
@@ -93,7 +92,8 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
         summarise(
           "Mean (sd)" = paste0(round(mean(variable, na.rm = T), 2), " (", round(sd(variable, na.rm = T), 2), ")"),
           "Median [IQR]" = paste0(
-            median(variable, na.rm = T), " [", round(median(variable, na.rm = T) - IQR(variable, na.rm = T), 2), "-",
+            round(median(variable, na.rm = T),2), " [", 
+            round(median(variable, na.rm = T) - IQR(variable, na.rm = T), 2), "-",
             round(median(variable, na.rm = T) + IQR(variable, na.rm = T), 2), "]"
           )
         )
@@ -123,7 +123,7 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
       ##### ===== DF
       {
         df <- data.frame(variable = data[, v])
-
+       colnames(df)[1] <- "variable"
 
 
         if (na.include == T) {
@@ -166,7 +166,7 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
 
 
     ########## ========== Final df
-    final_df <- bind_rows(list_num, list_cat)
+    final_df <- rbind(bind_rows(list_num), bind_rows(list_cat))
   } else {
 
     ## Filter out var with >80% NA
@@ -332,7 +332,7 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
 
 
     ########## ========== Final df
-    final_df <- bind_rows(list_num, list_cat)
+    final_df <- rbind(bind_rows(list_num), bind_rows(list_cat))
   }
 
 
@@ -709,7 +709,10 @@ regression_dataframes <- function(y_var, x_var, data, model = "lm",
     formula <- as.formula(paste(y_var, "~ s(", x_var, ")"))
     model <- mgcv::gam(formula, data = data, method = "REML")
     res[["model"]] <- model
-    res[["augment_df"]] <- broom::augment(model)
+    res[["augment_df"]] <- data.frame(y_var=data[,y_var],
+                                      ".fitted"=fitted(model),
+                                      ".resid"=residuals(model))
+    colnames(res[["augment_df"]])[1] <- y_var
     res[["tidy_df"]] <- broom::tidy(model)
     res[["cor_df"]] <- broom::tidy(cor.test(data[, y_var], data[, x_var], method = cor_type))
   }

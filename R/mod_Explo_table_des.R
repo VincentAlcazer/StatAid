@@ -115,12 +115,6 @@ mod_Explo_table_des_server <- function(input, output, session, r) {
     })
   })
   
-  data_out <- reactive({
-    
-    as.data.frame(table_des_df())
-    
-  })
-
   ## Output
 
   output$analysis_info <- renderText({

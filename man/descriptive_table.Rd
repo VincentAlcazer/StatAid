@@ -12,7 +12,7 @@ descriptive_table(
   percent_type = 1,
   padj_method = "none",
   show_methods = F,
-  exclude_vector = c("Patient_id", "patient_id", "Sample_ID")
+  exclude_vector = c("Patient_id", "patient_id", "Sample_ID", "Whole_cohort")
 )
 }
 \arguments{
