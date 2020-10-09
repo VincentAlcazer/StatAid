@@ -39,7 +39,7 @@ mod_Intro_ui <- function(id) {
           HTML("<ul><li> Exploratory data analysis: distribution, count, missing-values and outliers check  </li>
                             <li> Descriptive analysis, simple comparative analysis and publication ready 'table 1' output </li>
                              <li> Publication-ready graph customization  </li>
-                            <li> Paired data analysis (case-control studies, repetead measures) </li>
+                            <li> Paired data analysis (repeated measures,matched case-control studies) </li>
                             <li> Univariate analysis and models for continuous and categorical outcome: Correlation, linear and logistic regression  </li>
 						              	<li> Univariate analysis and models for time-dependant outcome: Kaplan-Meier curves and cox regression </li>
                             <li> Multivariate analysis and models for continuous and categorical outcome </li>

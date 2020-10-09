@@ -94,7 +94,7 @@ test_that("regression_table_multi_lm", {
   
   expect_s3_class(res, "data.frame")
   expect_equal(res$`X Variables`[1],"Sex")
-  expect_equal(res$`Beta Coeff.`[1],1.3)
+  expect_equal(res$`Beta Coeff.`[1],1.34)
   
 })
 

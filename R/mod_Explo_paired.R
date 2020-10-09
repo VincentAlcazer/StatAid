@@ -279,7 +279,9 @@ mod_Explo_paired_server <- function(input, output, session, r) {
 
 
   output$analysis_info <- renderText({
-    paste(paste0("<b>Methods :</b>  Numerical variables are expressed as mean (", input$Error, ") for default plot or median [IQR] for boxplots."),
+    paste(paste0("<b>Methods :</b>  Numerical variables are expressed as mean (", 
+                 if_else(input$Error == "IC95","95% CI",input$Error), 
+                 ") for default plot or median [IQR] for boxplots."),
       "<br>   - For intra-groups analysis (i.e. no groups selected), data are compared with the paired Welch t-test (or its non parametric alternative the paired Wilcoxon rank-sum test) for up to two measures, 
     or with an ANOVA for repeated measures (or its non parametric alternative the Friedman test) for more than two measures.",
       "<br>   - For inter-groups analysis (i.e. 2 or more groups to compare), data are compared  with a two ways ANOVA for repeated measures. 

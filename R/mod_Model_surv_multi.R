@@ -150,7 +150,7 @@ mod_Model_surv_multi_server <- function(input, output, session, r) {
 
   output$Graph_reg <- renderPlot(
     regression_table_df() %>%
-      ggplot(aes(x = multiv_graph, y = HR, color = `X Variables`)) +
+      ggplot(aes(x = reorder(multiv_graph,desc(multiv_graph)), y = HR, color = `X Variables`)) +
       geom_pointrange(aes(ymin = CI95_low, ymax = CI95_high), size = 1) +
       geom_hline(yintercept = 1, linetype = "dashed", size = 1) +
       coord_flip() +
