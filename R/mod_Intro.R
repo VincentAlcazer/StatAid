@@ -48,7 +48,8 @@ mod_Intro_ui <- function(id) {
           
           h2("Change log"),
           
-          p("26/08/2020: v1.0 - Github Public Release"),
+          p("12/10/2020: v1.1 - Complete release for JOSS publication"),
+          p("26/08/2020: v1.0 - Github Public Release for JOSS review"),
           p("24/08/2020: v0.8 - Univariate & multivariate models for time-dependant outcome"),
           p("20/08/2020: v0.7.1 - Minor tweaks and bug fixes"),
           p("18/08/2020: v0.7 - Paired-data exploration module"),
