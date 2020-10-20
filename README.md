@@ -43,7 +43,7 @@ Publication-ready graph customization
 
 <li>
 
-Paired data analysis (case-control studies, repeated measures)
+Paired data analysis (matched case-control studies, repeated measures)
 
 </li>
 
