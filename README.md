@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Welcome to StatAid v1.1.2
+# Welcome to StatAid
 
 <!-- badges: start -->
 
@@ -97,6 +97,13 @@ If you are not familiar with StatAid or just want to have an overview of
 the different possibilities, you can check the [StatAid’s quick-start
 user
 guide](https://github.com/VincentAlcazer/StatAid/blob/master/STATAID_QUICK_START_USER_GUIDE.pdf)
+
+## Citing StatAid
+
+If you found StatAid useful and used it for your research, please cite
+the [paper published in the Journal of Open Source
+Software.](https://joss.theoj.org/papers/10.21105/joss.02630)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02630/status.svg)](https://doi.org/10.21105/joss.02630)
 
 # Troubleshooting and contribution
 

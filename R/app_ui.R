@@ -35,7 +35,8 @@ app_ui <- function(request) {
           ),
           # menuItem("Bioinformatic tools", tabName="Bioinfo", icon = icon("desktop"),
           #          menuSubItem("Heatmaps", tabName = "Heat")),
-          menuItem("Contact/About", tabName = "Contact", icon = icon("info"))
+          menuItem("Contact/About", tabName = "Contact", icon = icon("info")),
+          menuItem("Support StatAid", tabName = "Support", icon = icon("life-ring"))
         )
       ),
       dashboardBody(
@@ -226,8 +227,46 @@ app_ui <- function(request) {
 
 
           #################### ==================== CONTACT ====================  ####################
-          tabItem(tabName = "Contact", mod_Contact_ui("Contact_ui_1"))
+          tabItem(tabName = "Contact", mod_Contact_ui("Contact_ui_1")),
+          
+          tabItem(
+            tabName = "Support",
+            fluidPage(
+              column(
+                10,
+      
+                    h1("Support StatAid"),
+                    
+                    p("StatAid is a free open-source software and will remain free, without any contribution needed in return.
+                    
+                   If you used the software for your research project, please consider",
+                      a("citing StatAid.",
+                        href="https://joss.theoj.org/papers/10.21105/joss.02630" )),
+
+                    
+                    p("If you find the program useful and want to further support the project, you can also make a donation
+                      on",a("the StatAid's paypal page.",href="https://paypal.me/StatAid")),
+                    
+                    h2("Why donating to StatAid?"),
+                  
+                    p("The online version of StatAid is currently hosted on the Shinyapps.io servers. In a first step, contributions
+                    to StatAid will help to improve the website performances and allow more users to access it
+                    by increasing the available active hours.
+                    
+                    In case of multiple contributions, a dedicated webserver will be deployed 
+                    to ensure a stable and unlimited access to StatAid. 
+                      
+                      ")
+                    
+                    
+                  )#column
+            )#fluidrow   
+          ) # tabItem
+          
+          
         ) # TabItems
+        
+        
       ) # Dashboard body
     ) # Dashboard page
   ) # taglist
