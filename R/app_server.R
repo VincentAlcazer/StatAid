@@ -68,4 +68,5 @@ app_server <- function(input, output, session) {
   callModule(mod_Model_num_multi_server, "Model_num_multi_ui_1", r = r)
   callModule(mod_Model_cat_multi_server, "Model_cat_multi_ui_1", r = r)
   callModule(mod_Model_surv_multi_server, "Model_surv_multi_ui_1", r = r)
+  callModule(mod_ROC_server, "ROC_ui_1", r=r)
 }

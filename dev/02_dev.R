@@ -28,6 +28,7 @@ usethis::use_package("mgcv")
 usethis::use_package("broom")
 usethis::use_package("survival")
 usethis::use_package("survminer")
+usethis::use_package("plotROC")
 
 ## Add modules ----
 ## Create a module infrastructure in R/
@@ -49,6 +50,8 @@ golem::add_module(name = "Model_surv_km")
 golem::add_module(name = "Model_num_multi")
 golem::add_module(name = "Model_cat_multi")
 golem::add_module(name = "Model_surv_multi")
+golem::add_module(name = "ROC")
+
 golem::add_module(name = "Contact") # Name of the module
 
 ## Add helper functions ----

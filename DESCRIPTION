@@ -8,7 +8,7 @@ Imports:
     golem,
     shiny,
     DT,
-	data.table,
+    data.table,
     shinydashboard,
     ggrepel,
     ggpubr,
@@ -22,9 +22,10 @@ Imports:
     broom,
     survival,
     survminer,
-	htmltools,
-	config,
-	tibble
+    htmltools,
+    config,
+    tibble,
+    plotROC
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0

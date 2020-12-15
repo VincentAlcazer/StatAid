@@ -61,7 +61,7 @@ mod_Intro_ui <- function(id) {
           h2("Change log"),
           
           HTML("
-          
+            15/12/2020: v1.12 - ROC curves module <br/>
             29/10/2020: v1.1.2 - Official release for JOSS publication <br/>
             12/10/2020: v1.1 - Complete release for JOSS publication <br/>
             26/08/2020: v1.0 - Github Public Release for JOSS review <br/>

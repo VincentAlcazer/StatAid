@@ -11,7 +11,7 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here
     dashboardPage(
-      dashboardHeader(title = "StatAid v1.1.2"),
+      dashboardHeader(title = "StatAid v1.2"),
       dashboardSidebar(
         sidebarMenu(
           id = "tabs",
@@ -35,6 +35,7 @@ app_ui <- function(request) {
           ),
           # menuItem("Bioinformatic tools", tabName="Bioinfo", icon = icon("desktop"),
           #          menuSubItem("Heatmaps", tabName = "Heat")),
+          menuItem("ROC Curves", tabName = "ROC", icon = icon("firstdraft")),
           menuItem("Contact/About", tabName = "Contact", icon = icon("info")),
           menuItem("Support StatAid", tabName = "Support", icon = icon("life-ring"))
         )
@@ -224,7 +225,15 @@ app_ui <- function(request) {
               )
             )
           ), # tabItem
-
+          
+          tabItem(
+            tabName = "ROC",
+            fluidRow(
+              h2("ROC curves"),
+              column(12,  mod_ROC_ui("ROC_ui_1"))
+            ) # FluidRow
+          ), # tabItem
+        
 
           #################### ==================== CONTACT ====================  ####################
           tabItem(tabName = "Contact", mod_Contact_ui("Contact_ui_1")),

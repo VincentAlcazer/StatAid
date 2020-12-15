@@ -978,3 +978,51 @@ regression_table_multi_cox <- function(data, y_var, time_var) {
 
   return(res)
 }
+
+#' Dedicated function to plot ROC Curves
+#' This function output individual ROC Curves for each x-variable provided.
+#' @param data A dataframe with row corresponding to samples/patients and columns to variables.
+#' @param y_var A character string corresponding to the y variable. !!Must be a 2-level factor (TRUE/FALSE, 1/0)
+#' @param time_var A vector of numeric variable to test
+#' @export
+
+ROC_curves <- function(data, y_var, x_var){
+  
+  
+  predictions <- list()
+  
+  for(var in x_var){
+    
+    formula <- as.formula(paste0(y_var,"~",var))
+    
+    model <- glm(formula, data, family = "binomial")
+    
+    predictions[[var]] <- data.frame(Prediction=predict(model, data),
+                                     x_var = var,
+                                     Response = data[,y_var])
+    
+  }
+  
+  prediction_full <- dplyr::bind_rows(predictions)
+  
+  n_scores = length(x_var)
+  
+  ROC <- ggplot(prediction_full, aes(d = Response, m = Prediction,color = x_var)) + 
+    geom_roc(size = 1.5) +
+    style_roc()
+  
+  ROC <- ROC +
+    annotate("text", x = 0.80, y = c(seq(0.2,0.60,length.out  = n_scores)), 
+             label = paste("AUC =", round(calc_auc(ROC)$AUC, 2)), colour = c(scales::hue_pal()(n_scores)), size = 6) +
+    labs(title = paste0(y_var," - ROC curves"),
+         color = "Variables") +
+    default_theme + 
+    theme(legend.position = "right")
+  
+  
+  return(ROC)
+  
+  
+  
+  
+}
