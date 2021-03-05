@@ -35,10 +35,22 @@ app_server <- function(input, output, session) {
       colnames(dat)[1] <- "Patient_id"
       dat$Patient_id <- as.factor(dat$Patient_id)
     } else {
-      dat <- data.table::fread(input$df$datapath, sep = input$sep, dec = input$dec, na.strings = c("", "NA", "#N/A"), stringsAsFactors = T, data.table = F) %>%
-        mutate("Whole_cohort" = as.factor("Whole cohort"))
-      colnames(dat)[1] <- "Patient_id"
-      dat$Patient_id <- as.factor(dat$Patient_id)
+      
+      if(input$sep == "xl"){
+        dat <- readxl::read_xlsx(input$df$datapath) %>%
+          mutate("Whole_cohort" = as.factor("Whole cohort")) %>%
+          as.data.frame()
+        colnames(dat)[1] <- "Patient_id"
+        dat$Patient_id <- as.factor(dat$Patient_id)
+        
+      } else {
+        dat <- data.table::fread(input$df$datapath, sep = input$sep, dec = input$dec, na.strings = c("", "NA", "#N/A"), stringsAsFactors = T, data.table = F) %>%
+          mutate("Whole_cohort" = as.factor("Whole cohort"))
+        colnames(dat)[1] <- "Patient_id"
+        dat$Patient_id <- as.factor(dat$Patient_id)
+      }
+      
+     
     }
     return(dat)
   })
@@ -69,4 +81,5 @@ app_server <- function(input, output, session) {
   callModule(mod_Model_cat_multi_server, "Model_cat_multi_ui_1", r = r)
   callModule(mod_Model_surv_multi_server, "Model_surv_multi_ui_1", r = r)
   callModule(mod_ROC_server, "ROC_ui_1", r=r)
+  callModule(mod_Signature_calc_server, "Signature_calc_ui_1")
 }

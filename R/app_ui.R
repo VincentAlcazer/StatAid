@@ -5,13 +5,17 @@
 #' @import shiny
 #' @import shinydashboard
 #' @noRd
+
+options(shiny.maxRequestSize = 150*1024^2)
+
+
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here
     dashboardPage(
-      dashboardHeader(title = "StatAid v1.2"),
+      dashboardHeader(title = "StatAid v1.2.2"),
       dashboardSidebar(
         sidebarMenu(
           id = "tabs",
@@ -36,10 +40,13 @@ app_ui <- function(request) {
           # menuItem("Bioinformatic tools", tabName="Bioinfo", icon = icon("desktop"),
           #          menuSubItem("Heatmaps", tabName = "Heat")),
           menuItem("ROC Curves", tabName = "ROC", icon = icon("firstdraft")),
+          menuItem("Bioinformatics tools", tabName = "Bioinfo", icon = icon("desktop"),
+                   menuSubItem("Signature calc", tabName = "Signature_calc", icon = icon("calculator"))
+                    ),
           menuItem("Contact/About", tabName = "Contact", icon = icon("info")),
           menuItem("Support StatAid", tabName = "Support", icon = icon("life-ring"))
         )
-      ),
+      ), #dashboard sidebar
       dashboardBody(
         tabItems(
           #################### ==================== INTRO ====================  ####################
@@ -81,21 +88,25 @@ app_ui <- function(request) {
                         "text/plain",
                         "text/csv",
                         ".csv",
-                        ".tsv"
+                        ".tsv",
+                        ".xls",
+                        ".xlsx"
+                        
                       )
                     ),
                     radioButtons("sep", "Separator",
                       choices = c(
-                        "Comma" = ",",
-                        "Semicolon" = ";",
-                        "Tab" = "\t"
+                        "comma-delim (.csv1)" = ",",
+                        "semi colon-delim (.csv2)" = ";",
+                        "tab-delim (.tsv/.txt)" = "\t",
+                        "Excel (.xls/.xlsx)" = "xl" 
                       ),
                       selected = "\t"
                     ),
                     radioButtons("dec", "Decimal",
                       choices = c(
-                        "Comma" = ",",
-                        "Period" = "."
+                        "Comma (,)" = ",",
+                        "Period (.)" = "."
                       ),
                       selected = ","
                     ),
@@ -234,6 +245,19 @@ app_ui <- function(request) {
             ) # FluidRow
           ), # tabItem
         
+          #################### ==================== BIOINFO ====================  ####################
+          
+          tabItem(
+            tabName = "Signature_calc",
+            fluidRow(
+              h2("Signature calculator for NGS data"),
+              p("NB: Large gene expression dataset may not load (too big for the server - disconnect).
+              Prefer the local version of StatAid in that case (see StatAid github)"),
+              column(12,  mod_Signature_calc_ui("Signature_calc_ui_1"))
+              )
+            ), # tabItem
+          
+          
 
           #################### ==================== CONTACT ====================  ####################
           tabItem(tabName = "Contact", mod_Contact_ui("Contact_ui_1")),

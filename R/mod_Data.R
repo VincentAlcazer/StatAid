@@ -25,7 +25,12 @@ mod_Data_ui <- function(id) {
                             
                            
       
-      Once correctly encoded, <b> your dataframe should be saved as a tab (.txt/.tsv), comma or semicolon (.csv) delimited file.</b> 
+      Once correctly encoded, <b> your dataframe should be saved as a tab (.txt/.tsv), comma or semicolon (.csv) delimited file.</b> </br>
+      
+      Always prefer loading your dataset as a tab-delimited file. 
+      However, <b> if you want to load your datafame as an Excel file (.xls or .xlsx), 
+      be sure to set your numeric variables to 'number' in Excel! </b> 
+      (else, all variable will be considered as categorical).
       
       Do not forget to select the appropriate parameters in control panel on the right. 
 	  

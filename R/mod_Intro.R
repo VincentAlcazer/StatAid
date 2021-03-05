@@ -61,8 +61,9 @@ mod_Intro_ui <- function(id) {
           h2("Change log"),
           
           HTML("
-            15/12/2020: v1.12 - ROC curves module <br/>
-            29/10/2020: v1.1.2 - Official release for JOSS publication <br/>
+            02/03/2021: v1.2.2 - Excel file support and signature calculator module <br/>
+            15/12/2020: v1.2.1 - ROC curves module <br/>
+            29/10/2020: v1.2 - Official release for JOSS publication <br/>
             12/10/2020: v1.1 - Complete release for JOSS publication <br/>
             26/08/2020: v1.0 - Github Public Release for JOSS review <br/>
             24/08/2020: v0.8 - Univariate & multivariate models for time-dependant outcome <br/>
