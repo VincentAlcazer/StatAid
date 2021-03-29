@@ -85,10 +85,10 @@ repository or directly by downloading the package in R:
 
 ``` r
 
-# install.packages("remotes")
-# remotes::install_github("VincentAlcazer/StatAid")
+install.packages("remotes")
+remotes::install_github("VincentAlcazer/StatAid")
 
-# StatAid::run_app()
+StatAid::run_app()
 ```
 
 ## Quick-start user guide
