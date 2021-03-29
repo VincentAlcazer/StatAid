@@ -44,10 +44,10 @@ You can install the development version from [GitHub](https://github.com/Vincent
 
 ```{r Github install }
 
-# install.packages("remotes")
-# remotes::install_github("VincentAlcazer/StatAid")
+install.packages("remotes")
+remotes::install_github("VincentAlcazer/StatAid")
 
-# StatAid::run_app()
+StatAid::run_app()
 ```
 
 ## Quick-start user guide
