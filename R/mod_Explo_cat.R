@@ -134,7 +134,7 @@ mod_Explo_cat_server <- function(input, output, session, r) {
 
     # --- Barchart with count
     data_explo() %>%
-      ggplot(aes_string(x = input$Variable, fill = input$Group)) +
+      ggplot(aes_string(x = input$Group, fill = input$Variable)) +
       geom_bar(stat = "count", position = "dodge", color = "black", size = 0.75) +
       labs(y = "Count") +
       default_theme +
