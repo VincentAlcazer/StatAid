@@ -54,6 +54,7 @@ golem::add_module(name = "Model_surv_multi")
 golem::add_module(name = "ROC")
 
 ## Bioinfo
+golem::add_module(name = "Data_merge")
 golem::add_module(name = "Signature_calc")
 
 golem::add_module(name = "Contact") # Name of the module

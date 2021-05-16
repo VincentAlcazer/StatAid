@@ -41,7 +41,9 @@ app_ui <- function(request) {
           #          menuSubItem("Heatmaps", tabName = "Heat")),
           menuItem("ROC Curves", tabName = "ROC", icon = icon("firstdraft")),
           menuItem("Bioinformatics tools", tabName = "Bioinfo", icon = icon("desktop"),
-                   menuSubItem("Signature calc", tabName = "Signature_calc", icon = icon("calculator"))
+                   menuSubItem("Data merge", tabName = "Data_merge", icon = icon("code-merge")),
+                   menuSubItem("Signature calculator", tabName = "Signature_calc", icon = icon("calculator")),
+                   menuSubItem("Panel Informativity Optimizer", tabName = "PIO", icon = icon("percentage"))
                     ),
           menuItem("Contact/About", tabName = "Contact", icon = icon("info")),
           menuItem("Support StatAid", tabName = "Support", icon = icon("life-ring"))
@@ -248,6 +250,20 @@ app_ui <- function(request) {
           #################### ==================== BIOINFO ====================  ####################
           
           tabItem(
+            tabName = "Data_merge",
+            fluidRow(
+              h2("Data merging"),
+              column(12,mod_Data_merge_ui("Data_merge_ui_1"))
+            )
+          ), # tabItem
+           
+          tabItem( 
+          tabName = "PIO",
+          fluidRow(
+            h2("Panel Informativity Optimizer")
+          )
+        ), # tabItem
+        tabItem(
             tabName = "Signature_calc",
             fluidRow(
               h2("Signature calculator for NGS data"),

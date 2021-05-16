@@ -93,8 +93,8 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
           "Mean (sd)" = paste0(round(mean(variable, na.rm = T), 2), " (", round(sd(variable, na.rm = T), 2), ")"),
           "Median [IQR]" = paste0(
             round(median(variable, na.rm = T),2), " [", 
-            round(median(variable, na.rm = T) - IQR(variable, na.rm = T), 2), "-",
-            round(median(variable, na.rm = T) + IQR(variable, na.rm = T), 2), "]"
+            round(quantile(variable, 0.25, na.rm = T), 2), "-",
+            round(quantile(variable, 0.75, na.rm = T), 2), "]"
           )
         )
 
@@ -211,8 +211,9 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
         summarise(
           "Mean (sd)" = paste0(round(mean(variable, na.rm = T), 2), " (", round(sd(variable, na.rm = T), 2), ")"),
           "Median [IQR]" = paste0(
-            median(variable, na.rm = T), " [", round(median(variable, na.rm = T) - IQR(variable, na.rm = T), 2), "-",
-            round(median(variable, na.rm = T) + IQR(variable, na.rm = T), 2), "]"
+            round(median(variable, na.rm = T),2), " [", 
+            round(quantile(variable, 0.25, na.rm = T), 2), "-",
+            round(quantile(variable, 0.75, na.rm = T), 2), "]"
           )
         ) %>%
         column_to_rownames("group")

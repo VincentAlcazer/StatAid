@@ -1,0 +1,146 @@
+Patient_id	LSC17_score	Sex	Age	FAB	ELN2017	Karyotype	FLT3_mut	NPM1_mut	TP53_mut	BM_BLAST_PERCENTAGE	WBC	PB_BLAST_PERCENTAGE	DFS_MONTHS	DFS_STATUS	OS_MONTHS	OS_STATUS	DFS_COMPRISK_STATUS	TT_type	concentration_day0	concentration_day15	concentation_day30
+TCGA.AB.2810	0.639430646	Female	76	M2	Favorable	NA	No	Yes	No	48	61.6	88	1.3	0	1.3	1	2	Supportive care	41	6	4
+TCGA.AB.2812	1.015921052	Female	25	M2	Intermediate	Normal	Yes	Yes	No	53	34.2	87	7.3	1	11.5	1	1	Intensive	63	8	4
+TCGA.AB.2814	1.484569398	Female	39	M0	Adverse	NA	Yes	No	No	75	2.3	4	22.2	1	26.3	1	1	Intensive	85	1	2
+TCGA.AB.2818	0.685617844	Female	62	M2	Favorable	Normal	Yes	Yes	No	46	75.2	53	6.9	1	10.2	1	1	Intensive	76	11	1
+TCGA.AB.2819	0.403218291	Female	52	M2	Favorable	"t(8;21)(q22;q22.1)_RUNX1-RUNX1T1"	No	No	No	67	4.1	18	95.6	0	95.6	0	0	Intensive	2	13	2
+TCGA.AB.2823	1.013179377	Female	61	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	73	86.4	68	0.2	0	0.2	1	2	Other	72	5	1
+TCGA.AB.2825	0.633219424	Female	31	M5	Favorable	Normal	Yes	Yes	No	83	137.2	6	6.4	1	7.5	1	1	Intensive	65	15	3
+TCGA.AB.2826	0.255743641	Female	64	M4	Favorable	Normal	No	Yes	No	72	131.5	90	12.1	1	24.1	1	1	Intensive	75	4	3
+TCGA.AB.2830	1.305834898	Female	64	M4	Adverse	Intermediate Risk Abnormality	Yes	No	No	85	2.9	22	8.1	0	8.1	1	2	HMA	79	7	4
+TCGA.AB.2839	1.106881345	Female	51	M2	Favorable	Normal	No	Yes	No	64	42.1	79	10.2	1	16.3	1	1	Intensive	15	7	5
+TCGA.AB.2841	0.57944811	Female	51	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	93	3.6	40	5.4	1	46.5	1	1	Intensive	52	7	2
+TCGA.AB.2845	0.412329456	Female	37	M2	Favorable	Normal	No	No	No	52	18.7	33	8.5	1	9.3	1	1	Intensive	3	2	5
+TCGA.AB.2846	0.435279106	Female	57	M4	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	61	13.6	17	10.8	1	45.8	1	1	Intensive	7	3	1
+TCGA.AB.2851	0.876210886	Female	66	M5	Intermediate	Normal	Yes	No	No	32	78.5	11	5.9	1	7.7	1	1	HMA	24	9	1
+TCGA.AB.2858	0.471002155	Female	75	M2	Favorable	"t(8;21)(q22;q22.1)_RUNX1-RUNX1T1"	No	No	No	48	8.3	54	18.2	1	19.2	1	1	Intensive	74	14	2
+TCGA.AB.2862	0.740427524	Female	33	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	100	0.9	0	69	0	69	0	0	Intensive	88	9	4
+TCGA.AB.2867	0.837612591	Female	66	M2	Intermediate	Normal	No	No	No	70	3.4	6	5.2	0	5.2	1	2	Intensive	74	11	1
+TCGA.AB.2869	1.209105513	Female	64	M2	Favorable	Normal	Yes	Yes	No	80	2.6	46	15.6	1	27.1	0	1	Intensive	79	4	4
+TCGA.AB.2873	0.795236853	Female	51	M5	Intermediate	Normal	No	No	No	57	14.9	0	32.7	1	32.7	0	1	Intensive	45	12	2
+TCGA.AB.2877	0.614006306	Female	60	M1	Intermediate	Normal	Yes	Yes	No	86	11.5	43	41.4	0	41.4	0	0	Intensive	64	12	1
+TCGA.AB.2881	0.458496902	Female	48	M1	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	75	33.2	41	8.8	1	29.7	0	1	Intensive	42	14	1
+TCGA.AB.2882	1.329761974	Female	73	M2	Adverse	NA	No	No	No	37	1.7	16	11	0	11	1	2	HMA	32	12	4
+TCGA.AB.2884	0.519518205	Female	44	M1	Favorable	Normal	No	Yes	No	86	13.5	17	13.8	1	24.8	1	1	Intensive	7	15	5
+TCGA.AB.2889	0.730406657	Female	55	M4	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	52	30.9	59	28.4	1	34.3	0	1	Intensive	33	7	4
+TCGA.AB.2895	1.461298135	Female	41	M1	Favorable	NA	Yes	Yes	No	92	134.4	90	5.7	0	5.7	1	2	Intensive	87	5	1
+TCGA.AB.2896	1.366787603	Female	21	M5	Favorable	Normal	No	Yes	No	90	93	72	7.5	0	7.5	1	2	Intensive	66	12	3
+TCGA.AB.2897	0.223220148	Female	50	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	90	3.4	0	30.5	0	30.5	0	0	Intensive	70	13	1
+TCGA.AB.2898	1.215256665	Female	69	M1	Intermediate	Intermediate Risk Abnormality	No	No	No	42	10.1	32	36.1	0	36.1	0	0	Intensive	59	9	3
+TCGA.AB.2899	1.043897235	Female	76	M4	Intermediate	Intermediate Risk Abnormality	No	No	No	37	2.7	0	17.3	1	22.3	1	1	HMA	47	1	3
+TCGA.AB.2910	0.676341878	Female	61	M5	Adverse	Complex	Yes	No	No	71	34.6	55	0.1	0	0.1	1	2	Supportive care	15	10	1
+TCGA.AB.2911	0.79789411	Female	51	M4	Adverse	"t(v;11q23.3);_X_KMT2A(MLL_translocation)"	No	No	No	39	50.3	39	3.7	1	61.2	0	1	Intensive	86	8	5
+TCGA.AB.2914	0.594518904	Female	22	M2	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	55	51.8	70	48.3	0	48.3	0	0	Intensive	48	8	3
+TCGA.AB.2915	1.461638185	Female	73	M2	Favorable	Complex	Yes	Yes	No	32	15.1	11	0.5	0	0.5	1	2	HMA	73	16	3
+TCGA.AB.2916	0.795463985	Female	49	M4	Intermediate	Intermediate Risk Abnormality	No	No	No	51	12.4	5	45.3	0	45.3	0	0	Intensive	43	7	1
+TCGA.AB.2917	1.213596241	Female	41	M0	Adverse	Complex	No	No	No	42	47.6	74	39	1	57.3	0	1	Intensive	56	16	3
+TCGA.AB.2918	0.971337009	Female	47	M1	Adverse	Intermediate Risk Abnormality	Yes	No	No	77	80.5	79	6	1	7.4	1	1	Intensive	75	7	3
+TCGA.AB.2919	0.657883789	Female	54	M1	Favorable	Normal	No	Yes	No	72	13.1	90	26.8	0	26.8	0	0	Intensive	4	1	2
+TCGA.AB.2921	1.246355713	Female	55	M4	Intermediate	Normal	Yes	No	No	69	27.6	57	6.3	1	8.1	1	1	Intensive	56	10	5
+TCGA.AB.2927	1.229301198	Female	88	M1	Intermediate	Normal	No	No	No	33	2.9	0	2.4	0	2.4	1	2	Other	75	11	2
+TCGA.AB.2928	1.492455167	Female	43	M1	Adverse	NA	Yes	No	No	87	171.9	91	4	0	4	1	2	Intensive	60	3	3
+TCGA.AB.2929	1.69320649	Female	71	M0	Adverse	Complex	No	No	No	55	5.6	50	4.6	0	4.6	1	2	HMA	85	8	1
+TCGA.AB.2930	0.727509445	Female	62	M2	Adverse	Normal	Yes	No	No	72	27.7	49	4.8	1	7.1	1	1	Intensive	74	6	3
+TCGA.AB.2936	1.192901002	Female	60	M0	Intermediate	Normal	No	No	No	50	2.1	14	13.8	0	13.8	0	0	HMA	2	7	3
+TCGA.AB.2937	0.40585979	Female	35	M1	Favorable	"t(8;21)(q22;q22.1)_RUNX1-RUNX1T1"	No	No	No	81	42.8	86	4.6	1	8	1	1	Intensive	6	16	5
+TCGA.AB.2942	0.482498326	Female	67	M4	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	Yes	No	No	69	37	61	43.5	0	43.5	0	0	Intensive	71	4	2
+TCGA.AB.2943	1.452527328	Female	70	M1	Adverse	Complex	No	No	Yes	32	0.7	6	4.2	0	4.2	1	2	HMA	77	8	5
+TCGA.AB.2950	0.467843557	Female	34	M2	Favorable	"t(8;21)(q22;q22.1)_RUNX1-RUNX1T1"	No	No	No	57	14.3	59	40.3	0	40.3	0	0	Intensive	55	9	1
+TCGA.AB.2952	1.510263292	Female	60	M1	Adverse	Complex	No	No	Yes	62	16	29	1.9	0	1.9	1	2	Intensive	19	3	1
+TCGA.AB.2955	0.638882657	Female	56	M2	Intermediate	Normal	No	No	No	60	202.7	96	9.6	1	16.4	1	1	Intensive	15	5	5
+TCGA.AB.2966	0.718971254	Female	57	M2	Intermediate	Normal	No	No	No	43	3.1	35	8.6	1	28.4	1	1	Intensive	81	4	5
+TCGA.AB.2970	0.967811301	Female	34	M4	Adverse	Normal	Yes	No	No	71	19.6	58	8.3	1	10.7	1	1	Intensive	33	10	1
+TCGA.AB.2971	0.260099242	Female	76	NA	Intermediate	Normal	No	No	No	91	5	16	17	1	25.8	1	1	Intensive	50	3	2
+TCGA.AB.2973	0.509102556	Female	67	NA	Favorable	Normal	No	Yes	No	75	15.2	10	12	1	20.5	1	1	Intensive	18	3	5
+TCGA.AB.2977	1.035358915	Female	71	M2	Intermediate	Normal	No	No	No	70	35.9	67	0.8	0	0.8	1	2	Other	42	13	4
+TCGA.AB.2979	0.427082581	Female	30	M1	Favorable	Normal	No	No	No	86	22.9	88	47	0	47	0	0	Intensive	74	4	3
+TCGA.AB.2981	0.797706756	Female	35	M5	Intermediate	Normal	Yes	Yes	No	87	72.1	8	44.4	0	44.4	0	0	Intensive	63	7	3
+TCGA.AB.2982	0.701250655	Female	29	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	85	1.2	1	37.1	0	37.1	0	NA	Intensive	73	9	1
+TCGA.AB.2986	1.193688586	Female	31	M2	Intermediate	Normal	Yes	Yes	No	63	12.6	45	6.6	0	6.6	1	2	Intensive	55	13	5
+TCGA.AB.2987	0.781820605	Female	75	M5	Favorable	Normal	No	Yes	No	41	7.3	0	5.3	1	6.3	1	1	Other	18	13	1
+TCGA.AB.2988	1.341511231	Female	67	M1	Favorable	Normal	Yes	Yes	No	76	45.6	49	0.8	0	0.8	1	2	Supportive care	44	12	4
+TCGA.AB.2991	1.088176394	Female	40	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	90	0.4	0	88.3	0	88.3	0	0	Intensive	29	5	2
+TCGA.AB.2992	0.900537685	Female	32	M1	Favorable	Normal	No	Yes	No	94	5.1	70	11.9	1	56.3	1	1	Intensive	36	9	1
+TCGA.AB.2998	0.446075737	Female	68	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	Yes	No	No	85	29	32	1	0	1	1	2	Intensive	69	13	1
+TCGA.AB.3001	0.986247047	Female	31	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	40	1.6	0	76.2	0	76.2	0	0	Intensive	76	7	1
+TCGA.AB.3011	0.696903621	Female	21	M1	Favorable	Normal	No	Yes	No	91	8.2	83	81.9	0	81.9	0	0	Intensive	18	7	1
+TCGA.AB.2805	0.687454995	Male	77	M0	Intermediate	Normal	No	No	No	67	92	56	11.6	1	18.5	1	1	Intensive	69	22	4
+TCGA.AB.2806	0.241938328	Male	46	M1	Favorable	"t(8;21)(q22;q22.1)_RUNX1-RUNX1T1"	No	No	No	90	29.4	81	16.1	1	30.6	1	1	Intensive	61	23	3
+TCGA.AB.2808	0.509794888	Male	23	M2	Intermediate	Intermediate Risk Abnormality	No	No	No	59	32.4	NA	10	1	118.1	0	1	Intensive	23	13	3
+TCGA.AB.2811	0.720670769	Male	81	M4	Favorable	Normal	Yes	Yes	No	98	90.6	37	8.2	1	8.2	1	1	Intensive	89	10	1
+TCGA.AB.2813	0.884406369	Male	78	M4	Adverse	Complex	No	No	Yes	40	9.9	6	1.3	0	1.3	1	2	HMA	49	13	2
+TCGA.AB.2815	0.379609119	Male	49	M4	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	81	57.1	48	14.2	1	26.3	1	1	Intensive	69	4	4
+TCGA.AB.2817	1.53433326	Male	63	M2	Adverse	"t(9;22)(q34.1;q11.2)_BCR-ABL1"	No	No	No	57	77.3	70	9.3	0	9.3	1	2	Intensive	64	12	1
+TCGA.AB.2820	1.288250311	Male	76	M0	Adverse	Complex	No	No	Yes	74	14.5	82	0.3	0	0.3	1	2	Intensive	18	14	4
+TCGA.AB.2821	1.142506277	Male	64	M1	Intermediate	Intermediate Risk Abnormality	No	No	No	60	1.2	5	27.4	0	27.4	1	2	Intensive	4	16	5
+TCGA.AB.2822	0.92613828	Male	65	M0	Intermediate	Intermediate Risk Abnormality	No	No	No	99	2.9	34	32.3	0	32.3	1	2	Intensive	87	7	3
+TCGA.AB.2828	0.584890671	Male	55	M4	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	35	22.2	8	99.9	0	99.9	0	0	Intensive	11	11	2
+TCGA.AB.2834	0.728203428	Male	33	M4	Adverse	"t(v;11q23.3);_X_KMT2A(MLL_translocation)"	Yes	No	No	71	25.9	14	7.7	0	7.7	1	2	Intensive	79	3	1
+TCGA.AB.2835	0.473999061	Male	48	M5	Favorable	Normal	No	Yes	No	83	116.2	3	77.3	0	77.3	0	0	Intensive	57	17	3
+TCGA.AB.2836	0.957433095	Male	35	M4	Favorable	Normal	Yes	Yes	No	90	52.9	18	17	1	17	1	1	Intensive	56	10	5
+TCGA.AB.2840	0.734151838	Male	74	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	Yes	No	No	51	31.5	NA	0.7	0	0.7	1	2	Other	79	10	5
+TCGA.AB.2842	1.077494962	Male	64	M4	Adverse	Intermediate Risk Abnormality	No	No	No	95	2.3	0	0.3	0	0.3	1	2	Supportive care	61	2	5
+TCGA.AB.2843	1.062737115	Male	77	M6	Intermediate	Intermediate Risk Abnormality	No	No	No	75	2.6	8	3.7	1	6.3	1	1	Intensive	89	54	5
+TCGA.AB.2844	0.709467919	Male	63	M2	Adverse	"t(v;11q23.3);_X_KMT2A(MLL_translocation)"	Yes	No	No	80	17	71	3.9	0	3.9	1	2	HMA	36	2	1
+TCGA.AB.2847	1.586004411	Male	53	M1	Adverse	NA	No	No	No	72	2.7	41	19.3	1	52.7	1	1	Intensive	68	12	2
+TCGA.AB.2849	1.183201961	Male	39	M0	Adverse	Complex	No	No	No	83	5	53	95.5	0	95.5	0	0	Intensive	53	14	1
+TCGA.AB.2853	0.803873977	Male	51	M1	Intermediate	Normal	Yes	Yes	No	85	103.6	85	3.1	0	3.1	1	2	Intensive	68	15	2
+TCGA.AB.2856	1.216363982	Male	63	M4	Adverse	Normal	No	No	No	82	76.7	39	5.3	0	5.3	1	2	Intensive	67	1	4
+TCGA.AB.2857	1.262255978	Male	54	M6	Adverse	Complex	No	No	Yes	30	2.3	0	6.5	1	10	1	1	Intensive	11	7	5
+TCGA.AB.2859	1.198601421	Male	40	M2	Favorable	Normal	No	Yes	No	47	8.3	23	8	1	10.2	1	1	Intensive	87	32	2
+TCGA.AB.2861	0.725766083	Male	76	M5	Favorable	NA	No	Yes	No	78	4	0	0.6	0	0.6	1	2	Other	5	1	2
+TCGA.AB.2863	1.00580038	Male	63	M1	Adverse	NA	No	No	No	81	46.4	97	1.2	0	1.2	1	2	Intensive	32	18	5
+TCGA.AB.2865	1.513444875	Male	75	M1	Intermediate	Intermediate Risk Abnormality	No	No	No	40	6.4	48	2.3	0	2.3	1	2	HMA	89	20	2
+TCGA.AB.2866	0.842269985	Male	67	M1	Intermediate	Normal	No	No	No	89	30.8	61	4.5	1	5.5	1	1	Intensive	11	31	3
+TCGA.AB.2870	0.717768398	Male	76	M1	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	Yes	No	No	73	34	55	4.5	NA	4.5	1	2	Intensive	60	8	3
+TCGA.AB.2871	1.175747996	Male	51	M1	Intermediate	Normal	Yes	Yes	No	62	1.5	10	13.9	1	22.6	0	1	Intensive	31	4	3
+TCGA.AB.2872	0.267470986	Male	42	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	88	2.1	2	43.4	0	43.4	0	0	Intensive	74	11	3
+TCGA.AB.2874	0.67277441	Male	59	M2	Adverse	NA	No	No	No	70	11.5	48	35.2	0	35.2	0	0	Intensive	59	2	4
+TCGA.AB.2875	0.306835988	Male	43	M2	Favorable	"t(8;21)(q22;q22.1)_RUNX1-RUNX1T1"	Yes	No	No	40	4.3	39	27.7	0	27.7	0	0	Intensive	24	6	4
+TCGA.AB.2880	0.340782852	Male	24	M1	Adverse	Normal	Yes	No	No	77	223.8	76	9.8	1	20.5	1	1	Intensive	44	54	1
+TCGA.AB.2885	1.663997675	Male	71	M0	Adverse	Complex	No	No	Yes	97	5.4	54	4.8	1	7	1	1	Intensive	38	7	2
+TCGA.AB.2886	0.187216887	Male	25	M2	Favorable	"t(8;21)(q22;q22.1)_RUNX1-RUNX1T1"	No	No	No	72	11	50	29.4	0	29.4	0	0	Intensive	17	23	5
+TCGA.AB.2888	0.319509156	Male	57	M4	Favorable	inv(16)(p13.1q22)_CBFB-MYH11	No	No	No	40	4.9	0	33.5	0	33.5	0	0	Intensive	84	29	12
+TCGA.AB.2890	1.17210915	Male	69	M0	Intermediate	Intermediate Risk Abnormality	No	No	No	60	6.1	22	0.5	0	0.5	1	2	Other	74	7	2
+TCGA.AB.2891	0.94988085	Male	42	M1	Adverse	Complex	No	No	No	68	10.7	51	14.9	1	21.5	1	1	Intensive	74	32	2
+TCGA.AB.2900	0.734741521	Male	70	M1	Favorable	Normal	Yes	Yes	No	84	48	49	4.9	1	6.3	1	1	Intensive	9	28	3
+TCGA.AB.2901	1.313275477	Male	27	M1	Adverse	"t(9;22)(q34.1;q11.2)_BCR-ABL1"	No	No	No	77	90.4	88	3	1	10.5	0	1	Intensive	23	9	5
+TCGA.AB.2908	1.41318087	Male	81	M2	Adverse	Complex	No	No	Yes	46	1.5	0	1.4	0	1.4	1	2	Other	25	10	2
+TCGA.AB.2912	0.76352186	Male	63	M4	Intermediate	Intermediate Risk Abnormality	No	No	No	62	17.9	9	8.4	0	8.4	1	2	Intensive	72	12	3
+TCGA.AB.2913	1.022945398	Male	61	M0	Intermediate	Intermediate Risk Abnormality	Yes	Yes	No	95	61.6	86	6.1	1	52.6	0	1	Intensive	21	16	3
+TCGA.AB.2920	1.686349664	Male	44	M2	Adverse	Complex	No	No	No	39	34.8	83	5.2	1	11.8	1	1	Intensive	71	14	5
+TCGA.AB.2924	0.663637158	Male	59	M4	Favorable	Normal	Yes	Yes	No	75	29.7	17	26	0	26	0	0	Intensive	50	9	2
+TCGA.AB.2925	0.761232047	Male	57	M5	Intermediate	Normal	Yes	Yes	No	52	99.2	4	7.8	1	7.9	1	1	Intensive	11	8	5
+TCGA.AB.2931	1.442705512	Male	75	M2	Intermediate	Normal	Yes	Yes	No	76	98.2	80	0.1	0	0.1	1	2	Supportive care	67	11	3
+TCGA.AB.2932	0.641391889	Male	62	M5	Favorable	Normal	No	Yes	No	85	59.3	22	42.1	0	42.1	0	0	Intensive	58	4	5
+TCGA.AB.2933	1.239436726	Male	58	M4	Intermediate	Intermediate Risk Abnormality	No	No	No	79	101.3	64	4.6	0	4.6	1	2	Intensive	40	3	5
+TCGA.AB.2934	1.348004582	Male	65	M1	Intermediate	Normal	Yes	No	No	79	67.9	84	2.7	1	6.6	0	1	Intensive	13	14	2
+TCGA.AB.2935	1.434028786	Male	66	M4	Adverse	Complex	No	No	Yes	81	2.2	12	1.6	0	1.6	1	2	Intensive	8	5	4
+TCGA.AB.2938	1.153002769	Male	76	M7	Intermediate	Normal	No	No	Yes	33	3.6	6	7.2	1	9.9	1	1	HMA	87	2	1
+TCGA.AB.2939	0.734107337	Male	72	M1	Adverse	Complex	No	No	No	88	37.5	18	36.9	0	36.9	0	0	Intensive	17	48	1
+TCGA.AB.2940	0.609758508	Male	35	M2	Intermediate	Intermediate Risk Abnormality	No	No	No	34	33.5	40	14.6	1	55.4	1	1	Intensive	32	14	5
+TCGA.AB.2941	1.228819948	Male	73	NA	Adverse	"t(9;22)(q34.1;q11.2)_BCR-ABL1"	No	No	Yes	90	58.9	0	0.2	0	0.2	1	2	Supportive care	78	8	3
+TCGA.AB.2944	1.65326243	Male	48	M0	Adverse	NA	No	No	No	92	111	87	2.4	0	2.4	1	2	Intensive	72	10	4
+TCGA.AB.2946	0.700061681	Male	41	NA	NA	NA	No	No	No	47	43.1	62	20.8	1	24.4	0	1	Intensive	75	6	1
+TCGA.AB.2948	0.993756456	Male	67	M4	Intermediate	Normal	No	No	No	30	26.1	6	18.1	0	18.1	1	2	Other	17	2	5
+TCGA.AB.2949	1.505543912	Male	58	M0	Adverse	Complex	No	No	No	59	47.2	72	32.6	0	32.6	0	0	Intensive	71	22	10
+TCGA.AB.2956	0.371856378	Male	61	M5	Intermediate	"t(9;11)(p21.3;q23.3)_MLLT3-KMT2A"	No	No	No	89	8.4	0	3.2	1	5.7	1	1	Intensive	46	5	4
+TCGA.AB.2959	0.842865231	Male	71	M0	Intermediate	Intermediate Risk Abnormality	No	No	No	90	1	13	13.4	1	15.4	1	1	Other	14	15	5
+TCGA.AB.2963	0.782159762	Male	56	M1	Favorable	Normal	Yes	Yes	No	90	30.5	45	53.9	0	53.9	1	2	Intensive	90	50	27
+TCGA.AB.2965	0.951988225	Male	60	M4	Favorable	Normal	Yes	Yes	No	89	67.5	56	9.9	1	11.3	1	1	Intensive	27	16	5
+TCGA.AB.2975	1.224815584	Male	54	M2	Intermediate	Normal	No	No	No	67	45	83	8.5	1	34	1	1	Other	20	6	1
+TCGA.AB.2976	1.19953376	Male	53	M1	Intermediate	Normal	Yes	Yes	No	86	88.1	52	7.7	1	30	1	1	Intensive	91	52	21
+TCGA.AB.2980	1.060282344	Male	50	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	Yes	No	No	74	0.5	10	47.5	0	47.5	0	0	Intensive	53	15	4
+TCGA.AB.2983	1.041047834	Male	45	M0	Intermediate	Normal	No	No	No	75	2.3	0	3.8	1	11.2	1	1	Intensive	31	12	1
+TCGA.AB.2984	0.774222593	Male	38	M1	Favorable	Normal	No	Yes	No	86	39.8	97	71.3	0	71.3	0	0	Intensive	83	21	10
+TCGA.AB.2990	0.734959896	Male	51	M1	Favorable	Normal	No	Yes	No	85	63.7	85	34.1	1	42.1	0	1	Intensive	21	6	5
+TCGA.AB.2994	0.725532564	Male	25	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	Yes	No	No	91	8.2	63	24.2	1	83.5	0	1	Intensive	84	13	4
+TCGA.AB.2995	1.366458815	Male	63	M2	Intermediate	Normal	No	No	No	35	0.6	0	69.7	1	73.6	0	1	Intensive	23	4	5
+TCGA.AB.2996	1.012526664	Male	75	M2	Intermediate	Normal	No	No	No	63	2.5	2	73	0	73	0	0	HMA	42	13	3
+TCGA.AB.2999	0.496887173	Male	62	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	82	0.9	11	83.3	0	83.3	0	0	Intensive	66	13	4
+TCGA.AB.3000	0.502300008	Male	25	M2	Favorable	Normal	No	No	No	56	98.8	71	67.7	0	67.7	0	0	Intensive	82	3	4
+TCGA.AB.3002	1.360768991	Male	68	M2	Intermediate	Normal	No	No	No	64	5.5	48	26.2	1	46.8	1	1	Intensive	62	20	10
+TCGA.AB.3007	0.963735171	Male	35	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	Yes	No	No	90	1.5	7	75.8	0	75.8	0	0	Intensive	64	34	15
+TCGA.AB.3008	0.5258897	Male	22	M1	Favorable	Normal	No	No	No	71	1.2	90	7.7	1	27	1	1	Intensive	77	20	10
+TCGA.AB.3009	0.477710836	Male	23	M4	Intermediate	Normal	No	No	No	51	27.1	63	7.7	1	19	1	1	Intensive	51	13	5
+TCGA.AB.3012	0.774526564	Male	53	M3	Favorable	"t(15;17)(q22;q21)_PML-RARA"	No	No	No	42	1	29	86.6	0	86.6	0	0	Intensive	10	12	1

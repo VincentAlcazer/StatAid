@@ -1,3 +1,4 @@
+
 #' Global parameters
 #'
 #' @import ggplot2
@@ -14,6 +15,7 @@
 #' @import plotROC
 #' @import readxl
 
+library(ggplot2)
 
 ########## ========== Datasets
 
