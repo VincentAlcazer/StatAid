@@ -28,7 +28,7 @@ mod_ROC_ui <- function(id){
         style = "opacity: 0.85",
         wellPanel(
           selectInput(ns("y_var"),
-                      label = ("Y variable: Binary (Yes/No, TRUE/FALSE)"),
+                      label = ("Y variable: Binary (Yes/No, TRUE/FALSE)"), 
                       multiple = F, selected = NULL,
                       ""
           ),
