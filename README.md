@@ -18,56 +18,37 @@ compilation and deployment.
 
 The software guides the users through the steps of a good data analysis,
 including multiple features such as:
-
 <ul>
-
 <li>
-
 Exploratory data analysis: distribution, count, missing-values and
 outliers check
-
 </li>
-
 <li>
-
 Descriptive analysis, simple comparative analysis and publication ready
 ‘table 1’ output
-
 </li>
-
 <li>
-
 Publication-ready graph customization
-
 </li>
-
 <li>
-
 Paired data analysis (matched case-control studies, repeated measures)
-
 </li>
-
 <li>
-
 Univariate analysis and models for continuous and categorical outcome:
 Correlation, linear and logistic regression
-
 </li>
-
 <li>
-
 Univariate analysis and models for time-dependent outcome: Kaplan-Meier
 curves and cox regression
-
 </li>
-
 <li>
-
 Multivariate analysis and models for continuous, categorical and
 time-dependent outcomes
-
 </li>
-
+</ul>
+<li>
+ROC Curves
+</li>
 </ul>
 
 # Getting started
@@ -80,11 +61,10 @@ StatAid has a ready-to-use online version available at
 ## Local version
 
 You can install the development version from
-[GitHub](https://github.com/VincentAlcazer/StatAid) else by cloning the
-repository or directly by downloading the package in R:
+[GitHub](https://github.com/VincentAlcazer/StatAid) either by cloning
+the repository or directly by downloading the package in R:
 
 ``` r
-
 install.packages("remotes")
 remotes::install_github("VincentAlcazer/StatAid")
 
@@ -115,21 +95,21 @@ page.](https://github.com/VincentAlcazer/StatAid/issues)
 If you encounter any problem with the software or find a bug, please
 report it on GitHub:
 
-  - Create a [new
+-   Create a [new
     issue](https://github.com/VincentAlcazer/StatAid/issues) on the
     Github page
-  - Try to describe the problem/bug with reproductible steps
+-   Try to describe the problem/bug with reproductible steps
 
 ## Feature request
 
 To ask for new feature implementation/current feature enhancemenet:
 
-  - Create a [new
+-   Create a [new
     issue](https://github.com/VincentAlcazer/StatAid/issues) on the
     Github page
-  - Briefly describe the research question you want to answer and the
+-   Briefly describe the research question you want to answer and the
     type of data you have
-  - If possible: provide pictures of the graph you would like to make or
+-   If possible: provide pictures of the graph you would like to make or
     references from the paper you saw the analysis in.
 
 ## Contribution proposal

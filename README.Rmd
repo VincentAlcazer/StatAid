@@ -42,7 +42,7 @@ StatAid has a ready-to-use online version available at [https://vincentalcazer.s
 
 You can install the development version from [GitHub](https://github.com/VincentAlcazer/StatAid) either by cloning the repository or directly by downloading the package in R:
 
-```{r Github install }
+```{r Github install, eval = F }
 
 install.packages("remotes")
 remotes::install_github("VincentAlcazer/StatAid")
