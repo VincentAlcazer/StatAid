@@ -40,7 +40,7 @@ StatAid has a ready-to-use online version available at [https://vincentalcazer.s
 
 ## Local version
 
-You can install the development version from [GitHub](https://github.com/VincentAlcazer/StatAid) else by cloning the repository or directly by downloading the package in R:
+You can install the development version from [GitHub](https://github.com/VincentAlcazer/StatAid) either by cloning the repository or directly by downloading the package in R:
 
 ```{r Github install }
 
