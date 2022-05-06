@@ -1,6 +1,4 @@
 
-#' Global parameters
-#'
 #' @import ggplot2
 #' @import ggrepel
 #' @import ggpubr
@@ -14,12 +12,14 @@
 #' @import mgcv
 #' @import plotROC
 #' @import readxl
+#' @import ROCit
+#' @import shinyalert
 
 library(ggplot2)
 
 ########## ========== Datasets
 
-data_aml <- read.delim("datasets/TCGA_AML_exemple.txt", dec = ",", na.strings = c("", "NA"), stringsAsFactors = T)
+data_aml <- read.delim("inst/extdata/TCGA_AML_exemple.txt", dec = ",", na.strings = c("", "NA"), stringsAsFactors = T)
 
 
 ########## ========== Parameters

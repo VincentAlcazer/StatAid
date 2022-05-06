@@ -30,6 +30,8 @@ usethis::use_package("survival")
 usethis::use_package("survminer")
 usethis::use_package("plotROC")
 usethis::use_package("readxl")
+usethis::use_package("ROCit")
+usethis::use_package("shinyalert")
 
 ## Add modules ----
 ## Create a module infrastructure in R/

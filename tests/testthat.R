@@ -1,4 +1,4 @@
 library(testthat)
 library(StatAid)
 
-test_check("StatAid")
+#test_check("StatAid")

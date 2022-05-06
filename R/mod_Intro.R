@@ -61,6 +61,8 @@ mod_Intro_ui <- function(id) {
           h2("Change log"),
           
           HTML("
+            06/05/2022: v1.2.4 - Additional server released </br>
+            16/03/2022: v1.2.3 - ROC module improvement <br/>
             02/03/2021: v1.2.2 - Excel file support and signature calculator module <br/>
             15/12/2020: v1.2.1 - ROC curves module <br/>
             29/10/2020: v1.2 - Official release for JOSS publication <br/>

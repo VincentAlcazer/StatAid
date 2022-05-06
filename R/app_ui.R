@@ -14,8 +14,9 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here
+    
     dashboardPage(
-      dashboardHeader(title = "StatAid v1.2.2"),
+      dashboardHeader(title = "StatAid v1.2.4"),
       dashboardSidebar(
         sidebarMenu(
           id = "tabs",

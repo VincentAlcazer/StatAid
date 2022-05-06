@@ -14,12 +14,18 @@ mod_ROC_ui <- function(id){
       column(
         11,
         p(strong("Data format:"), "The response variable (y-var) should be a two-level categorical variable: TRUE-FALSE, 1-0 or Yes-No. 
-          The x-variables should be numeric variables only (ordinal categorical variable should be encoded with numbers only).")
+          The x-variables should be numeric variables only (ordinal categorical variable should be encoded with numbers only). 
+          2 different mode are proposed: raw values (ROC curve/parameters are computed on the raw x-var values) 
+          and logit predictions (ROC curve/parameters are computed using Y predictions from a univariate logistic model based on the selected x-var). "),
+        p("TP: True Positive, FP: False Positive, TN: True Negative,FN: False Negative, 
+      ACC: Overall accuracy of classification, 
+      SENS: Sensitivity, SPEC: Specificity, PPV: Positive predictive value, NPV: Positive predictive value."),
       ),
+
       
       column(8,
              offset = 1,
-             box(width = 11, plotOutput(ns("graph"))),
+             box(width = 11, plotOutput(ns("graph")))
       ),
       column(
       2,
@@ -37,11 +43,21 @@ mod_ROC_ui <- function(id){
                       multiple = T, selected = NULL,
                       choices = c("")
           ),
+          radioButtons(ns("value"),
+                       label = ("Values"),
+                       choices = list("Raw values"="raw",
+                                      "Logit predictions"="logit"),
+                       selected = "raw"
+          ),
           
-          actionButton(ns("Run_analysis"), "Run analysis")
+          actionButton(ns("Run_analysis"), "Run analysis"),
+          p(),
+          downloadButton(ns("download"), "Download table (.tsv)")
         )
       ) # Absolutepanel
-    ) #column
+    ), #column
+    br(),
+    column(11, DT::DTOutput(ns("res_table")))
     )#fluidrow
   )
 }
@@ -74,6 +90,18 @@ mod_ROC_server <- function(input, output, session,r){
     )
   })
   
+  ## ROC list 
+  
+  roc_list <- reactive({
+    input$Run_analysis
+    req(input$Run_analysis >= 1)
+    req(data())
+    isolate({
+      ROC_calc(data(), y_var = input$y_var, x_var = input$x_var, value = input$value)
+     
+    })
+
+  })
   
   ## Graph
   
@@ -82,15 +110,47 @@ mod_ROC_server <- function(input, output, session,r){
     req(input$Run_analysis >= 1)
     isolate({
 
-      ROC <- ROC_curves(data(), y_var = input$y_var, x_var = input$x_var)
-      
-      ROC
+      roc_list()$plot
 
     })
   })
   
 
-    
+  ## Table 
+  
+  param_df <- reactive({
+    input$Run_analysis
+    req(input$Run_analysis >= 1)
+    req(roc_list())
+    isolate({
+      roc_list()$param_df
+    })
+  })
+  
+
+  output$res_table <- DT::renderDT(
+    param_df(),
+    class = "display nowrap compact", # style
+    filter = "top", # location of column filters
+    server = T,
+    rownames = FALSE,
+    options = list(
+      lengthChange = TRUE,
+      pageLength = 30,
+      columnDefs = list(list(className = "dt-left", targets = "_all"))
+    )
+  )
+  
+  # Download table
+  output$download <- downloadHandler(
+    filename = function() {
+      paste("ROC_table.tsv")
+    },
+    content = function(file) {
+      
+      write.table(param_df(), file, row.names = FALSE, sep = "\t", quote = F)
+    }
+  )
     
   
   

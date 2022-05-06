@@ -980,50 +980,78 @@ regression_table_multi_cox <- function(data, y_var, time_var) {
   return(res)
 }
 
-#' Dedicated function to plot ROC Curves
+#' Dedicated function to plot ROC Curves & compute parameters
 #' This function output individual ROC Curves for each x-variable provided.
 #' @param data A dataframe with row corresponding to samples/patients and columns to variables.
 #' @param y_var A character string corresponding to the y variable. !!Must be a 2-level factor (TRUE/FALSE, 1/0)
-#' @param time_var A vector of numeric variable to test
+#' @param x_var A vector of numeric variable to test
+#' @param value Use raw parameters value or predictions from logit model?
 #' @export
 
-ROC_curves <- function(data, y_var, x_var){
+ROC_calc <- function(data, y_var, x_var, value = "raw"){
   
-  
-  predictions <- list()
-  
-  for(var in x_var){
-    
-    formula <- as.formula(paste0(y_var,"~",var))
-    
-    model <- glm(formula, data, family = "binomial")
-    
-    predictions[[var]] <- data.frame(Prediction=predict(model, data),
-                                     x_var = var,
-                                     Response = data[,y_var])
-    
-  }
-  
-  prediction_full <- dplyr::bind_rows(predictions)
+  res_list <- list()
   
   n_scores = length(x_var)
   
-  ROC <- ggplot(prediction_full, aes(d = Response, m = Prediction,color = x_var)) + 
-    geom_roc(size = 1.5) +
-    style_roc()
+  if(value == "raw"){
+    AUC_df <- data %>% select(Response = y_var, one_of(x_var)) %>%
+      pivot_longer(-Response, names_to = "x_var", values_to = "Prediction")
+    
+  } else {
+    
+    predictions <- list()
+    
+    for(var in x_var){
+      
+      formula <- as.formula(paste0(y_var,"~",var))
+      
+      model <- glm(formula, data, family = "binomial")
+      
+      predictions[[var]] <- data.frame(Response = data[,y_var],
+                                       x_var = var,
+                                       Prediction=predict(model, data))
+      
+    }
+    
+    AUC_df <- dplyr::bind_rows(predictions)
+    
+    
+  }
   
-  ROC <- ROC +
-    annotate("text", x = 0.80, y = c(seq(0.2,0.60,length.out  = n_scores)), 
-             label = paste("AUC =", round(calc_auc(ROC)$AUC, 2)), colour = c(scales::hue_pal()(n_scores)), size = 6) +
+  
+  plot <- ggplot(AUC_df, aes(d = Response, m = Prediction, color = x_var)) +
+    geom_roc(size = 1.5) + style_roc() 
+  
+  plot <- plot + annotate("text", x = 0.80, y = c(seq(0.1,0.50,length.out  = n_scores)), 
+                          label = paste("AUC =", round(calc_auc(plot)$AUC, 2)), colour = c(scales::hue_pal()(n_scores)), size = 6) +
     labs(title = paste0(y_var," - ROC curves"),
          color = "Variables") +
-    default_theme + 
+    default_theme +
     theme(legend.position = "right")
   
+  res_list$plot <- plot
   
-  return(ROC)
   
+  ##### ===== Calculate parameters
   
+  param_list <- list()
+  
+  for(var in x_var){
+    
+    param_df <- AUC_df %>% filter(x_var == var)
+    
+    param_list[[var]] <- ROCit::measureit(score =  param_df$Prediction, 
+                                          class = param_df$Response,
+                                          measure = c("ACC", "SENS","SPEC", "PPV","NPV"))
+    
+    class(param_list[[var]]) = "data.frame"
+  }
+  
+  res_list$param_df <- bind_rows(param_list, .id = "x_var") %>%
+    mutate_at(-1, function(x){round(x,2)})
+  
+  return(res_list)
   
   
 }

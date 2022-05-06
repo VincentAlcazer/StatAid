@@ -15,7 +15,7 @@ mod_Contact_ui <- function(id) {
     p(
       "My name is ", a("Vincent Alcazer", href = "https://www.linkedin.com/in/vincent-alcazer-673834151/"),
       "and I am a medical doctor resident in clinical Hematology in Lyon, FRANCE.
-    I am currently doing a PhD in immunology and bioinformatic, developping a new approach to 
+    I am currently doing a PhD in immunology and bioinformatics, developping a new approach to 
     identify and select relevant CD8+ T cells epitopes among original targets (human endogenous retroviruses)
     expressed in different types of cancers."
     ),
@@ -47,6 +47,9 @@ mod_Contact_ui <- function(id) {
     
     <li> <b>Time-dependant outcome : </b> Survival curves (Kaplan-Meier estimates) are plotted with the <b>survival</b>  and <b>survminer</b>  packages. 
     Cox model parameters are calculated with the coxph() function. </li>  
+    
+      <li> <b>ROC curves : </b> ROC curves are plotted using the <b>plotROC</b> package. 
+      Other parameters (sensitivity, specificity...) are computed using the <b>ROCit</b> package. </li>  
          
 
          </ul>"),

@@ -7,6 +7,34 @@
 #' @noRd
 app_server <- function(input, output, session) {
   # List the first level callModules here
+  
+  shinyalert(
+    title = "Welcome to StatAid v1.2.4!",
+    text = "
+    If you found StatAid useful please: <br><br>
+    <b> <a href = https://joss.theoj.org/papers/10.21105/joss.02630> - Cite the original paper </a></b><br><br>
+    <b> - Consider <a href = https://paypal.me/StatAid> making a donation to StatAid to maintain servers power / capacity </a></b><br><br>
+    
+    Additional servers are now available: <br>
+    <a href = https://vincentalcazer.shinyapps.io/StatAid/> Mirror 1 </a></b><br>
+    <a href = https://alcazerv.shinyapps.io/StatAid/> Mirror 2 </a></b><br>
+    ",
+    size = "s",
+    closeOnEsc = TRUE,
+    closeOnClickOutside = FALSE,
+    html = T,
+    type = "info",
+    showConfirmButton = TRUE,
+    showCancelButton = FALSE,
+    confirmButtonText = "OK",
+    confirmButtonCol = "#AEDEF4",
+    timer = 0,
+    imageUrl = "",
+    animation = TRUE
+  )
+  
+  
+  
 
   #################### ==================== Global links ====================  ####################
 

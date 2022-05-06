@@ -26,10 +26,12 @@ Imports:
     config,
     tibble,
     plotROC,
-    readxl
+    readxl,
+    ROCit,
+    shinyalert
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 URL: https://github.com/VincentAlcazer/StatAid
 BugReports: https://github.com/VincentAlcazer/StatAid/issues
 Suggests: 

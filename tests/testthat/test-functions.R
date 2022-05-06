@@ -1,7 +1,7 @@
 context("Functions test")
 
 
-data <- read.delim("../../datasets/TCGA_AML_exemple.txt", dec = ",", na.strings = c("", "NA"), stringsAsFactors = T)
+data <- read.delim("inst/extdata/TCGA_AML_exemple.txt", dec = ",", na.strings = c("", "NA"), stringsAsFactors = T)
 
 
 test_that("descriptive_table", {
