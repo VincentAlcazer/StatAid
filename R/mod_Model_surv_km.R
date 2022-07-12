@@ -10,6 +10,8 @@
 mod_Model_surv_km_ui <- function(id) {
   ns <- NS(id)
   tagList(
+    
+    
     column(
       12,
       h4("Analysis informations"),
@@ -19,143 +21,162 @@ mod_Model_surv_km_ui <- function(id) {
              For numeric X variables, you can select the number of groups to cut your variable in (e.g. 2 will cut at the median,
              3 at terciles...)")
     ),
-
-    column(10, box(title = "KM curves", width = 10, plotOutput(ns("km_curves")))),
-
-    column(
-      2,
-      absolutePanel(
-        width = 200, right = 20, draggable = T,
-        style = "opacity: 0.85",
-        wellPanel(
-          selectInput(ns("time_var"),
-            label = ("Time column (numeric)"),
-            multiple = F, selected = NULL,
-            ""
-          ),
-          selectInput(ns("y_var"),
-            label = ("Status column (0-1 or dead-alive)"),
-            multiple = F, selected = NULL,
-            ""
-          ),
-          selectInput(ns("x_var"),
-            label = ("X Variable (explanatory/predictive)"),
-            multiple = F, selected = NULL,
-            choices = c("")
-          ),
-          sliderInput(ns("x_cut"),
-            label = ("Number of groups to cut X in (X numeric only)"),
-            min = 2, max = 10, value = 2, step = 1
-          ),
-
-          actionButton(ns("Run_analysis"), "Run analysis")
-        )
-      ) # Absolutepanel
-    ),
-
-    ##### Graph param
-
-    column(
-      10,
-      box(
-        title = "Graphical parameters", width = 11, collapsed = FALSE, collapsible = TRUE,
-        column(
-          4,
+    column(10,
+    tabsetPanel(
+      id = "Explo", type = "tabs",
+      tabPanel("KM curves",
+               column(10, box(title = "KM curves", width = 10, plotOutput(ns("km_curves")))),
+               
+               ##### Graph param
+               
+               column(
+                 10,
+                 box(
+                   title = "Graphical parameters", width = 11, collapsed = FALSE, collapsible = TRUE,
+                   column(
+                     4,
+                     wellPanel(
+                       strong("Global"),
+                       textInput(ns("Title"), "Title", "Main title"),
+                       sliderInput(ns("title_font_size"),
+                                   label = "Title font size", min = 1,
+                                   max = 35, value = 20, step = 1
+                       ),
+                       
+                       selectInput(ns("Colors"),
+                                   label = ("Colors panels"),
+                                   choices = c("Default",
+                                               "Grey levels" = "grey",
+                                               "Nature" = "npg",
+                                               "NEJM" = "nejm",
+                                               "JCO" = "jco",
+                                               "Lancet" = "lancet",
+                                               "JAMA" = "jama",
+                                               "AAAS" = "aaas"
+                                   )
+                       ),
+                       strong("Risk table"),
+                       checkboxInput(ns("show_risk_table"), label = "Show Risk table", value = TRUE),
+                       sliderInput(ns("risk_table_font_size"),
+                                   label = "Font size (values - title)", min = 1,
+                                   max = 35, value = c(6, 8), step = 1
+                       )
+                     )
+                   ),
+                   column(
+                     4,
+                     wellPanel(
+                       strong("X axis"),
+                       textInput(ns("x_lab"), "Title", "Time"),
+                       sliderInput(ns("x_font_size"),
+                                   label = "Font size (values - title)", min = 1,
+                                   max = 20, value = c(14, 18), step = 1
+                       )
+                     ) # Wellpanel
+                   ), # Column
+                   column(
+                     4,
+                     wellPanel(
+                       strong("Y Axis"),
+                       textInput(ns("y_lab"), "Title", "Event Free Survival (%)"),
+                       sliderInput(ns("y_font_size"),
+                                   label = "Font size (values - title)", min = 1,
+                                   max = 35, value = c(14, 18), step = 1
+                       )
+                     ) # Wellpanel
+                   ), # Column
+                   
+                   column(
+                     4,
+                     wellPanel(
+                       strong("Legend"),
+                       selectInput(ns("Legend"),
+                                   label = ("Position"),
+                                   choices = c(
+                                     "Hide" = "none",
+                                     "Top" = "top",
+                                     "Right" = "right",
+                                     "Left" = "left",
+                                     "Bottom" = "bottom"
+                                   ),
+                                   selected = "right"
+                       ),
+                       textInput(ns("legend_title"), "Title", "Group"),
+                       sliderInput(ns("legend_font_size"),
+                                   label = "Font size (values - title)", min = 1,
+                                   max = 35, value = c(12, 14), step = 1
+                       )
+                     ) # Wellpanel
+                   ), # Column
+                   column(
+                     4,
+                     wellPanel(
+                       strong("Statistics"),
+                       checkboxInput(ns("show_pval"), label = "Show p-value", value = TRUE),
+                       checkboxInput(ns("show_ci"), label = "Show confidence intervals", value = FALSE),
+                       sliderInput(ns("pval_font_size"),
+                                   label = "Font size", min = 0,
+                                   max = 35, value = 6
+                       ),
+                       sliderInput(ns("pval_x_coord"),
+                                   label = "X position", min = 0,
+                                   max = 100, value = 1
+                       ),
+                       sliderInput(ns("pval_y_coord"),
+                                   label = "Y position", min = 0,
+                                   max = 100, value = 5, step = 1
+                       )
+                     ) # Wellpanel
+                   ) # Column
+                   
+                 ) #box
+               ) #graph panel box
+      ), #tabpanel KM curve
+      tabPanel("Survival table",
+               p("The percent of event-free population (=estimate) with its 95% CI (conf low - conf high) 
+               is shown at each time-point."),
+               downloadButton(ns("download"), "Download table (.tsv)"),
+               p(),
+               column(10, DT::DTOutput(ns("table_surv")))
+               )
+    ) #tabsetpanel
+    
+    ),#column
+      ##### Data param
+      column(
+        2,
+        absolutePanel(
+          width = 200, right = 20, top = 50, draggable = T,
+          style = "opacity: 0.85",
           wellPanel(
-            strong("Global"),
-            textInput(ns("Title"), "Title", "Main title"),
-            sliderInput(ns("title_font_size"),
-              label = "Title font size", min = 1,
-              max = 35, value = 20, step = 1
+            selectInput(ns("time_var"),
+                        label = ("Time column (numeric)"),
+                        multiple = F, selected = NULL,
+                        ""
             ),
-
-            selectInput(ns("Colors"),
-              label = ("Colors panels"),
-              choices = c("Default",
-                "Grey levels" = "grey",
-                "Nature" = "npg",
-                "NEJM" = "nejm",
-                "JCO" = "jco",
-                "Lancet" = "lancet",
-                "JAMA" = "jama",
-                "AAAS" = "aaas"
-              )
+            selectInput(ns("y_var"),
+                        label = ("Status column (0-1 or dead-alive)"),
+                        multiple = F, selected = NULL,
+                        ""
             ),
-            strong("Risk table"),
-            checkboxInput(ns("show_risk_table"), label = "Show Risk table", value = TRUE),
-            sliderInput(ns("risk_table_font_size"),
-              label = "Font size (values - title)", min = 1,
-              max = 35, value = c(6, 8), step = 1
-            )
+            selectInput(ns("x_var"),
+                        label = ("X Variable (explanatory/predictive)"),
+                        multiple = F, selected = NULL,
+                        choices = c("")
+            ),
+            sliderInput(ns("x_cut"),
+                        label = ("Number of groups to cut X in (X numeric only)"),
+                        min = 2, max = 10, value = 2, step = 1
+            ),
+            
+            actionButton(ns("Run_analysis"), "Run analysis")
           )
-        ),
-        column(
-          4,
-          wellPanel(
-            strong("X axis"),
-            textInput(ns("x_lab"), "Title", "Time"),
-            sliderInput(ns("x_font_size"),
-              label = "Font size (values - title)", min = 1,
-              max = 20, value = c(14, 18), step = 1
-            )
-          ) # Wellpanel
-        ), # Column
-        column(
-          4,
-          wellPanel(
-            strong("Y Axis"),
-            textInput(ns("y_lab"), "Title", "Event Free Survival (%)"),
-            sliderInput(ns("y_font_size"),
-              label = "Font size (values - title)", min = 1,
-              max = 35, value = c(14, 18), step = 1
-            )
-          ) # Wellpanel
-        ), # Column
+        ) # Absolutepanel
+      ) #column
+      
 
-        column(
-          4,
-          wellPanel(
-            strong("Legend"),
-            selectInput(ns("Legend"),
-              label = ("Position"),
-              choices = c(
-                "Hide" = "none",
-                "Top" = "top",
-                "Right" = "right",
-                "Left" = "left",
-                "Bottom" = "bottom"
-              ),
-              selected = "right"
-            ),
-            textInput(ns("legend_title"), "Title", "Group"),
-            sliderInput(ns("legend_font_size"),
-              label = "Font size (values - title)", min = 1,
-              max = 35, value = c(12, 14), step = 1
-            )
-          ) # Wellpanel
-        ), # Column
-        column(
-          4,
-          wellPanel(
-            strong("Statistics"),
-            checkboxInput(ns("show_pval"), label = "Show p-value", value = TRUE),
-            checkboxInput(ns("show_ci"), label = "Show confidence intervals", value = FALSE),
-            sliderInput(ns("pval_font_size"),
-              label = "Font size", min = 0,
-              max = 35, value = 6
-            ),
-            sliderInput(ns("pval_x_coord"),
-              label = "X position", min = 0,
-              max = 100, value = 1
-            ),
-            sliderInput(ns("pval_y_coord"),
-              label = "Y position", min = 0,
-              max = 100, value = 5, step = 1
-            )
-          ) # Wellpanel
-        ), # Column
-      )
-    )
+
+ 
   )
 }
 
@@ -189,10 +210,18 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
       return(surv)
     })
   })
+  
+  surv_df <- reactive({
+    
+    req(surv_object())
+    dat <- broom::tidy(surv_object()) %>%
+      mutate_if(is.numeric, function(x){round(x,3)})
+    
+    return(dat)
+    
+  })
 
   ## Parameters update
-
-
 
   observe({
     updateSelectInput(
@@ -274,6 +303,30 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
           legend.text = element_text(size = input$legend_font_size[1])
         )
     )
+  )
+  
+  output$table_surv <- DT::renderDT(
+    surv_df(),
+    class = "display nowrap compact", # style
+    filter = "top", # location of column filters
+    server = T,
+    rownames = FALSE,
+    options = list(
+      lengthChange = TRUE,
+      pageLength = 30,
+      columnDefs = list(list(className = "dt-left", targets = "_all"))
+    )
+  )
+  
+  # Download table
+  output$download <- downloadHandler(
+    filename = function() {
+      paste("Survival_table.tsv")
+    },
+    content = function(file) {
+      
+      write.table(surv_df(), file, row.names = FALSE, sep = "\t", quote = F)
+    }
   )
 }
 

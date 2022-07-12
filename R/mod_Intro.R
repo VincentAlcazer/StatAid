@@ -61,6 +61,7 @@ mod_Intro_ui <- function(id) {
           h2("Change log"),
           
           HTML("
+            12/07/2022: v1.2.5 - Survival table (for KM estimate) </br>
             06/05/2022: v1.2.4 - Additional server released </br>
             16/03/2022: v1.2.3 - ROC module improvement <br/>
             02/03/2021: v1.2.2 - Excel file support and signature calculator module <br/>
