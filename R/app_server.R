@@ -9,7 +9,7 @@ app_server <- function(input, output, session) {
   # List the first level callModules here
   
   shinyalert(
-    title = "Welcome to StatAid v1.2.5!",
+    title = "Welcome to StatAid v1.2.6!",
     text = "
     If you found StatAid useful please: <br><br>
     <b> <a href = https://joss.theoj.org/papers/10.21105/joss.02630> - Cite the original paper </a></b><br><br>

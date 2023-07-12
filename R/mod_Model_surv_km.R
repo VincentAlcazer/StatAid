@@ -217,6 +217,9 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
     dat <- broom::tidy(surv_object()) %>%
       mutate_if(is.numeric, function(x){round(x,3)})
     
+    print(unique(data()[,input$x_var]))
+    print(head(surv_object()))
+    
     return(dat)
     
   })
@@ -276,7 +279,7 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
       font.title = c(input$title_font_size, "bold", "black"),
       # font.tickslab = c(14,"plain","black"),
       legend.title = input$legend_title,
-      legend.labs = gsub("^.*=", "", names(surv_object()[["strata"]])),
+      legend.labs = unique(data()[,input$x_var]),
       linetype = 1, size = 1,
       # censor.size = 10,
       conf.int = input$show_ci,
