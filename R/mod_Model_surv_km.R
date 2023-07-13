@@ -217,9 +217,6 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
     dat <- broom::tidy(surv_object()) %>%
       mutate_if(is.numeric, function(x){round(x,3)})
     
-    print(unique(data()[,input$x_var]))
-    print(head(surv_object()))
-    
     return(dat)
     
   })
