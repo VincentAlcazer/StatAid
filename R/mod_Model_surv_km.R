@@ -18,8 +18,9 @@ mod_Model_surv_km_ui <- function(id) {
       p("The status column must be coded either with 0-1 (no event-event) or TRUE/FALSE (TRUE = event) or 1/2 (2=event).
              The corresponding time column must contain only numeric values. "),
       p("For categorical X variables, each different category is considered as an independent group.
-             For numeric X variables, you can select the number of groups to cut your variable in (e.g. 2 will cut at the median,
-             3 at terciles...)")
+             For continuous/numeric X variables, you can select the number of groups to cut your variable in (e.g. 2 will cut at the median,
+             3 at terciles...). /!\ Continuous/Numeric variables with less than 10 unique values will be considered as categorial!")
+
     ),
     column(10,
     tabsetPanel(
@@ -132,10 +133,18 @@ mod_Model_surv_km_ui <- function(id) {
                  ) #box
                ) #graph panel box
       ), #tabpanel KM curve
-      tabPanel("Survival table",
+      
+      tabPanel("Summary table",
+               p("The total number of patients at initial follow-up (n.start), number of event and median survival is shown for each group."),
+               downloadButton(ns("download_summary"), "Download table (.tsv)"),
+               p(),
+               column(10, DT::DTOutput(ns("median_survival")))
+      ),
+
+      tabPanel("Full table",
                p("The percent of event-free population (=estimate) with its 95% CI (conf low - conf high) 
                is shown at each time-point."),
-               downloadButton(ns("download"), "Download table (.tsv)"),
+               downloadButton(ns("download_full"), "Download table (.tsv)"),
                p(),
                column(10, DT::DTOutput(ns("table_surv")))
                )
@@ -198,7 +207,7 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
       data_km <- data() %>%
         select(time = one_of(input$time_var), status = one_of(input$y_var), x_var = one_of(input$x_var))
 
-      if (is.numeric(data_km$x_var)) {
+      if (is.numeric(data_km$x_var) & length(unique(data_km$x_var)) > 8) {
         data_km <- data_km %>%
           mutate(x_var = cut(x_var, input$x_cut))
       }
@@ -276,7 +285,7 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
       font.title = c(input$title_font_size, "bold", "black"),
       # font.tickslab = c(14,"plain","black"),
       legend.title = input$legend_title,
-      legend.labs = unique(data()[,input$x_var]),
+      legend.labs = gsub("x_var=","",names(surv_object()$strata)),
       linetype = 1, size = 1,
       # censor.size = 10,
       conf.int = input$show_ci,
@@ -305,6 +314,21 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
     )
   )
   
+  output$median_survival <-  DT::renderDT(
+    summary(surv_object())$table %>% as.data.frame(check.names=F) %>% rownames_to_column("var"),
+    class = "display nowrap compact", # style
+    filter = "top", # location of column filters
+    server = T,
+    rownames = FALSE,
+    options = list(
+      lengthChange = TRUE,
+      pageLength = 30,
+      columnDefs = list(list(className = "dt-left", targets = "_all"))
+    )
+    
+  )
+  
+  
   output$table_surv <- DT::renderDT(
     surv_df(),
     class = "display nowrap compact", # style
@@ -319,9 +343,19 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
   )
   
   # Download table
-  output$download <- downloadHandler(
+  output$download_summary <- downloadHandler(
     filename = function() {
-      paste("Survival_table.tsv")
+      paste("Survival_summary_table.tsv")
+    },
+    content = function(file) {
+      
+      write.table(summary(surv_object())$table %>% as.data.frame(check.names=F)  %>% rownames_to_column("var"), file, row.names = FALSE, sep = "\t", quote = F)
+    }
+  )
+  
+  output$download_full <- downloadHandler(
+    filename = function() {
+      paste("Survival_full_table.tsv")
     },
     content = function(file) {
       

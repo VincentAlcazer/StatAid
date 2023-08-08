@@ -16,7 +16,7 @@ app_ui <- function(request) {
     # List the first level UI elements here
     
     dashboardPage(
-      dashboardHeader(title = "StatAid v1.2.6"),
+      dashboardHeader(title = "StatAid v1.2.7"),
       dashboardSidebar(
         sidebarMenu(
           id = "tabs",
