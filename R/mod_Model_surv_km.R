@@ -229,6 +229,22 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
     return(dat)
     
   })
+  
+  legend_labs <- reactive({
+    
+    input$Run_analysis
+    req(input$Run_analysis >= 1)
+    
+    isolate({
+    if(input$x_var == "Whole_cohort"){
+      legend_labs = "Overall cohort"
+    } else {
+      legend_labs = gsub("x_var=","",names(surv_object()$strata))
+    }
+    return(legend_labs)
+    })
+    
+  })
 
   ## Parameters update
 
@@ -285,7 +301,7 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
       font.title = c(input$title_font_size, "bold", "black"),
       # font.tickslab = c(14,"plain","black"),
       legend.title = input$legend_title,
-      legend.labs = gsub("x_var=","",names(surv_object()$strata)),
+      legend.labs = legend_labs(),
       linetype = 1, size = 1,
       # censor.size = 10,
       conf.int = input$show_ci,

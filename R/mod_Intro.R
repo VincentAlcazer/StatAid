@@ -61,6 +61,7 @@ mod_Intro_ui <- function(id) {
           h2("Change log"),
           
           HTML("
+            06/09/2023: v1.2.8 - Minor bug corrections for KM curves on macOS </br>
             31/07/2023: v1.2.7 - Bug corrections for KM and Cox modules </br>
             12/07/2023: v1.2.6 - Minor bug corrections for KM curves </br>
             12/07/2022: v1.2.5 - Survival table (for KM estimate) </br>
