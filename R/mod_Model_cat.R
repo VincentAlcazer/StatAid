@@ -98,12 +98,14 @@ mod_Model_cat_server <- function(input, output, session, r) {
     input$Run_analysis
     req(input$Run_analysis >= 1)
     isolate({
-      if (input$x_var == "All") {
+      
+      if (input$x_var[1] == "All"){
         data_sort <- data()
       } else {
         data_sort <- select(data(), input$y_var, one_of(input$x_var))
       }
-
+      
+      
       df <- regression_table(data = data_sort, y_var = input$y_var, family = input$model)
 
       return(df)

@@ -115,6 +115,7 @@ mod_Model_surv_server <- function(input, output, session, r) {
     input$Run_analysis
     req(input$Run_analysis >= 1)
     isolate({
+
       if (input$x_var[1] == "All") {
         data_sort <- data()
       } else {

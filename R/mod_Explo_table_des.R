@@ -102,7 +102,9 @@ mod_Explo_table_des_server <- function(input, output, session, r) {
         data_sort <- data() %>% select(-all_of(c("Whole_cohort", "Patient_id")))
       }
 
-      if (input$Variable != "All") {
+      if (length(input$Variable)>1) {
+        data_sort <- select(data_sort, one_of(input$Group), one_of(input$Variable))
+      } else if (input$Variable != "All"){
         data_sort <- select(data_sort, one_of(input$Group), one_of(input$Variable))
       }
 
