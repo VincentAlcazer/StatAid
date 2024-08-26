@@ -61,6 +61,7 @@ mod_Intro_ui <- function(id) {
           h2("Change log"),
           
           HTML("
+            26/08/2024: v1.3.1 - Excel import fix </br>
             18/04/2024: v1.3 - Official release for data science MOOC & minor bug corrections for model tables </br>
             06/09/2023: v1.2.8 - Minor bug corrections for KM curves on macOS </br>
             31/07/2023: v1.2.7 - Bug corrections for KM and Cox modules </br>

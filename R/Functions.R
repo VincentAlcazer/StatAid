@@ -736,7 +736,7 @@ regression_table <- function(data, y_var, family = "gaussian") {
   exclude_vector <- c("Patient_id", "patient_id", "Sample_ID", "sample_id", "Whole_cohort")
 
   data_reg <- data %>% select(y_var = all_of(y_var), everything(), -one_of(exclude_vector))
-
+  
   x_vars <- colnames(data_reg)[-1]
 
   res_temp <- list()
@@ -860,7 +860,6 @@ regression_table_multi <- function(data, y_var, family = "gaussian") {
   exclude_vector <- c("Patient_id", "patient_id", "Sample_ID", "sample_id", "Whole_cohort")
 
   data_reg <- data %>% select(all_of(y_var), everything(), -one_of(exclude_vector))
-
 
   res_list <- list()
 

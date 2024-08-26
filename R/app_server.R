@@ -9,7 +9,7 @@ app_server <- function(input, output, session) {
   # List the first level callModules here
   
   shinyalert(
-    title = "Welcome to StatAid v1.3!",
+    title = "Welcome to StatAid v1.3.1!",
     text = "
     If you found StatAid useful please: <br><br>
     <b> <a href = https://joss.theoj.org/papers/10.21105/joss.02630> - Cite the original paper </a></b><br><br>
@@ -67,6 +67,7 @@ app_server <- function(input, output, session) {
       if(input$sep == "xl"){
         dat <- readxl::read_xlsx(input$df$datapath) %>%
           mutate("Whole_cohort" = as.factor("Whole cohort")) %>%
+          mutate(across(where(is.character), as.factor)) %>%
           as.data.frame()
         colnames(dat)[1] <- "Patient_id"
         dat$Patient_id <- as.factor(dat$Patient_id)
