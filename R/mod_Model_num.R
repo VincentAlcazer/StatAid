@@ -80,7 +80,7 @@ mod_Model_num_server <- function(input, output, session, r) {
     updateSelectInput(
       session,
       "y_var",
-      choices = c(names(data()[sapply(data(), class) %in% c("numeric", "integer")])[-1])
+      choices = names(data())[vapply(data(), is.numeric, logical(1))]
     )
     updateSelectInput(
       session,
@@ -97,7 +97,8 @@ mod_Model_num_server <- function(input, output, session, r) {
     input$Run_analysis
     req(input$Run_analysis >= 1)
     isolate({
-     
+      validate(need(length(input$x_var) > 0, "Please select at least one X variable."))
+
       if (input$x_var[1] == "All"){
         data_sort <- data()
       } else {

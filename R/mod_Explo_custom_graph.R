@@ -212,11 +212,12 @@ mod_Explo_custom_graph_server <- function(input, output, session, r) {
       choices = c(NULL, (levels(data() %>% select(input$Group) %>% unlist() %>% as.factor())))
     )
 
+    ylim <- as.numeric(res()[["lim"]]$ylim)
     updateSliderInput(session,
                       "y_limits",
-                      min = 0,
-                      max =  as.numeric((res()[["lim"]]$ylim[[2]]))*3, 
-                      value = c(as.numeric((res()[["lim"]]$ylim[[1]])), as.numeric((res()[["lim"]]$ylim[[2]])))
+                      min = min(0, 3 * ylim[1]),
+                      max = max(0, 3 * ylim[2]),
+                      value = ylim
                       )
     
   })
@@ -237,11 +238,6 @@ mod_Explo_custom_graph_server <- function(input, output, session, r) {
 
 
 
-
-
-  ## DF
-
-  data <- reactive(r$test$data)
 
 
   ## Reactives elements
@@ -274,7 +270,8 @@ mod_Explo_custom_graph_server <- function(input, output, session, r) {
   output$Graph_comp <- renderPlot({
     p <- p() + theme_bw() +
       labs(title = input$Title, y = input$y_lab, x = input$x_lab, fill = input$legend_title) +
-      ylim(input$y_limits[1],input$y_limits[2]) +
+      # coord_cartesian zooms without removing data (ylim() dropped bars starting at 0)
+      coord_cartesian(ylim = input$y_limits) +
       theme(
         plot.title = element_text(size = input$title_font_size, face = "bold"),
         axis.text.x = element_text(size = input$x_font_size[1], angle = input$x_angle, vjust = 0.5, hjust = 0.5, color = "black"),
@@ -290,7 +287,7 @@ mod_Explo_custom_graph_server <- function(input, output, session, r) {
     if (input$Colors == "Default") {
       p
     } else if (input$Colors == "grey") {
-      p + scale_fill_grey()
+      p + scale_fill_grey() + scale_color_grey()
     } else {
       set_palette(p, input$Colors)
     }

@@ -164,8 +164,8 @@ mod_Explo_cat_server <- function(input, output, session, r) {
 
     data_explo() %>%
       select(Group = one_of(input$Group), Variable = one_of(input$Variable)) %>%
-      mutate(Group = forcats::fct_explicit_na(Group, "NA"),
-             Variable = forcats::fct_explicit_na(Variable, "NA")) %>%
+      mutate(Group = explicit_na(Group),
+             Variable = explicit_na(Variable)) %>%
       group_by(Group, Variable) %>%
       summarise(
         Count = n()

@@ -78,7 +78,8 @@ mod_ROC_server <- function(input, output, session,r){
     updateSelectInput(
       session,
       "y_var",
-      choices = c(names(data()[sapply(data(), class) %in% c("character", "factor")]))
+      choices = setdiff(names(data())[vapply(data(), function(x) is.factor(x) || is.character(x) || is.logical(x), logical(1))],
+                        c("Patient_id", "Whole_cohort"))
     )
   })
   
@@ -97,6 +98,7 @@ mod_ROC_server <- function(input, output, session,r){
     req(input$Run_analysis >= 1)
     req(data())
     isolate({
+      validate(need(length(input$x_var) > 0, "Please select at least one X variable."))
       ROC_calc(data(), y_var = input$y_var, x_var = input$x_var, value = input$value)
      
     })

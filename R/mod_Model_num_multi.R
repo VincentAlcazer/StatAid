@@ -80,7 +80,7 @@ mod_Model_num_multi_server <- function(input, output, session, r) {
     updateSelectInput(
       session,
       "y_var",
-      choices = c(names(data()[sapply(data(), class) %in% c("numeric", "integer")])[-1])
+      choices = names(data())[vapply(data(), is.numeric, logical(1))]
     )
     updateSelectInput(
       session,
@@ -96,6 +96,7 @@ mod_Model_num_multi_server <- function(input, output, session, r) {
     input$Run_analysis
     req(input$Run_analysis >= 1)
     isolate({
+      validate(need(length(input$x_var) > 0, "Please select at least one X variable."))
       data_sort <- select(data(), all_of(input$y_var), one_of(input$x_var))
 
 

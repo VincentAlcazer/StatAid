@@ -3,7 +3,8 @@
 \name{regression_table}
 \alias{regression_table}
 \title{All-in-one publication ready regression table for glm models
-This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.}
+This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.
+Variables for which the model cannot be fitted (e.g. a single level factor) are skipped with a warning.}
 \usage{
 regression_table(data, y_var, family = "gaussian")
 }
@@ -17,4 +18,5 @@ regression_table(data, y_var, family = "gaussian")
 \description{
 All-in-one publication ready regression table for glm models
 This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.
+Variables for which the model cannot be fitted (e.g. a single level factor) are skipped with a warning.
 }

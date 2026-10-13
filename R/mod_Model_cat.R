@@ -98,7 +98,8 @@ mod_Model_cat_server <- function(input, output, session, r) {
     input$Run_analysis
     req(input$Run_analysis >= 1)
     isolate({
-      
+      validate(need(length(input$x_var) > 0, "Please select at least one X variable."))
+
       if (input$x_var[1] == "All"){
         data_sort <- data()
       } else {

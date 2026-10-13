@@ -106,25 +106,21 @@ mod_Signature_calc_server <- function(input, output, session){
     req(input$load_gene >= 1)
     isolate({
     
-    if (is.null(input$genexp_df) == T) {
-      dat <- readxl::read_xlsx("datasets/TCGA_LAML_RSEM_log2.xlsx") %>%
-        mutate_at(-1, as.numeric)
-      colnames(dat)[1] <- "gene_id"
-    } else {
-      
+    ## No example dataset is shipped with the package: a file is required
+    validate(need(input$genexp_df, "Please select a gene expression file before loading."))
+
       if(input$sep == "xl"){
         
-        dat <- readxl::read_xlsx(input$genexp_df$datapath)%>%
+        dat <- readxl::read_excel(input$genexp_df$datapath)%>%
           mutate_at(-1, as.numeric)
         colnames(dat)[1] <- "gene_id"
       } else {
         
-        dat <- data.table::fread(input$genexp_df$datapath, sep = input$sep, dec = input$dec, na.strings = c("", "NA", "#N/A"), stringsAsFactors = T, data.table = F)%>%
+        dat <- data.table::fread(input$genexp_df$datapath, sep = input$sep, dec = input$dec, na.strings = c("", "NA", "#N/A"), stringsAsFactors = F, data.table = F)%>%
           mutate_at(-1, as.numeric)
         colnames(dat)[1] <- "gene_id"
       }
- 
-    }
+
     return(dat)
   }) # isolate
   }) # reactive
@@ -135,24 +131,19 @@ mod_Signature_calc_server <- function(input, output, session){
     input$load_sig
     req(input$load_sig >= 1)
     isolate({
-    if (is.null(input$sig_df) == T) {
-      dat <- data.table::fread("datasets/LSC17_signature.txt", data.table = F)
-      colnames(dat)[1] <- "gene_id"
-    } else {
-      
+    validate(need(input$sig_df, "Please select a signature file before loading."))
+
       if(input$sep == "xl"){
         
-        dat <- readxl::read_xlsx(input$sig_df$datapath)
+        dat <- readxl::read_excel(input$sig_df$datapath)
         colnames(dat)[1] <- "gene_id"
       } else {
         
-        dat <- data.table::fread(input$sig_df$datapath, sep = input$sep, dec = input$dec, na.strings = c("", "NA", "#N/A"), stringsAsFactors = T, data.table = F)
+        dat <- data.table::fread(input$sig_df$datapath, sep = input$sep, dec = input$dec, na.strings = c("", "NA", "#N/A"), stringsAsFactors = F, data.table = F)
         colnames(dat)[1] <- "gene_id"
       }
-      
-    }
+
     return(dat)
-      return(dat)
     }) # isolate
   }) # reactive
   
@@ -160,7 +151,7 @@ mod_Signature_calc_server <- function(input, output, session){
   
   
   output$table_gene <- DT::renderDT(
-    data_gene()[1:5,1:5], # data
+    head(data_gene()[, seq_len(min(5, ncol(data_gene()))), drop = FALSE], 5), # data
     class = "display nowrap compact", # style
     filter = "top", # location of column filters
     server = T,
@@ -205,13 +196,13 @@ mod_Signature_calc_server <- function(input, output, session){
         group_by(gene_id) %>% summarise_all(mean) %>%
         column_to_rownames("gene_id") %>% as.matrix()
       
-      sig_calc <- gene_xp[intersect_genes,] * coefs
+      sig_calc <- gene_xp[intersect_genes, , drop = FALSE] * coefs
       
       sig_final <- data.frame(Score = colSums(sig_calc)) %>%
         rownames_to_column("Sample_ID") %>%
-        mutate(Median_cut = factor(cut(Score,2),labels = c("Low","High")),
-               Tercile_cut = factor(cut(Score,3),labels = c("Low","Intermediate", "High")),
-               Quartile_cut = factor(cut(Score,4),labels = c("Low","Intermediate1","Intermediate2", "High")))
+        mutate(Median_cut = quantile_cut(Score, 2, labels = c("Low","High")),
+               Tercile_cut = quantile_cut(Score, 3, labels = c("Low","Intermediate", "High")),
+               Quartile_cut = quantile_cut(Score, 4, labels = c("Low","Intermediate1","Intermediate2", "High")))
       
       return(sig_final)
     })

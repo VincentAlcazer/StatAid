@@ -28,11 +28,11 @@ autoplot(
 
 \item{na_exclude_group}{Should missing values be excluded from groups?}
 
-\item{plot_type}{Set the plot type (Boxplot, Barchart_mean or  Barchart_count).}
+\item{plot_type}{Set the plot type (Boxplot, Barchart_mean, Barchart_count or Histogram).}
 
 \item{add_points}{Add data points as a scatter plot to the graph.}
 
-\item{error_bar}{Type of error bar to be shown on the barcharts (IC95 or hide).}
+\item{error_bar}{Type of error bar to be shown on the barcharts (IC95, sd, se or hide).}
 
 \item{stat}{Type of statistics to show (param, non_param or no).}
 }

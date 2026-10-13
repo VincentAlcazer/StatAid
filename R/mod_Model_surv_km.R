@@ -207,9 +207,10 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
       data_km <- data() %>%
         select(time = one_of(input$time_var), status = one_of(input$y_var), x_var = one_of(input$x_var))
 
-      if (is.numeric(data_km$x_var) & length(unique(data_km$x_var)) > 8) {
+      ## Numeric variables with >= 10 unique values are cut at quantiles (2 = median, 3 = terciles...)
+      if (is.numeric(data_km$x_var) && length(unique(na.omit(data_km$x_var))) >= 10) {
         data_km <- data_km %>%
-          mutate(x_var = cut(x_var, input$x_cut))
+          mutate(x_var = quantile_cut(x_var, input$x_cut))
       }
 
       # formula <- as.formula(sprintf(paste0("Surv(",input$time_var,",",input$status_var,")~",input$x_var)))
@@ -260,7 +261,7 @@ mod_Model_surv_km_server <- function(input, output, session, r) {
     updateSelectInput(
       session,
       "y_var",
-      choices = c(setdiff(names(data()[sapply(data(), class) %in% c("numeric", "integer","character","factor")]), c(input$time_var)))
+      choices = setdiff(names(data())[vapply(data(), function(x) is.numeric(x) || is.logical(x), logical(1))], input$time_var)
     )
   })
 

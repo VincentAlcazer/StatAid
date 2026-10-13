@@ -65,21 +65,19 @@ app_server <- function(input, output, session) {
     } else {
       
       if(input$sep == "xl"){
-        dat <- readxl::read_xlsx(input$df$datapath) %>%
+        dat <- readxl::read_excel(input$df$datapath) %>%
           mutate("Whole_cohort" = as.factor("Whole cohort")) %>%
           mutate(across(where(is.character), as.factor)) %>%
           as.data.frame()
-        colnames(dat)[1] <- "Patient_id"
-        dat$Patient_id <- as.factor(dat$Patient_id)
-        
       } else {
-        dat <- data.table::fread(input$df$datapath, sep = input$sep, dec = input$dec, na.strings = c("", "NA", "#N/A"), stringsAsFactors = T, data.table = F) %>%
-          mutate("Whole_cohort" = as.factor("Whole cohort"))
-        colnames(dat)[1] <- "Patient_id"
-        dat$Patient_id <- as.factor(dat$Patient_id)
+        dat <- data.table::fread(input$df$datapath, sep = input$sep, dec = input$dec, na.strings = c("", "NA", "#N/A"), stringsAsFactors = T, data.table = F)
+        ## Duplicated column names used to crash the app ("Disconnected from the server")
+        colnames(dat) <- make.unique(colnames(dat), sep = "_")
+        dat <- dat %>% mutate("Whole_cohort" = as.factor("Whole cohort"))
       }
-      
-     
+
+      colnames(dat)[1] <- "Patient_id"
+      dat$Patient_id <- as.factor(dat$Patient_id)
     }
     return(dat)
   })
