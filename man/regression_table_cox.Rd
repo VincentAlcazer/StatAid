@@ -3,7 +3,8 @@
 \name{regression_table_cox}
 \alias{regression_table_cox}
 \title{All-in-one publication ready regression table for cox models
-This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.}
+This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.
+Variables for which the model cannot be fitted (e.g. a single level factor) are skipped with a warning.}
 \usage{
 regression_table_cox(data, y_var, time_var)
 }
@@ -17,4 +18,5 @@ regression_table_cox(data, y_var, time_var)
 \description{
 All-in-one publication ready regression table for cox models
 This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.
+Variables for which the model cannot be fitted (e.g. a single level factor) are skipped with a warning.
 }

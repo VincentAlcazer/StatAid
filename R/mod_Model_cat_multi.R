@@ -96,6 +96,7 @@ mod_Model_cat_multi_server <- function(input, output, session, r) {
     input$Run_analysis
     req(input$Run_analysis >= 1)
     isolate({
+      validate(need(length(input$x_var) > 0, "Please select at least one X variable."))
       y_var <- as.character(input$y_var)
       x_var <- as.character(input$x_var)
 
@@ -112,7 +113,7 @@ mod_Model_cat_multi_server <- function(input, output, session, r) {
 
 
   output$analysis_info <- renderText({
-    paste(paste0("<b>Methods :</b> Multivariate analysis is performed using a linear regression model. 
+    paste(paste0("<b>Methods :</b> Multivariate analysis is performed using a logistic regression model. 
                  
                 Variables are manually selected by the user 
                 (e.g. Variables with a p-value < 0.10 in univariate analysis have been included in the multivariate model.)
@@ -151,7 +152,7 @@ mod_Model_cat_multi_server <- function(input, output, session, r) {
       geom_hline(yintercept = 1, linetype = "dashed", size = 1) +
       coord_flip() +
       default_theme +
-      labs(title = "Multivariate analysis - Linear model", y = "Beta coefficient", x = "") +
+      labs(title = "Multivariate analysis - Logistic model", y = "Odds Ratio [95%CI]", x = "") +
       theme(legend.position = "right")
   )
   

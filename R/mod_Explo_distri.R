@@ -98,7 +98,7 @@ mod_Explo_distri_server <- function(input, output, session, r) {
     updateSelectInput(
       session,
       "Variable",
-      choices = setdiff(c(names(data()[-1][sapply(data()[, -1], class) %in% c("numeric", "double", "integer")])), input$Group)
+      choices = names(data())[vapply(data(), is.numeric, logical(1))]
     )
   })
 
@@ -161,11 +161,15 @@ mod_Explo_distri_server <- function(input, output, session, r) {
   
 
   output$Barchart <- renderPlot({
+    ## Plain ggplot: ggbarplot(add = "mean_sd") fails to find ggpubr::mean_sd when ggpubr is not attached
     data_explo() %>%
-      ggbarplot(
-        x = "Group", y = "variable", fill = "Group", size = 0.75, width = 1,
-        add = c("mean_sd", "jitter"), error.plot = "upper_errorbar"
+      ggplot(aes(x = Group, y = variable, fill = Group)) +
+      stat_summary(fun = mean, geom = "bar", color = "black", size = 0.75, width = 1) +
+      stat_summary(
+        fun.data = function(y) data.frame(y = mean(y), ymin = mean(y), ymax = mean(y) + sd(y)),
+        geom = "errorbar", width = 0.3, size = 0.75
       ) +
+      geom_jitter(width = 0.2, height = 0) +
       geom_text_repel(aes(label = label), size = 5, colour = "red") +
       labs(y = paste0(input$Variable), x = "", fill = "Group") +
       default_theme +
@@ -216,7 +220,7 @@ mod_Explo_distri_server <- function(input, output, session, r) {
       summarise(
         Count = n(),
         "NA" = sum(is.na(variable)),
-        "Shapiro-Wilk pval" = ifelse(Count > 3, format.pval(shapiro.test(variable)$p.value, digits = 3, eps = 0.001), "NA")
+        "Shapiro-Wilk pval" = format.pval(shapiro_pval(variable), digits = 3, eps = 0.001)
       ), # data
     class = "display nowrap compact", # style
     server = F, rownames = FALSE,

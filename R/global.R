@@ -13,7 +13,7 @@
 #' @import plotROC
 #' @import readxl
 #' @import ROCit
-#' @import shinyalert
+#' @importFrom shinyalert shinyalert
 
 library(ggplot2)
 

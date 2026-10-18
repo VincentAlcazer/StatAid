@@ -148,7 +148,7 @@ mod_Data_merge_server <- function(id){
 
           if(input$A_sep == "xl"){
             
-            dat <- readxl::read_xlsx(input$file_a$datapath)
+            dat <- readxl::read_excel(input$file_a$datapath)
             
           } else {
             
@@ -172,7 +172,7 @@ mod_Data_merge_server <- function(id){
         
         if(input$B_sep == "xl"){
           
-          dat <- readxl::read_xlsx(input$file_b$datapath)
+          dat <- readxl::read_excel(input$file_b$datapath)
           
         } else {
           
@@ -192,33 +192,19 @@ mod_Data_merge_server <- function(id){
       req(input$file_a)
       req(input$merge)
       isolate({
-        
+        ## Keys are compared as character to avoid type mismatch errors (e.g. integer vs character IDs)
+        a <- file_a() %>% select(key = all_of(input$A_key), everything()) %>% mutate(key = as.character(key))
+        b <- file_b() %>% select(key = all_of(input$B_key), everything()) %>% mutate(key = as.character(key))
 
-        
         if(input$join_type == "Inner join"){
-          merge_file <- file_a() %>% 
-            select(key = input$A_key, everything()) %>%
-            inner_join(select(file_b(), key = input$B_key, everything()), by = "key")
-          
+          merge_file <- inner_join(a, b, by = "key")
         } else if(input$join_type == "Left (A) join"){
-          
-          merge_file <- file_a() %>% 
-            select(key = input$A_key, everything()) %>%
-            left_join(select(file_b(), key = input$B_key, everything()), by = "key")
-          
+          merge_file <- left_join(a, b, by = "key")
         } else if(input$join_type == "Full join"){
-          
-          merge_file <- file_a() %>% 
-            select(key = input$A_key, everything()) %>%
-            full_join(select(file_b(), key = input$B_key, everything()), by = "key")
-          
-          
+          merge_file <- full_join(a, b, by = "key")
         }
-        
+
         return(merge_file)
-       
-        
-        
       })
       
     })
@@ -284,8 +270,8 @@ mod_Data_merge_server <- function(id){
     
     missing_pts <- reactive({
       
-      input$calc_sig
-      req(input$calc_sig >= 1)
+      input$merge
+      req(input$merge >= 1)
       isolate({
         
         A_samples <- file_a() %>% select(key = input$A_key) %>% distinct(key) %>% unlist() %>% as.character() 
@@ -318,7 +304,7 @@ mod_Data_merge_server <- function(id){
     # Download table
     output$download <- downloadHandler(
       filename = function() {
-        paste("Signature_score.tsv")
+        paste("Merged_file.tsv")
       },
       content = function(file) {
         

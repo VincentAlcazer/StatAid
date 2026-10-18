@@ -6,9 +6,6 @@
 #' @import shinydashboard
 #' @noRd
 
-options(shiny.maxRequestSize = 150*1024^2)
-
-
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources

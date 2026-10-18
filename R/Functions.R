@@ -16,31 +16,77 @@ aov_pipe_pval <- function(data, variable, group) {
   return(summary(anova)[[1]][["Pr(>F)"]][[1]])
 }
 
-cut2 <- function(x) {
-  y <- quantcut(x, q = 2)
-  y <- factor(y,
-    order = FALSE,
-    labels = c("Low", "High")
-  )
-  return(y)
-}
-cut3 <- function(x) {
-  y <- quantcut(x, q = 3)
-
-  if (nlevels(y) < 3) {
-    y <- factor(y, order = F, labels = c("Low", "High"))
-  } else {
-    y <- factor(y, order = F, labels = c("Low", "Intermediate", "High"))
+#' Cut a numeric vector into groups of (approximately) equal size
+#' Breaks are placed at quantiles (2 = median, 3 = terciles, 4 = quartiles...).
+#' Duplicated quantiles (heavily tied data) are merged, so fewer groups may be returned.
+#'
+#' @param x A numeric vector.
+#' @param n Number of groups.
+#' @param labels Optional labels. Used only if the number of groups obtained matches.
+#'
+#' @noRd
+quantile_cut <- function(x, n, labels = NULL) {
+  breaks <- unique(quantile(x, probs = seq(0, 1, length.out = n + 1), na.rm = TRUE, names = FALSE))
+  if (length(breaks) < 2) {
+    return(factor(ifelse(is.na(x), NA, "All")))
   }
-
-  return(y)
+  y <- cut(x, breaks = breaks, include.lowest = TRUE, dig.lab = 4)
+  if (!is.null(labels) && nlevels(y) == length(labels)) {
+    levels(y) <- labels
+  }
+  y
 }
-cut4 <- function(x) {
-  quantcut(x, q = 4) %>%
-    factor(
-      order = FALSE,
-      labels = c("Low", "Intermediate1", "Intermediate2", "High")
-    )
+
+#' Make missing values an explicit "NA" factor level
+#'
+#' @noRd
+explicit_na <- function(x, na_level = "NA") {
+  x <- factor(x)
+  if (any(is.na(x))) {
+    levels(x) <- c(levels(x), na_level)
+    x[is.na(x)] <- na_level
+  }
+  x
+}
+
+#' Safe Shapiro-Wilk p-value (NA when the test cannot be computed)
+#'
+#' @noRd
+shapiro_pval <- function(x) {
+  x <- x[!is.na(x)]
+  if (length(x) < 3 || length(x) > 5000 || length(unique(x)) < 2) {
+    return(NA_real_)
+  }
+  shapiro.test(x)$p.value
+}
+
+#' Label regression terms with their source variable and comparison
+#' Works for glm and coxph fits, relying on the model matrix "assign" attribute
+#' rather than on partial name matching (which mislabels variables sharing a prefix, e.g. WBC / WBC_cat).
+#'
+#' @param fit A fitted glm or coxph model.
+#' @param terms Coefficient names to label (e.g. the "term" column of broom::tidy(fit)).
+#'
+#' @noRd
+label_model_terms <- function(fit, terms) {
+  mm <- model.matrix(fit)
+  term_labels <- attr(terms(fit), "term.labels")
+  coef_var <- c("(Intercept)", term_labels)[attr(mm, "assign") + 1]
+  names(coef_var) <- colnames(mm)
+
+  var <- unname(coef_var[terms])
+  level <- substring(terms, nchar(var) + 1)
+  clean_var <- gsub("^`|`$", "", var)
+
+  reference <- vapply(seq_along(terms), function(i) {
+    if (!is.null(fit$xlevels[[clean_var[i]]])) fit$xlevels[[clean_var[i]]][1] else "FALSE"
+  }, character(1))
+
+  data.frame(
+    x_var = clean_var,
+    Comparison = ifelse(level == "", "Continuous", paste0(level, "_vs_", reference)),
+    stringsAsFactors = FALSE
+  )
 }
 
 #' All-in-one publication ready descriptive table
@@ -59,7 +105,10 @@ cut4 <- function(x) {
 descriptive_table <- function(data, group, na.include = F, percent_type = 1, padj_method = "none", show_methods = F,
                               exclude_vector = c("Patient_id", "patient_id", "Sample_ID","Whole_cohort")) {
 
-  
+  if (group != "Whole_cohort" && nlevels(factor(data[[group]])) < 2) {
+    stop("The group variable '", group, "' must contain at least 2 different values.")
+  }
+
   if (group == "Whole_cohort") {
 
     ## Filter out var with >80% NA
@@ -68,10 +117,10 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
       message(paste0(length(na_var), " variables with >80% missing values were removed from the analysis "))
     }
 
-    var_num <- colnames(data[sapply(data, class) %in% c("numeric", "integer", "double")])
+    var_num <- colnames(data)[vapply(data, is.numeric, logical(1))]
     var_num <- var_num[!var_num %in% c(exclude_vector, na_var)]
 
-    var_cat <- colnames(data[sapply(data, class) %in% c("factor", "character")])
+    var_cat <- colnames(data)[vapply(data, function(x) is.factor(x) || is.character(x), logical(1))]
     var_cat <- var_cat[!var_cat %in% c(exclude_vector, na_var)]
 
 
@@ -127,10 +176,7 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
 
 
         if (na.include == T) {
-          df <- df %>% mutate_if(is.factor,
-            fct_explicit_na,
-            na_level = "NA"
-          )
+          df <- df %>% mutate_if(is.factor, explicit_na)
         } else {
           df <- df %>% filter(is.na(variable) == F)
         }
@@ -176,10 +222,10 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
     }
 
 
-    var_num <- colnames(data[sapply(data, class) %in% c("numeric", "integer", "double")])
+    var_num <- colnames(data)[vapply(data, is.numeric, logical(1))]
     var_num <- var_num[!var_num %in% c(exclude_vector, na_var)]
 
-    var_cat <- colnames(data[sapply(data, class) %in% c("factor", "character")])
+    var_cat <- colnames(data)[vapply(data, function(x) is.factor(x) || is.character(x), logical(1))]
     var_cat <- var_cat[!var_cat %in% c(exclude_vector, group, na_var)]
 
     ########## ========== Variables numériques
@@ -195,10 +241,7 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
 
 
         if (na.include == T) {
-          df <- df %>% mutate_if(is.factor,
-            fct_explicit_na,
-            na_level = "NA"
-          )
+          df <- df %>% mutate_if(is.factor, explicit_na)
         } else {
           df <- df %>% filter(is.na(group) == F)
         }
@@ -274,10 +317,7 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
         df$group <- factor(df$group)
 
         if (na.include == T) {
-          df <- df %>% mutate_if(is.factor,
-            fct_explicit_na,
-            na_level = "NA"
-          )
+          df <- df %>% mutate_if(is.factor, explicit_na)
         } else {
           df <- df %>% filter(is.na(group) == F)
         }
@@ -377,9 +417,9 @@ descriptive_table <- function(data, group, na.include = F, percent_type = 1, pad
 #' @param group A character string corresponding to the comparative groups.
 #' @param group_filter_vector A character string/vector defining groups sublevels to be included in the analysis.
 #' @param na_exclude_group Should missing values be excluded from groups?
-#' @param plot_type Set the plot type (Boxplot, Barchart_mean or  Barchart_count).
+#' @param plot_type Set the plot type (Boxplot, Barchart_mean, Barchart_count or Histogram).
 #' @param add_points Add data points as a scatter plot to the graph.
-#' @param error_bar Type of error bar to be shown on the barcharts (IC95 or hide).
+#' @param error_bar Type of error bar to be shown on the barcharts (IC95, sd, se or hide).
 #' @param stat Type of statistics to show (param, non_param or no).
 #' @export
 
@@ -419,10 +459,10 @@ autoplot <- function(data, variable, group, group_filter_vector = NULL, na_exclu
     data_stat <- data_plot %>%
       group_by(Group) %>%
       summarise(
-        n = n(),
-        mean = mean(Variable),
-        sd = sd(Variable),
-        hide = factor(1)
+        n = sum(!is.na(Variable)),
+        mean = mean(Variable, na.rm = TRUE),
+        sd = sd(Variable, na.rm = TRUE),
+        hide = 0
       ) %>%
       mutate(se = sd / sqrt(n)) %>%
       mutate(IC95 = se * qt((1 - 0.05) / 2 + 0.5, n - 1))
@@ -448,6 +488,16 @@ autoplot <- function(data, variable, group, group_filter_vector = NULL, na_exclu
       geom_bar(position = "stack", color = "black", size = 0.75)
   }
 
+  if (plot_type == "Histogram") {
+    if (is.numeric(data_plot$Variable)) {
+      p <- ggplot(data_plot, aes(x = Variable, fill = Group)) +
+        geom_histogram(position = "identity", bins = 30, color = "black", alpha = 0.5)
+    } else {
+      p <- ggplot(data_plot, aes(x = Variable, fill = Group)) +
+        geom_bar(position = "dodge", color = "black", size = 0.75)
+    }
+  }
+
 
 
   ## Add statistics
@@ -463,7 +513,7 @@ autoplot <- function(data, variable, group, group_filter_vector = NULL, na_exclu
 
     if (nlevels(data_plot$Group) > 2 & var_class %in% c("numeric", "double", "integer")) {
       p_value <- ifelse(stat == "param",
-        paste0("ANOVA p-value: ", format.pval(aov_pipe_pval(data, variable, group), 3, eps = 0.001)),
+        paste0("ANOVA p-value: ", format.pval(aov_pipe_pval(data_plot, "Variable", "Group"), 3, eps = 0.001)),
         paste0("Kruskal-Wallis p-value: ", format.pval(kruskal.test(data_plot$Variable, data_plot$Group)$p.value, 3, eps = 0.001))
       )
     }
@@ -695,11 +745,11 @@ regression_dataframes <- function(y_var, x_var, data, model = "lm",
   res <- list()
   if (model == "lm") {
     res <- list()
-    if (!class(data[, x_var]) %in% c("numeric", "integer", "double")) {
+    if (!is.numeric(data[[x_var]])) {
       data[, x_var] <- as.numeric(as.factor(data[, x_var]))
     }
 
-    formula <- as.formula(paste(y_var, "~", x_var))
+    formula <- as.formula(paste0("`", y_var, "` ~ `", x_var, "`"))
     model <- glm(formula, data = data, family = "gaussian")
     res[["model"]] <- model
     res[["augment_df"]] <- broom::augment(model)
@@ -707,10 +757,11 @@ regression_dataframes <- function(y_var, x_var, data, model = "lm",
     res[["cor_df"]] <- rbind(broom::tidy(cor.test(data[, y_var], data[, x_var], method = cor_type)))
   } else {
     res <- list()
-    formula <- as.formula(paste(y_var, "~ s(", x_var, ")"))
+    formula <- as.formula(paste0("`", y_var, "` ~ s(`", x_var, "`)"))
     model <- mgcv::gam(formula, data = data, method = "REML")
     res[["model"]] <- model
-    res[["augment_df"]] <- data.frame(y_var=data[,y_var],
+    ## model$y only keeps complete cases (same length as fitted values)
+    res[["augment_df"]] <- data.frame(y_var=model$y,
                                       ".fitted"=fitted(model),
                                       ".resid"=residuals(model))
     colnames(res[["augment_df"]])[1] <- y_var
@@ -723,8 +774,51 @@ regression_dataframes <- function(y_var, x_var, data, model = "lm",
 }
 
 
+#' Format a tidy regression output into a publication-ready table
+#'
+#' @param res A broom::tidy(conf.int = TRUE) data frame with x_var and Comparison columns.
+#' @param coef_name Name of the coefficient column (Beta Coeff., Odds Ratio, HR).
+#' @param exponentiate Should estimates and confidence intervals be exponentiated (OR, HR)?
+#'
+#' @noRd
+format_regression_table <- function(res, coef_name, exponentiate = FALSE,
+                                    pval_digits = 2, pval_eps = .Machine$double.eps) {
+  if (exponentiate) {
+    ## Exponentiate before rounding to keep OR/HR precision
+    res <- res %>% mutate(estimate = exp(estimate), conf.low = exp(conf.low), conf.high = exp(conf.high))
+  }
+
+  res <- res %>%
+    select(
+      "X Variables" = x_var, Comparison,
+      estimate, "CI95_low" = conf.low, "CI95_high" = conf.high,
+      "P.Value" = p.value
+    ) %>%
+    mutate(multiv_graph = paste0(`X Variables`, "_", Comparison))
+
+  res$Adj_P.Value <- p.adjust(res$P.Value, method = "fdr")
+  res$estimate <- round(res$estimate, 2)
+  res$CI95_low <- round(res$CI95_low, 2)
+  res$CI95_high <- round(res$CI95_high, 2)
+
+  res$P.Value <- format.pval(res$P.Value, pval_digits, eps = pval_eps)
+  res$Adj_P.Value <- format.pval(res$Adj_P.Value, pval_digits, eps = pval_eps)
+
+  colnames(res)[3] <- coef_name
+  return(res)
+}
+
+#' Tidy a fitted model and label its terms
+#'
+#' @noRd
+tidy_labelled <- function(fit) {
+  res <- broom::tidy(fit, conf.int = TRUE) %>% filter(term != "(Intercept)")
+  bind_cols(res, label_model_terms(fit, res$term))
+}
+
 #' All-in-one publication ready regression table for glm models
 #' This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.
+#' Variables for which the model cannot be fitted (e.g. a single level factor) are skipped with a warning.
 #' @param data A dataframe with row corresponding to samples/patients and columns to variables.
 #' @param y_var A character string corresponding to the y variable.
 #' @param family Generalized linear model family (gaussian or binomial)
@@ -735,61 +829,35 @@ regression_table <- function(data, y_var, family = "gaussian") {
   ## DF
   exclude_vector <- c("Patient_id", "patient_id", "Sample_ID", "sample_id", "Whole_cohort")
 
-  data_reg <- data %>% select(y_var = all_of(y_var), everything(), -one_of(exclude_vector))
-  
+  data_reg <- data %>% select(y_var = all_of(y_var), everything(), -any_of(exclude_vector))
+
   x_vars <- colnames(data_reg)[-1]
 
   res_temp <- list()
 
   for (v in x_vars) {
-    formula <- as.formula(paste0("y_var ~ ", v))
+    formula <- as.formula(paste0("y_var ~ `", v, "`"))
 
-    fit <- glm(formula, family = family, data_reg)
-    res <- broom::tidy(fit, conf.int = TRUE) %>% filter(term != "(Intercept)")
-    if (class(data_reg[, v]) %in% c("factor", "character")) {
-      res$term <- paste0(gsub(v, "", res$term), "_vs_", fit$xlevels[[1]][1])
-    }
-    if (class(data_reg[, v]) %in% c("numeric", "double", "integer")) {
-      res$term <- "Continuous"
-    }
-
-    res_temp[[v]] <- res
+    res_temp[[v]] <- tryCatch(
+      tidy_labelled(glm(formula, family = family, data_reg)),
+      error = function(e) {
+        warning("Variable '", v, "' skipped: ", conditionMessage(e), call. = FALSE)
+        NULL
+      }
+    )
   }
 
-
-  res <- bind_rows(res_temp, .id = "x_var") %>%
-    filter(term != "(Intercept)") %>%
-    select(
-      "X Variables" = x_var, "Comparison" = term,
-      "Beta Coeff." = estimate, "CI95_low" = conf.low, "CI95_high" = conf.high,
-      "P.Value" = p.value
-    ) %>%
-    mutate(multiv_graph = paste0(`X Variables`, "_", Comparison))
-
-
-  res$Adj_P.Value <- p.adjust(res$P.Value, method = "fdr")
-  res$`Beta Coeff.` <- round(res$`Beta Coeff.`, 2)
-  res$CI95_low <- round(res$CI95_low, 2)
-  res$CI95_high <- round(res$CI95_high, 2)
-
-  res$P.Value <- format.pval(res$P.Value, 2)
-  res$Adj_P.Value <- format.pval(res$Adj_P.Value, 2)
-
-  if (family == "binomial") {
-    res$`Beta Coeff.` <- round(exp(res$`Beta Coeff.`), 2)
-    res$CI95_low <- round(exp(res$CI95_low), 2)
-    res$CI95_high <- round(exp(res$CI95_high), 2)
-
-    colnames(res)[3] <- "Odds Ratio"
-  }
-
-
-  return(res)
+  format_regression_table(
+    bind_rows(res_temp),
+    coef_name = ifelse(family == "binomial", "Odds Ratio", "Beta Coeff."),
+    exponentiate = family == "binomial"
+  )
 }
 
 
 #' All-in-one publication ready regression table for cox models
 #' This function output a publication-ready regression table from a dataset. Each column of the dataset is independantly tested as a x variable in a univariate model.
+#' Variables for which the model cannot be fitted (e.g. a single level factor) are skipped with a warning.
 #' @param data A dataframe with row corresponding to samples/patients and columns to variables.
 #' @param y_var A character string corresponding to the y variable = time-dependant outcome (0-1 or dead-alive for example).
 #' @param time_var A numeric variable corresponding to the time variable.
@@ -800,51 +868,25 @@ regression_table_cox <- function(data, y_var, time_var) {
   ## DF
   exclude_vector <- c("Patient_id", "patient_id", "Sample_ID", "sample_id", "Whole_cohort")
 
-  data_reg <- data %>% select(y_var = all_of(y_var), time_var = all_of(time_var), everything(), -one_of(exclude_vector))
+  data_reg <- data %>% select(y_var = all_of(y_var), time_var = all_of(time_var), everything(), -any_of(exclude_vector))
 
   x_vars <- colnames(data_reg)[-c(1:2)]
 
   res_temp <- list()
 
   for (v in x_vars) {
-    formula <- as.formula(paste0("Surv(time_var,y_var) ~ ", v))
+    formula <- as.formula(paste0("Surv(time_var,y_var) ~ `", v, "`"))
 
-    fit <- coxph(formula, data_reg)
-    res <- broom::tidy(fit, conf.int = TRUE) %>% filter(term != "(Intercept)")
-    if (class(data_reg[, v]) %in% c("factor", "character")) {
-      res$term <- paste0(gsub(v, "", res$term), "_vs_", fit$xlevels[[1]][1])
-    }
-    if (class(data_reg[, v]) %in% c("numeric", "double", "integer")) {
-      res$term <- "Continuous"
-    }
-
-    res_temp[[v]] <- res
+    res_temp[[v]] <- tryCatch(
+      tidy_labelled(coxph(formula, data_reg)),
+      error = function(e) {
+        warning("Variable '", v, "' skipped: ", conditionMessage(e), call. = FALSE)
+        NULL
+      }
+    )
   }
 
-
-  res <- bind_rows(res_temp, .id = "x_var") %>%
-    filter(term != "(Intercept)") %>%
-    select(
-      "X Variables" = x_var, "Comparison" = term,
-      "HR" = estimate, "CI95_low" = conf.low, "CI95_high" = conf.high,
-      "P.Value" = p.value
-    ) %>%
-    mutate(
-      multiv_graph = paste0(`X Variables`, "_", Comparison),
-      HR = exp(HR), CI95_low = exp(CI95_low), CI95_high = exp(CI95_high)
-    )
-
-
-  res$Adj_P.Value <- p.adjust(res$P.Value, method = "fdr")
-  res$HR <- round(res$HR, 2)
-  res$CI95_low <- round(res$CI95_low, 2)
-  res$CI95_high <- round(res$CI95_high, 2)
-
-  res$P.Value <- format.pval(res$P.Value, 2)
-  res$Adj_P.Value <- format.pval(res$Adj_P.Value, 2)
-
-
-  return(res)
+  format_regression_table(bind_rows(res_temp), coef_name = "HR", exponentiate = TRUE)
 }
 
 #' All-in-one publication ready regression table for glm models
@@ -859,61 +901,16 @@ regression_table_multi <- function(data, y_var, family = "gaussian") {
   ## DF
   exclude_vector <- c("Patient_id", "patient_id", "Sample_ID", "sample_id", "Whole_cohort")
 
-  data_reg <- data %>% select(all_of(y_var), everything(), -one_of(exclude_vector))
+  data_reg <- data %>% select(y_var = all_of(y_var), everything(), -any_of(exclude_vector))
 
-  res_list <- list()
+  fit <- glm(y_var ~ ., family = family, data_reg)
 
-  formula <- as.formula(paste0(y_var, " ~ ."))
-
-  x_var <- colnames(data_reg)[which(colnames(data_reg) != y_var)]
-
-  fit <- glm(formula, family = family, data_reg)
-  res <- broom::tidy(fit, conf.int = TRUE) %>%
-    filter(term != "(Intercept)") %>%
-    mutate(x_var = "", Comparison = "")
-
-
-  for (var in x_var) {
-    res$x_var[grep(var, res$term)] <- var
-  }
-
-
-  for (cat_var in names(fit$xlevels)) {
-    res$Comparison[grep(cat_var, res$term)] <- gsub(cat_var, "", paste0(res$term[grep(cat_var, res$term)], "_vs_", fit$xlevels[[cat_var]][1]))
-  }
-
-  for (num_var in x_var[which(!x_var %in% names(fit$xlevels))]) {
-    res$Comparison[grep(num_var, res$term)] <- "Continuous"
-  }
-
-
-  res <- res %>%
-    filter(term != "(Intercept)") %>%
-    select(
-      "X Variables" = x_var, Comparison,
-      "Beta Coeff." = estimate, "CI95_low" = conf.low, "CI95_high" = conf.high,
-      "P.Value" = p.value
-    ) %>%
-    mutate(multiv_graph = paste0(`X Variables`, "_", Comparison))
-
-  res$Adj_P.Value <- p.adjust(res$P.Value, method = "fdr")
-  res$`Beta Coeff.` <- round(res$`Beta Coeff.`, 2)
-  res$CI95_low <- round(res$CI95_low, 2)
-  res$CI95_high <- round(res$CI95_high, 2)
-
-  res$P.Value <- format.pval(res$P.Value, 3, eps = 0.001)
-  res$Adj_P.Value <- format.pval(res$Adj_P.Value, 3, eps = 0.001)
-
-  if (family == "binomial") {
-    res$`Beta Coeff.` <- round(exp(res$`Beta Coeff.`), 2)
-    res$CI95_low <- round(exp(res$CI95_low), 2)
-    res$CI95_high <- round(exp(res$CI95_high), 2)
-
-    colnames(res)[3] <- "Odds Ratio"
-  }
-
-
-  return(res)
+  format_regression_table(
+    tidy_labelled(fit),
+    coef_name = ifelse(family == "binomial", "Odds Ratio", "Beta Coeff."),
+    exponentiate = family == "binomial",
+    pval_digits = 3, pval_eps = 0.001
+  )
 }
 
 #' All-in-one publication ready regression table for cox models
@@ -928,55 +925,11 @@ regression_table_multi_cox <- function(data, y_var, time_var) {
   ## DF
   exclude_vector <- c("Patient_id", "patient_id", "Sample_ID", "sample_id", "Whole_cohort")
 
-  data_reg <- data %>% select(y_var = all_of(y_var), time_var = all_of(time_var), everything(), -one_of(exclude_vector))
-
-
-  res_list <- list()
-
-  x_var <- colnames(data_reg)[-c(1:2)]
+  data_reg <- data %>% select(y_var = all_of(y_var), time_var = all_of(time_var), everything(), -any_of(exclude_vector))
 
   fit <- coxph(Surv(time_var, y_var) ~ ., data_reg)
-  res <- broom::tidy(fit, conf.int = TRUE) %>%
-    filter(term != "(Intercept)") %>%
-    mutate(x_var = "", Comparison = "")
 
-
-  for (var in x_var) {
-    res$x_var[grep(var, res$term)] <- var
-  }
-
-
-  for (cat_var in names(fit$xlevels)) {
-    res$Comparison[grep(cat_var, res$term)] <- gsub(cat_var, "", paste0(res$term[grep(cat_var, res$term)], "_vs_", fit$xlevels[[cat_var]][1]))
-  }
-
-  for (num_var in x_var[which(!x_var %in% names(fit$xlevels))]) {
-    res$Comparison[grep(num_var, res$term)] <- "Continuous"
-  }
-
-
-  res <- res %>%
-    filter(term != "(Intercept)") %>%
-    select(
-      "X Variables" = x_var, Comparison,
-      "HR" = estimate, "CI95_low" = conf.low, "CI95_high" = conf.high,
-      "P.Value" = p.value
-    ) %>%
-    mutate(
-      multiv_graph = paste0(`X Variables`, "_", Comparison),
-      HR = exp(HR), CI95_low = exp(CI95_low), CI95_high = exp(CI95_high)
-    )
-
-  res$Adj_P.Value <- p.adjust(res$P.Value, method = "fdr")
-  res$HR <- round(res$HR, 2)
-  res$CI95_low <- round(res$CI95_low, 2)
-  res$CI95_high <- round(res$CI95_high, 2)
-
-  res$P.Value <- format.pval(res$P.Value, 2)
-  res$Adj_P.Value <- format.pval(res$Adj_P.Value, 2)
-
-
-  return(res)
+  format_regression_table(tidy_labelled(fit), coef_name = "HR", exponentiate = TRUE)
 }
 
 #' Dedicated function to plot ROC Curves & compute parameters
@@ -992,9 +945,13 @@ ROC_calc <- function(data, y_var, x_var, value = "raw"){
   res_list <- list()
   
   n_scores = length(x_var)
+
+  if (length(unique(na.omit(data[[y_var]]))) != 2) {
+    stop("The response variable '", y_var, "' must have exactly 2 different values (e.g. Yes/No, TRUE/FALSE, 1/0).")
+  }
   
   if(value == "raw"){
-    AUC_df <- data %>% select(Response = y_var, one_of(x_var)) %>%
+    AUC_df <- data %>% select(Response = all_of(y_var), all_of(x_var)) %>%
       pivot_longer(-Response, names_to = "x_var", values_to = "Prediction")
     
   } else {
@@ -1003,7 +960,7 @@ ROC_calc <- function(data, y_var, x_var, value = "raw"){
     
     for(var in x_var){
       
-      formula <- as.formula(paste0(y_var,"~",var))
+      formula <- as.formula(paste0("`", y_var, "` ~ `", var, "`"))
       
       model <- glm(formula, data, family = "binomial")
       
@@ -1019,11 +976,20 @@ ROC_calc <- function(data, y_var, x_var, value = "raw"){
   }
   
   
+  AUC_df <- AUC_df %>% filter(!is.na(Response), !is.na(Prediction))
+
   plot <- ggplot(AUC_df, aes(d = Response, m = Prediction, color = x_var)) +
     geom_roc(size = 1.5) + style_roc() 
   
+  ## AUC computed with ROCit: plotROC::calc_auc() relies on `%||%`, only available in base R >= 4.4
+  ## (first sorted level of the response = negative class, as in geom_roc)
+  auc <- AUC_df %>%
+    group_by(x_var) %>%
+    summarise(AUC = ROCit::rocit(score = Prediction, class = Response,
+                                 negref = as.character(sort(unique(Response))[1]))$AUC)
+
   plot <- plot + annotate("text", x = 0.80, y = c(seq(0.1,0.50,length.out  = n_scores)), 
-                          label = paste("AUC =", round(calc_auc(plot)$AUC, 2)), colour = c(scales::hue_pal()(n_scores)), size = 6) +
+                          label = paste("AUC =", round(auc$AUC, 2)), colour = c(scales::hue_pal()(n_scores)), size = 6) +
     labs(title = paste0(y_var," - ROC curves"),
          color = "Variables") +
     default_theme +

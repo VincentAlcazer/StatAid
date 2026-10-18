@@ -98,8 +98,12 @@ mod_Model_surv_server <- function(input, output, session, r) {
     updateSelectInput(
       session,
       "y_var",
-      choices = c(setdiff(names(data()[sapply(data(), class) %in% c("numeric", "integer")]), c(input$time_var)))
+      choices = setdiff(names(data())[vapply(data(), function(x) is.numeric(x) || is.logical(x), logical(1))], input$time_var)
     )
+  })
+
+  ## Kept in a separate observer: changing the time column must not reset the selected X variables
+  observe({
     updateSelectInput(
       session,
       "x_var",
@@ -115,6 +119,7 @@ mod_Model_surv_server <- function(input, output, session, r) {
     input$Run_analysis
     req(input$Run_analysis >= 1)
     isolate({
+      validate(need(length(input$x_var) > 0, "Please select at least one X variable."))
 
       if (input$x_var[1] == "All") {
         data_sort <- data()

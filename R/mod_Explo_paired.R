@@ -156,11 +156,7 @@ mod_Explo_paired_ui <- function(id) {
               sliderInput(ns("y_font_size"),
                 label = "Size (values - title)", min = 1,
                 max = 35, value = c(12, 14), step = 1
-              ),
-              sliderInput(ns("y_limits"),
-                label = "Limits", min = 0,
-                max = 100, value = c(0, 50)
-              ),
+              )
             ) # Wellpanel
           ) # Column
         )
@@ -191,7 +187,7 @@ mod_Explo_paired_server <- function(input, output, session, r) {
     updateSelectInput(
       session,
       "Variable",
-      choices = setdiff(c(names(data()[-1][sapply(data()[, -1], class) %in% c("numeric", "double", "integer")])), input$Group)
+      choices = names(data())[vapply(data(), is.numeric, logical(1))]
     )
   })
 
@@ -203,7 +199,7 @@ mod_Explo_paired_server <- function(input, output, session, r) {
     req(input$Run_analysis >= 1)
 
     isolate({
-
+      validate(need(length(input$Variable) >= 2, "Please select at least 2 timepoints (numeric variables)."))
 
       # autoplot_paired(data,timepoints,
       #                 group,
@@ -233,18 +229,6 @@ mod_Explo_paired_server <- function(input, output, session, r) {
 
   ## Output
 
-  legend.x <- reactive({
-    if (input$Legend_x == "Hide") {
-      leg <- element_blank()
-    }
-    if (input$Legend_x == "Normal") {
-      leg <- element_text(size = 12, color = "black")
-    }
-    if (input$Legend_x == paste0("45", intToUtf8(0176))) {
-      leg <- element_text(size = 12, color = "black", angle = 45, vjust = 1, hjust = 1)
-    }
-    return(leg)
-  })
 
 
 
@@ -253,7 +237,7 @@ mod_Explo_paired_server <- function(input, output, session, r) {
 
   output$Graph_comp <- renderPlot({
     p <- p() + theme_bw() +
-      labs(title = input$Title, y = input$y_lab, x = input$x_lab, fill = input$legend_title) +
+      labs(title = input$Title, y = input$y_lab, x = input$x_lab, fill = input$legend_title, color = input$legend_title) +
       theme(
         plot.title = element_text(size = input$title_font_size, face = "bold"),
         axis.text.x = element_text(size = input$x_font_size[1], angle = input$x_angle, vjust = 0.5, hjust = 0.5, color = "black"),
@@ -269,7 +253,7 @@ mod_Explo_paired_server <- function(input, output, session, r) {
     if (input$Colors == "Default") {
       p
     } else if (input$Colors == "grey") {
-      p + scale_fill_grey()
+      p + scale_fill_grey() + scale_color_grey()
     } else {
       set_palette(p, input$Colors)
     }
